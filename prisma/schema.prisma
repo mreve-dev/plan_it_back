@@ -1,0 +1,164 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+datasource db {
+  provider = "mysql"
+}
+
+generator client {
+  provider     = "prisma-client"
+  output       = "generated/prisma"
+  moduleFormat = "cjs"
+}
+
+enum RoleEnum {
+  benevole
+  referent_coordinateur
+}
+
+enum GenderEnum {
+  femme
+  homme
+  autre
+}
+
+model User {
+  id            Int        @id @default(autoincrement())
+  firstname     String
+  lastname      String
+  gender        GenderEnum
+  email         String     @unique
+  password      String
+  date_of_birth DateTime   @db.Date
+  role          RoleEnum?   @default(benevole)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  evnts           Evnt[]
+  notifications   Notification[]
+  missions        Mission[]
+  userHasMissions User_Has_Mission[]
+  userHasSkills   User_has_Skill[]
+}
+
+model Evnt {
+  id          Int      @id @default(autoincrement())
+  name        String
+  date        DateTime @db.Date
+  location    String?
+  description String
+  categoryId  Int
+  creatorId   Int
+  documentId  Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  creator  User      @relation(fields: [creatorId], references: [id])
+  category Category  @relation(fields: [categoryId], references: [id])
+  document Document? @relation(fields: [documentId], references: [id])
+
+  missions         Mission[]
+  documentHasEvnts Document_Has_Evnt[]
+}
+
+model Mission {
+  id             Int      @id @default(autoincrement())
+  name           String
+  description    String
+  max_volunteers Int
+  start_hour     DateTime @db.Time(0)
+  end_hour       DateTime @db.Time(0)
+  eventId        Int
+  creatorId      Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  creator          User                @relation(fields: [creatorId], references: [id])
+  event            Evnt                @relation(fields: [eventId], references: [id])
+  userHasMissions  User_Has_Mission[]
+  missionHasSkills Mission_has_Skill[]
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  evnts Evnt[]
+}
+
+model Document {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  evnts            Evnt[]
+  documentHasEvnts Document_Has_Evnt[]
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  message   String   @unique
+  date      DateTime @db.Date
+  is_read   Boolean
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Skill {
+  id               Int                 @id @default(autoincrement())
+  name             String
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+  userHasSkills    User_has_Skill[]
+  missionHasSkills Mission_has_Skill[]
+}
+
+model User_has_Skill {
+  userId  Int
+  skillId Int
+
+  user  User  @relation(fields: [userId], references: [id])
+  skill Skill @relation(fields: [skillId], references: [id])
+
+  @@id([userId, skillId])
+}
+
+model Mission_has_Skill {
+  missionId Int
+  skillId   Int
+
+  mission Mission @relation(fields: [missionId], references: [id])
+  skill   Skill   @relation(fields: [skillId], references: [id])
+
+  @@id([missionId, skillId])
+}
+
+model User_Has_Mission {
+  userId    Int
+  missionId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id])
+  mission Mission @relation(fields: [missionId], references: [id])
+
+  @@id([userId, missionId])
+}
+
+model Document_Has_Evnt {
+  documentId Int
+  evntId     Int
+
+  document Document @relation(fields: [documentId], references: [id])
+  evnt     Evnt     @relation(fields: [evntId], references: [id])
+
+  @@id([documentId, evntId])
+}
