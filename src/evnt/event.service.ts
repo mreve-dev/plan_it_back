@@ -10,7 +10,7 @@ export class EventService {
 
   constructor(private readonly prisma : PrismaService){}
 
-  async create(createEvent: any) {
+  async create(createEvent: CreateEventDto) {
 
     createEvent.date = new Date(createEvent.date)
     const newEvent : Evnt = await this.prisma.evnt.create({
@@ -20,19 +20,23 @@ export class EventService {
     return newEvent
   }
 
-  findAll() {
+  async findAll(): Promise<Evnt[]> {
     return this.prisma.evnt.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} event`;
+  async findOne(id: number): Promise<Evnt | null> {
+    return this.prisma.evnt.findUnique({where: {id}});
   }
 
-  update(id: number, updateEventDto: UpdateEventDto) {
-    return `This action updates a #${id} event`;
+  async update(id: number, updateEventDto: UpdateEventDto) : Promise<Evnt> {
+    return this.prisma.evnt.update({
+      where : {id},
+      data: updateEventDto
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} event`;
+
+  async remove(id: number) : Promise<Evnt> {
+    return this.prisma.evnt.delete({where : {id}});
   }
 }

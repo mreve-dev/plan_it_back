@@ -7,9 +7,10 @@ import { PrismaModule } from 'prisma/prisma.module';
 import { UserModule } from './user/user.module';
 import { MissionModule } from './mission/mission.module';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({isGlobal:true}), EventModule, PrismaModule, UserModule, MissionModule],
+  imports: [ConfigModule.forRoot({isGlobal:true}), EventModule, PrismaModule, UserModule, MissionModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

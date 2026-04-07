@@ -45,6 +45,7 @@ export type MissionMinAggregateOutputType = {
   name: string | null
   description: string | null
   max_volunteers: number | null
+  date: Date | null
   start_hour: Date | null
   end_hour: Date | null
   eventId: number | null
@@ -58,6 +59,7 @@ export type MissionMaxAggregateOutputType = {
   name: string | null
   description: string | null
   max_volunteers: number | null
+  date: Date | null
   start_hour: Date | null
   end_hour: Date | null
   eventId: number | null
@@ -71,6 +73,7 @@ export type MissionCountAggregateOutputType = {
   name: number
   description: number
   max_volunteers: number
+  date: number
   start_hour: number
   end_hour: number
   eventId: number
@@ -100,6 +103,7 @@ export type MissionMinAggregateInputType = {
   name?: true
   description?: true
   max_volunteers?: true
+  date?: true
   start_hour?: true
   end_hour?: true
   eventId?: true
@@ -113,6 +117,7 @@ export type MissionMaxAggregateInputType = {
   name?: true
   description?: true
   max_volunteers?: true
+  date?: true
   start_hour?: true
   end_hour?: true
   eventId?: true
@@ -126,6 +131,7 @@ export type MissionCountAggregateInputType = {
   name?: true
   description?: true
   max_volunteers?: true
+  date?: true
   start_hour?: true
   end_hour?: true
   eventId?: true
@@ -226,6 +232,7 @@ export type MissionGroupByOutputType = {
   name: string
   description: string
   max_volunteers: number
+  date: Date
   start_hour: Date
   end_hour: Date
   eventId: number
@@ -262,6 +269,7 @@ export type MissionWhereInput = {
   name?: Prisma.StringFilter<"Mission"> | string
   description?: Prisma.StringFilter<"Mission"> | string
   max_volunteers?: Prisma.IntFilter<"Mission"> | number
+  date?: Prisma.DateTimeFilter<"Mission"> | Date | string
   start_hour?: Prisma.DateTimeFilter<"Mission"> | Date | string
   end_hour?: Prisma.DateTimeFilter<"Mission"> | Date | string
   eventId?: Prisma.IntFilter<"Mission"> | number
@@ -279,6 +287,7 @@ export type MissionOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   max_volunteers?: Prisma.SortOrder
+  date?: Prisma.SortOrder
   start_hour?: Prisma.SortOrder
   end_hour?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
@@ -300,6 +309,7 @@ export type MissionWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Mission"> | string
   description?: Prisma.StringFilter<"Mission"> | string
   max_volunteers?: Prisma.IntFilter<"Mission"> | number
+  date?: Prisma.DateTimeFilter<"Mission"> | Date | string
   start_hour?: Prisma.DateTimeFilter<"Mission"> | Date | string
   end_hour?: Prisma.DateTimeFilter<"Mission"> | Date | string
   eventId?: Prisma.IntFilter<"Mission"> | number
@@ -317,6 +327,7 @@ export type MissionOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   max_volunteers?: Prisma.SortOrder
+  date?: Prisma.SortOrder
   start_hour?: Prisma.SortOrder
   end_hour?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
@@ -338,6 +349,7 @@ export type MissionScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Mission"> | string
   description?: Prisma.StringWithAggregatesFilter<"Mission"> | string
   max_volunteers?: Prisma.IntWithAggregatesFilter<"Mission"> | number
+  date?: Prisma.DateTimeWithAggregatesFilter<"Mission"> | Date | string
   start_hour?: Prisma.DateTimeWithAggregatesFilter<"Mission"> | Date | string
   end_hour?: Prisma.DateTimeWithAggregatesFilter<"Mission"> | Date | string
   eventId?: Prisma.IntWithAggregatesFilter<"Mission"> | number
@@ -350,6 +362,7 @@ export type MissionCreateInput = {
   name: string
   description: string
   max_volunteers: number
+  date: Date | string
   start_hour: Date | string
   end_hour: Date | string
   createdAt?: Date | string
@@ -365,6 +378,7 @@ export type MissionUncheckedCreateInput = {
   name: string
   description: string
   max_volunteers: number
+  date: Date | string
   start_hour: Date | string
   end_hour: Date | string
   eventId: number
@@ -379,6 +393,7 @@ export type MissionUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -394,6 +409,7 @@ export type MissionUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -409,6 +425,7 @@ export type MissionCreateManyInput = {
   name: string
   description: string
   max_volunteers: number
+  date: Date | string
   start_hour: Date | string
   end_hour: Date | string
   eventId: number
@@ -421,6 +438,7 @@ export type MissionUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -432,6 +450,7 @@ export type MissionUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -461,6 +480,7 @@ export type MissionCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   max_volunteers?: Prisma.SortOrder
+  date?: Prisma.SortOrder
   start_hour?: Prisma.SortOrder
   end_hour?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
@@ -481,6 +501,7 @@ export type MissionMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   max_volunteers?: Prisma.SortOrder
+  date?: Prisma.SortOrder
   start_hour?: Prisma.SortOrder
   end_hour?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
@@ -494,6 +515,7 @@ export type MissionMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   max_volunteers?: Prisma.SortOrder
+  date?: Prisma.SortOrder
   start_hour?: Prisma.SortOrder
   end_hour?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
@@ -630,6 +652,7 @@ export type MissionCreateWithoutCreatorInput = {
   name: string
   description: string
   max_volunteers: number
+  date: Date | string
   start_hour: Date | string
   end_hour: Date | string
   createdAt?: Date | string
@@ -644,6 +667,7 @@ export type MissionUncheckedCreateWithoutCreatorInput = {
   name: string
   description: string
   max_volunteers: number
+  date: Date | string
   start_hour: Date | string
   end_hour: Date | string
   eventId: number
@@ -687,6 +711,7 @@ export type MissionScalarWhereInput = {
   name?: Prisma.StringFilter<"Mission"> | string
   description?: Prisma.StringFilter<"Mission"> | string
   max_volunteers?: Prisma.IntFilter<"Mission"> | number
+  date?: Prisma.DateTimeFilter<"Mission"> | Date | string
   start_hour?: Prisma.DateTimeFilter<"Mission"> | Date | string
   end_hour?: Prisma.DateTimeFilter<"Mission"> | Date | string
   eventId?: Prisma.IntFilter<"Mission"> | number
@@ -699,6 +724,7 @@ export type MissionCreateWithoutEventInput = {
   name: string
   description: string
   max_volunteers: number
+  date: Date | string
   start_hour: Date | string
   end_hour: Date | string
   createdAt?: Date | string
@@ -713,6 +739,7 @@ export type MissionUncheckedCreateWithoutEventInput = {
   name: string
   description: string
   max_volunteers: number
+  date: Date | string
   start_hour: Date | string
   end_hour: Date | string
   creatorId: number
@@ -752,6 +779,7 @@ export type MissionCreateWithoutMissionHasSkillsInput = {
   name: string
   description: string
   max_volunteers: number
+  date: Date | string
   start_hour: Date | string
   end_hour: Date | string
   createdAt?: Date | string
@@ -766,6 +794,7 @@ export type MissionUncheckedCreateWithoutMissionHasSkillsInput = {
   name: string
   description: string
   max_volunteers: number
+  date: Date | string
   start_hour: Date | string
   end_hour: Date | string
   eventId: number
@@ -795,6 +824,7 @@ export type MissionUpdateWithoutMissionHasSkillsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -809,6 +839,7 @@ export type MissionUncheckedUpdateWithoutMissionHasSkillsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -822,6 +853,7 @@ export type MissionCreateWithoutUserHasMissionsInput = {
   name: string
   description: string
   max_volunteers: number
+  date: Date | string
   start_hour: Date | string
   end_hour: Date | string
   createdAt?: Date | string
@@ -836,6 +868,7 @@ export type MissionUncheckedCreateWithoutUserHasMissionsInput = {
   name: string
   description: string
   max_volunteers: number
+  date: Date | string
   start_hour: Date | string
   end_hour: Date | string
   eventId: number
@@ -865,6 +898,7 @@ export type MissionUpdateWithoutUserHasMissionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -879,6 +913,7 @@ export type MissionUncheckedUpdateWithoutUserHasMissionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -893,6 +928,7 @@ export type MissionCreateManyCreatorInput = {
   name: string
   description: string
   max_volunteers: number
+  date: Date | string
   start_hour: Date | string
   end_hour: Date | string
   eventId: number
@@ -904,6 +940,7 @@ export type MissionUpdateWithoutCreatorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -918,6 +955,7 @@ export type MissionUncheckedUpdateWithoutCreatorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -932,6 +970,7 @@ export type MissionUncheckedUpdateManyWithoutCreatorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -944,6 +983,7 @@ export type MissionCreateManyEventInput = {
   name: string
   description: string
   max_volunteers: number
+  date: Date | string
   start_hour: Date | string
   end_hour: Date | string
   creatorId: number
@@ -955,6 +995,7 @@ export type MissionUpdateWithoutEventInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -969,6 +1010,7 @@ export type MissionUncheckedUpdateWithoutEventInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -983,6 +1025,7 @@ export type MissionUncheckedUpdateManyWithoutEventInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1035,6 +1078,7 @@ export type MissionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name?: boolean
   description?: boolean
   max_volunteers?: boolean
+  date?: boolean
   start_hour?: boolean
   end_hour?: boolean
   eventId?: boolean
@@ -1055,6 +1099,7 @@ export type MissionSelectScalar = {
   name?: boolean
   description?: boolean
   max_volunteers?: boolean
+  date?: boolean
   start_hour?: boolean
   end_hour?: boolean
   eventId?: boolean
@@ -1063,7 +1108,7 @@ export type MissionSelectScalar = {
   updatedAt?: boolean
 }
 
-export type MissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "max_volunteers" | "start_hour" | "end_hour" | "eventId" | "creatorId" | "createdAt" | "updatedAt", ExtArgs["result"]["mission"]>
+export type MissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "max_volunteers" | "date" | "start_hour" | "end_hour" | "eventId" | "creatorId" | "createdAt" | "updatedAt", ExtArgs["result"]["mission"]>
 export type MissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   event?: boolean | Prisma.EvntDefaultArgs<ExtArgs>
@@ -1085,6 +1130,7 @@ export type $MissionPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     name: string
     description: string
     max_volunteers: number
+    date: Date
     start_hour: Date
     end_hour: Date
     eventId: number
@@ -1468,6 +1514,7 @@ export interface MissionFieldRefs {
   readonly name: Prisma.FieldRef<"Mission", 'String'>
   readonly description: Prisma.FieldRef<"Mission", 'String'>
   readonly max_volunteers: Prisma.FieldRef<"Mission", 'Int'>
+  readonly date: Prisma.FieldRef<"Mission", 'DateTime'>
   readonly start_hour: Prisma.FieldRef<"Mission", 'DateTime'>
   readonly end_hour: Prisma.FieldRef<"Mission", 'DateTime'>
   readonly eventId: Prisma.FieldRef<"Mission", 'Int'>

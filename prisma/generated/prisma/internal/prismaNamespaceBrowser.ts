@@ -117,6 +117,7 @@ export const MissionScalarFieldEnum = {
   name: 'name',
   description: 'description',
   max_volunteers: 'max_volunteers',
+  date: 'date',
   start_hour: 'start_hour',
   end_hour: 'end_hour',
   eventId: 'eventId',
