@@ -39,16 +39,19 @@ export type Mission_has_SkillSumAggregateOutputType = {
 export type Mission_has_SkillMinAggregateOutputType = {
   missionId: number | null
   skillId: number | null
+  createdAt: Date | null
 }
 
 export type Mission_has_SkillMaxAggregateOutputType = {
   missionId: number | null
   skillId: number | null
+  createdAt: Date | null
 }
 
 export type Mission_has_SkillCountAggregateOutputType = {
   missionId: number
   skillId: number
+  createdAt: number
   _all: number
 }
 
@@ -66,16 +69,19 @@ export type Mission_has_SkillSumAggregateInputType = {
 export type Mission_has_SkillMinAggregateInputType = {
   missionId?: true
   skillId?: true
+  createdAt?: true
 }
 
 export type Mission_has_SkillMaxAggregateInputType = {
   missionId?: true
   skillId?: true
+  createdAt?: true
 }
 
 export type Mission_has_SkillCountAggregateInputType = {
   missionId?: true
   skillId?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -168,6 +174,7 @@ export type Mission_has_SkillGroupByArgs<ExtArgs extends runtime.Types.Extension
 export type Mission_has_SkillGroupByOutputType = {
   missionId: number
   skillId: number
+  createdAt: Date
   _count: Mission_has_SkillCountAggregateOutputType | null
   _avg: Mission_has_SkillAvgAggregateOutputType | null
   _sum: Mission_has_SkillSumAggregateOutputType | null
@@ -196,6 +203,7 @@ export type Mission_has_SkillWhereInput = {
   NOT?: Prisma.Mission_has_SkillWhereInput | Prisma.Mission_has_SkillWhereInput[]
   missionId?: Prisma.IntFilter<"Mission_has_Skill"> | number
   skillId?: Prisma.IntFilter<"Mission_has_Skill"> | number
+  createdAt?: Prisma.DateTimeFilter<"Mission_has_Skill"> | Date | string
   mission?: Prisma.XOR<Prisma.MissionScalarRelationFilter, Prisma.MissionWhereInput>
   skill?: Prisma.XOR<Prisma.SkillScalarRelationFilter, Prisma.SkillWhereInput>
 }
@@ -203,6 +211,7 @@ export type Mission_has_SkillWhereInput = {
 export type Mission_has_SkillOrderByWithRelationInput = {
   missionId?: Prisma.SortOrder
   skillId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   mission?: Prisma.MissionOrderByWithRelationInput
   skill?: Prisma.SkillOrderByWithRelationInput
 }
@@ -214,6 +223,7 @@ export type Mission_has_SkillWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.Mission_has_SkillWhereInput | Prisma.Mission_has_SkillWhereInput[]
   missionId?: Prisma.IntFilter<"Mission_has_Skill"> | number
   skillId?: Prisma.IntFilter<"Mission_has_Skill"> | number
+  createdAt?: Prisma.DateTimeFilter<"Mission_has_Skill"> | Date | string
   mission?: Prisma.XOR<Prisma.MissionScalarRelationFilter, Prisma.MissionWhereInput>
   skill?: Prisma.XOR<Prisma.SkillScalarRelationFilter, Prisma.SkillWhereInput>
 }, "missionId_skillId">
@@ -221,6 +231,7 @@ export type Mission_has_SkillWhereUniqueInput = Prisma.AtLeast<{
 export type Mission_has_SkillOrderByWithAggregationInput = {
   missionId?: Prisma.SortOrder
   skillId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   _count?: Prisma.Mission_has_SkillCountOrderByAggregateInput
   _avg?: Prisma.Mission_has_SkillAvgOrderByAggregateInput
   _max?: Prisma.Mission_has_SkillMaxOrderByAggregateInput
@@ -234,9 +245,11 @@ export type Mission_has_SkillScalarWhereWithAggregatesInput = {
   NOT?: Prisma.Mission_has_SkillScalarWhereWithAggregatesInput | Prisma.Mission_has_SkillScalarWhereWithAggregatesInput[]
   missionId?: Prisma.IntWithAggregatesFilter<"Mission_has_Skill"> | number
   skillId?: Prisma.IntWithAggregatesFilter<"Mission_has_Skill"> | number
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Mission_has_Skill"> | Date | string
 }
 
 export type Mission_has_SkillCreateInput = {
+  createdAt?: Date | string
   mission: Prisma.MissionCreateNestedOneWithoutMissionHasSkillsInput
   skill: Prisma.SkillCreateNestedOneWithoutMissionHasSkillsInput
 }
@@ -244,9 +257,11 @@ export type Mission_has_SkillCreateInput = {
 export type Mission_has_SkillUncheckedCreateInput = {
   missionId: number
   skillId: number
+  createdAt?: Date | string
 }
 
 export type Mission_has_SkillUpdateInput = {
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mission?: Prisma.MissionUpdateOneRequiredWithoutMissionHasSkillsNestedInput
   skill?: Prisma.SkillUpdateOneRequiredWithoutMissionHasSkillsNestedInput
 }
@@ -254,20 +269,23 @@ export type Mission_has_SkillUpdateInput = {
 export type Mission_has_SkillUncheckedUpdateInput = {
   missionId?: Prisma.IntFieldUpdateOperationsInput | number
   skillId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Mission_has_SkillCreateManyInput = {
   missionId: number
   skillId: number
+  createdAt?: Date | string
 }
 
 export type Mission_has_SkillUpdateManyMutationInput = {
-
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Mission_has_SkillUncheckedUpdateManyInput = {
   missionId?: Prisma.IntFieldUpdateOperationsInput | number
   skillId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Mission_has_SkillListRelationFilter = {
@@ -288,6 +306,7 @@ export type Mission_has_SkillMissionIdSkillIdCompoundUniqueInput = {
 export type Mission_has_SkillCountOrderByAggregateInput = {
   missionId?: Prisma.SortOrder
   skillId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type Mission_has_SkillAvgOrderByAggregateInput = {
@@ -298,11 +317,13 @@ export type Mission_has_SkillAvgOrderByAggregateInput = {
 export type Mission_has_SkillMaxOrderByAggregateInput = {
   missionId?: Prisma.SortOrder
   skillId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type Mission_has_SkillMinOrderByAggregateInput = {
   missionId?: Prisma.SortOrder
   skillId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type Mission_has_SkillSumOrderByAggregateInput = {
@@ -395,11 +416,13 @@ export type Mission_has_SkillUncheckedUpdateManyWithoutSkillNestedInput = {
 }
 
 export type Mission_has_SkillCreateWithoutMissionInput = {
+  createdAt?: Date | string
   skill: Prisma.SkillCreateNestedOneWithoutMissionHasSkillsInput
 }
 
 export type Mission_has_SkillUncheckedCreateWithoutMissionInput = {
   skillId: number
+  createdAt?: Date | string
 }
 
 export type Mission_has_SkillCreateOrConnectWithoutMissionInput = {
@@ -434,14 +457,17 @@ export type Mission_has_SkillScalarWhereInput = {
   NOT?: Prisma.Mission_has_SkillScalarWhereInput | Prisma.Mission_has_SkillScalarWhereInput[]
   missionId?: Prisma.IntFilter<"Mission_has_Skill"> | number
   skillId?: Prisma.IntFilter<"Mission_has_Skill"> | number
+  createdAt?: Prisma.DateTimeFilter<"Mission_has_Skill"> | Date | string
 }
 
 export type Mission_has_SkillCreateWithoutSkillInput = {
+  createdAt?: Date | string
   mission: Prisma.MissionCreateNestedOneWithoutMissionHasSkillsInput
 }
 
 export type Mission_has_SkillUncheckedCreateWithoutSkillInput = {
   missionId: number
+  createdAt?: Date | string
 }
 
 export type Mission_has_SkillCreateOrConnectWithoutSkillInput = {
@@ -472,34 +498,42 @@ export type Mission_has_SkillUpdateManyWithWhereWithoutSkillInput = {
 
 export type Mission_has_SkillCreateManyMissionInput = {
   skillId: number
+  createdAt?: Date | string
 }
 
 export type Mission_has_SkillUpdateWithoutMissionInput = {
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   skill?: Prisma.SkillUpdateOneRequiredWithoutMissionHasSkillsNestedInput
 }
 
 export type Mission_has_SkillUncheckedUpdateWithoutMissionInput = {
   skillId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Mission_has_SkillUncheckedUpdateManyWithoutMissionInput = {
   skillId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Mission_has_SkillCreateManySkillInput = {
   missionId: number
+  createdAt?: Date | string
 }
 
 export type Mission_has_SkillUpdateWithoutSkillInput = {
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mission?: Prisma.MissionUpdateOneRequiredWithoutMissionHasSkillsNestedInput
 }
 
 export type Mission_has_SkillUncheckedUpdateWithoutSkillInput = {
   missionId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Mission_has_SkillUncheckedUpdateManyWithoutSkillInput = {
   missionId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -507,6 +541,7 @@ export type Mission_has_SkillUncheckedUpdateManyWithoutSkillInput = {
 export type Mission_has_SkillSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   missionId?: boolean
   skillId?: boolean
+  createdAt?: boolean
   mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
   skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mission_has_Skill"]>
@@ -516,9 +551,10 @@ export type Mission_has_SkillSelect<ExtArgs extends runtime.Types.Extensions.Int
 export type Mission_has_SkillSelectScalar = {
   missionId?: boolean
   skillId?: boolean
+  createdAt?: boolean
 }
 
-export type Mission_has_SkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"missionId" | "skillId", ExtArgs["result"]["mission_has_Skill"]>
+export type Mission_has_SkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"missionId" | "skillId" | "createdAt", ExtArgs["result"]["mission_has_Skill"]>
 export type Mission_has_SkillInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
   skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
@@ -533,6 +569,7 @@ export type $Mission_has_SkillPayload<ExtArgs extends runtime.Types.Extensions.I
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     missionId: number
     skillId: number
+    createdAt: Date
   }, ExtArgs["result"]["mission_has_Skill"]>
   composites: {}
 }
@@ -906,6 +943,7 @@ export interface Prisma__Mission_has_SkillClient<T, Null = never, ExtArgs extend
 export interface Mission_has_SkillFieldRefs {
   readonly missionId: Prisma.FieldRef<"Mission_has_Skill", 'Int'>
   readonly skillId: Prisma.FieldRef<"Mission_has_Skill", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"Mission_has_Skill", 'DateTime'>
 }
     
 

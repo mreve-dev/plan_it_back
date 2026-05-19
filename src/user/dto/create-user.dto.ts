@@ -1,31 +1,28 @@
 import { Type } from "class-transformer"
 import { IsDate, isDate, IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, IsStrongPassword } from "class-validator"
-import { GenderEnum, RoleEnum } from "prisma/generated/prisma/enums"
-import { dateTimestampProvider } from "rxjs/internal/scheduler/dateTimestampProvider"
+import { RoleEnum } from "prisma/generated/prisma/enums"
 
 export class CreateUserDto {
     @IsString()
     @IsNotEmpty()
-    firstname: string
+    firstname!: string
 
     @IsString()
     @IsNotEmpty()
-    lastname: string
-
-    @IsEnum(GenderEnum)
-    gender: GenderEnum
+    lastname!: string
 
     @IsEmail()
-    email: string
+    email!: string
 
-    @IsStrongPassword({minLength:4,minSymbols:0,minLowercase:1,minNumbers:3,minUppercase:1})
-    password: string
+    @IsStrongPassword({minLength:6,minSymbols:1,minLowercase:1,minNumbers:3,minUppercase:1})
+    password!: string
 
     @Type(() => Date)
     @IsDate()
-    date_of_birth: Date
+    @IsOptional()
+    date_of_birth?: Date
 
     @IsEnum(RoleEnum)
     @IsOptional()
-    role: RoleEnum
+    role!: RoleEnum
 }

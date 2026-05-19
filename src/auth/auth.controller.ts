@@ -1,4 +1,4 @@
-import { Body, ConflictException, Controller, NotFoundException, Post } from '@nestjs/common';
+import { Body, ConflictException, Controller, NotFoundException, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UserService } from 'src/user/user.service';
@@ -6,6 +6,8 @@ import { User } from 'prisma/generated/prisma/client';
 import { IResponse } from 'utils/interface/response.interface';
 import { UserWTPwd } from 'src/user/interface/userWTPwd.interface';
 import { LoginDto } from './dto/login.dto';
+import { ChangePassword } from './dto/change-password.dto';
+import { AuthGuard } from './guard/auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -50,5 +52,24 @@ export class AuthController {
       timeStamp: new Date(),
       url: "auth/login"
     }
+  }
+
+  @UseGuards(AuthGuard)
+  @Patch('newpassword')
+  async changepassword(@Req() req, @Body() changePassword : ChangePassword) : Promise<void> {
+
+    const user = await this.userService.findOne(req.user)
+
+    if(!user) throw new NotFoundException('Email ou mot de passe incorrect')
+
+    if (!await this.authService.compare(changePassword.password, user.password)) throw new NotFoundException('Mot de passe incorrect')
+
+    changePassword.newpassword = await this.authService.hash(changePassword.newpassword)
+
+    const newUser : UserWTPwd = await this.userService.update(req.user, {
+      password : changePassword.newpassword,
+      mustChangepassword: false
+    })
+    
   }
 }

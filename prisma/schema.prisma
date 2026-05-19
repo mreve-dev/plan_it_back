@@ -15,26 +15,21 @@ generator client {
 
 enum RoleEnum {
   benevole
-  referent_coordinateur
-}
-
-enum GenderEnum {
-  femme
-  homme
-  autre
+  admin
 }
 
 model User {
-  id            Int        @id @default(autoincrement())
-  firstname     String
-  lastname      String
-  gender        GenderEnum
-  email         String     @unique
-  password      String
-  date_of_birth DateTime   @db.Date
-  role          RoleEnum?  @default(benevole)
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  id                 Int       @id @default(autoincrement())
+  firstname          String
+  lastname           String
+  email              String    @unique
+  password           String
+  date_of_birth      DateTime? @db.Date
+  role               RoleEnum  
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  mustChangePassword Boolean   @default(true)
+  isOnboarded        Boolean   @default(false)
 
   evnts           Evnt[]
   notifications   Notification[]
@@ -47,6 +42,8 @@ model Evnt {
   id          Int      @id @default(autoincrement())
   name        String
   date        DateTime @db.Date
+  start_hour  DateTime @db.Time(0)
+  end_hour    DateTime @db.Time(0)
   location    String?
   description String
   categoryId  Int
@@ -115,7 +112,7 @@ model Notification {
 
 model Skill {
   id               Int                 @id @default(autoincrement())
-  name             String
+  name             String              @unique
   createdAt        DateTime            @default(now())
   updatedAt        DateTime            @updatedAt
   userHasSkills    User_has_Skill[]
@@ -123,8 +120,8 @@ model Skill {
 }
 
 model User_has_Skill {
-  userId  Int
-  skillId Int
+  userId    Int
+  skillId   Int
   createdAt DateTime @default(now())
 
   user  User  @relation(fields: [userId], references: [id])
@@ -158,7 +155,7 @@ model User_Has_Mission {
 model Document_Has_Evnt {
   documentId Int
   evntId     Int
-  createdAt DateTime @default(now())
+  createdAt  DateTime @default(now())
 
   document Document @relation(fields: [documentId], references: [id])
   evnt     Evnt     @relation(fields: [evntId], references: [id])

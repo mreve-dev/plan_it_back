@@ -224,15 +224,15 @@ export type SkillOrderByWithRelationInput = {
 
 export type SkillWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  name?: string
   AND?: Prisma.SkillWhereInput | Prisma.SkillWhereInput[]
   OR?: Prisma.SkillWhereInput[]
   NOT?: Prisma.SkillWhereInput | Prisma.SkillWhereInput[]
-  name?: Prisma.StringFilter<"Skill"> | string
   createdAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Skill"> | Date | string
   userHasSkills?: Prisma.User_has_SkillListRelationFilter
   missionHasSkills?: Prisma.Mission_has_SkillListRelationFilter
-}, "id">
+}, "id" | "name">
 
 export type SkillOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

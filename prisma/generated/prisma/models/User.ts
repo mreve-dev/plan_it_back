@@ -38,39 +38,42 @@ export type UserMinAggregateOutputType = {
   id: number | null
   firstname: string | null
   lastname: string | null
-  gender: $Enums.GenderEnum | null
   email: string | null
   password: string | null
   date_of_birth: Date | null
   role: $Enums.RoleEnum | null
   createdAt: Date | null
   updatedAt: Date | null
+  mustChangePassword: boolean | null
+  isOnboarded: boolean | null
 }
 
 export type UserMaxAggregateOutputType = {
   id: number | null
   firstname: string | null
   lastname: string | null
-  gender: $Enums.GenderEnum | null
   email: string | null
   password: string | null
   date_of_birth: Date | null
   role: $Enums.RoleEnum | null
   createdAt: Date | null
   updatedAt: Date | null
+  mustChangePassword: boolean | null
+  isOnboarded: boolean | null
 }
 
 export type UserCountAggregateOutputType = {
   id: number
   firstname: number
   lastname: number
-  gender: number
   email: number
   password: number
   date_of_birth: number
   role: number
   createdAt: number
   updatedAt: number
+  mustChangePassword: number
+  isOnboarded: number
   _all: number
 }
 
@@ -87,39 +90,42 @@ export type UserMinAggregateInputType = {
   id?: true
   firstname?: true
   lastname?: true
-  gender?: true
   email?: true
   password?: true
   date_of_birth?: true
   role?: true
   createdAt?: true
   updatedAt?: true
+  mustChangePassword?: true
+  isOnboarded?: true
 }
 
 export type UserMaxAggregateInputType = {
   id?: true
   firstname?: true
   lastname?: true
-  gender?: true
   email?: true
   password?: true
   date_of_birth?: true
   role?: true
   createdAt?: true
   updatedAt?: true
+  mustChangePassword?: true
+  isOnboarded?: true
 }
 
 export type UserCountAggregateInputType = {
   id?: true
   firstname?: true
   lastname?: true
-  gender?: true
   email?: true
   password?: true
   date_of_birth?: true
   role?: true
   createdAt?: true
   updatedAt?: true
+  mustChangePassword?: true
+  isOnboarded?: true
   _all?: true
 }
 
@@ -213,13 +219,14 @@ export type UserGroupByOutputType = {
   id: number
   firstname: string
   lastname: string
-  gender: $Enums.GenderEnum
   email: string
   password: string
-  date_of_birth: Date
-  role: $Enums.RoleEnum | null
+  date_of_birth: Date | null
+  role: $Enums.RoleEnum
   createdAt: Date
   updatedAt: Date
+  mustChangePassword: boolean
+  isOnboarded: boolean
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -249,13 +256,14 @@ export type UserWhereInput = {
   id?: Prisma.IntFilter<"User"> | number
   firstname?: Prisma.StringFilter<"User"> | string
   lastname?: Prisma.StringFilter<"User"> | string
-  gender?: Prisma.EnumGenderEnumFilter<"User"> | $Enums.GenderEnum
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
-  date_of_birth?: Prisma.DateTimeFilter<"User"> | Date | string
-  role?: Prisma.EnumRoleEnumNullableFilter<"User"> | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  role?: Prisma.EnumRoleEnumFilter<"User"> | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  mustChangePassword?: Prisma.BoolFilter<"User"> | boolean
+  isOnboarded?: Prisma.BoolFilter<"User"> | boolean
   evnts?: Prisma.EvntListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   missions?: Prisma.MissionListRelationFilter
@@ -267,13 +275,14 @@ export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   firstname?: Prisma.SortOrder
   lastname?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
-  date_of_birth?: Prisma.SortOrder
-  role?: Prisma.SortOrderInput | Prisma.SortOrder
+  date_of_birth?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  mustChangePassword?: Prisma.SortOrder
+  isOnboarded?: Prisma.SortOrder
   evnts?: Prisma.EvntOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   missions?: Prisma.MissionOrderByRelationAggregateInput
@@ -290,12 +299,13 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   firstname?: Prisma.StringFilter<"User"> | string
   lastname?: Prisma.StringFilter<"User"> | string
-  gender?: Prisma.EnumGenderEnumFilter<"User"> | $Enums.GenderEnum
   password?: Prisma.StringFilter<"User"> | string
-  date_of_birth?: Prisma.DateTimeFilter<"User"> | Date | string
-  role?: Prisma.EnumRoleEnumNullableFilter<"User"> | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  role?: Prisma.EnumRoleEnumFilter<"User"> | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  mustChangePassword?: Prisma.BoolFilter<"User"> | boolean
+  isOnboarded?: Prisma.BoolFilter<"User"> | boolean
   evnts?: Prisma.EvntListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   missions?: Prisma.MissionListRelationFilter
@@ -307,13 +317,14 @@ export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   firstname?: Prisma.SortOrder
   lastname?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
-  date_of_birth?: Prisma.SortOrder
-  role?: Prisma.SortOrderInput | Prisma.SortOrder
+  date_of_birth?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  mustChangePassword?: Prisma.SortOrder
+  isOnboarded?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -328,25 +339,27 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"User"> | number
   firstname?: Prisma.StringWithAggregatesFilter<"User"> | string
   lastname?: Prisma.StringWithAggregatesFilter<"User"> | string
-  gender?: Prisma.EnumGenderEnumWithAggregatesFilter<"User"> | $Enums.GenderEnum
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
-  date_of_birth?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
-  role?: Prisma.EnumRoleEnumNullableWithAggregatesFilter<"User"> | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  role?: Prisma.EnumRoleEnumWithAggregatesFilter<"User"> | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  mustChangePassword?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  isOnboarded?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
 }
 
 export type UserCreateInput = {
   firstname: string
   lastname: string
-  gender: $Enums.GenderEnum
   email: string
   password: string
-  date_of_birth: Date | string
-  role?: $Enums.RoleEnum | null
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
   createdAt?: Date | string
   updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
   evnts?: Prisma.EvntCreateNestedManyWithoutCreatorInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   missions?: Prisma.MissionCreateNestedManyWithoutCreatorInput
@@ -358,13 +371,14 @@ export type UserUncheckedCreateInput = {
   id?: number
   firstname: string
   lastname: string
-  gender: $Enums.GenderEnum
   email: string
   password: string
-  date_of_birth: Date | string
-  role?: $Enums.RoleEnum | null
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
   createdAt?: Date | string
   updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
   evnts?: Prisma.EvntUncheckedCreateNestedManyWithoutCreatorInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   missions?: Prisma.MissionUncheckedCreateNestedManyWithoutCreatorInput
@@ -375,13 +389,14 @@ export type UserUncheckedCreateInput = {
 export type UserUpdateInput = {
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableEnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
   evnts?: Prisma.EvntUpdateManyWithoutCreatorNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   missions?: Prisma.MissionUpdateManyWithoutCreatorNestedInput
@@ -393,13 +408,14 @@ export type UserUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableEnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
   evnts?: Prisma.EvntUncheckedUpdateManyWithoutCreatorNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   missions?: Prisma.MissionUncheckedUpdateManyWithoutCreatorNestedInput
@@ -411,38 +427,41 @@ export type UserCreateManyInput = {
   id?: number
   firstname: string
   lastname: string
-  gender: $Enums.GenderEnum
   email: string
   password: string
-  date_of_birth: Date | string
-  role?: $Enums.RoleEnum | null
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
   createdAt?: Date | string
   updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
 }
 
 export type UserUpdateManyMutationInput = {
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableEnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableEnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserOrderByRelevanceInput = {
@@ -455,13 +474,14 @@ export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   firstname?: Prisma.SortOrder
   lastname?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   date_of_birth?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  mustChangePassword?: Prisma.SortOrder
+  isOnboarded?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -472,26 +492,28 @@ export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   firstname?: Prisma.SortOrder
   lastname?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   date_of_birth?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  mustChangePassword?: Prisma.SortOrder
+  isOnboarded?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   firstname?: Prisma.SortOrder
   lastname?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   date_of_birth?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  mustChangePassword?: Prisma.SortOrder
+  isOnboarded?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -507,16 +529,20 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
-export type EnumGenderEnumFieldUpdateOperationsInput = {
-  set?: $Enums.GenderEnum
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type EnumRoleEnumFieldUpdateOperationsInput = {
+  set?: $Enums.RoleEnum
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
-export type NullableEnumRoleEnumFieldUpdateOperationsInput = {
-  set?: $Enums.RoleEnum | null
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -600,13 +626,14 @@ export type UserUpdateOneRequiredWithoutUserHasMissionsNestedInput = {
 export type UserCreateWithoutEvntsInput = {
   firstname: string
   lastname: string
-  gender: $Enums.GenderEnum
   email: string
   password: string
-  date_of_birth: Date | string
-  role?: $Enums.RoleEnum | null
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
   createdAt?: Date | string
   updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   missions?: Prisma.MissionCreateNestedManyWithoutCreatorInput
   userHasMissions?: Prisma.User_Has_MissionCreateNestedManyWithoutUserInput
@@ -617,13 +644,14 @@ export type UserUncheckedCreateWithoutEvntsInput = {
   id?: number
   firstname: string
   lastname: string
-  gender: $Enums.GenderEnum
   email: string
   password: string
-  date_of_birth: Date | string
-  role?: $Enums.RoleEnum | null
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
   createdAt?: Date | string
   updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   missions?: Prisma.MissionUncheckedCreateNestedManyWithoutCreatorInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedCreateNestedManyWithoutUserInput
@@ -649,13 +677,14 @@ export type UserUpdateToOneWithWhereWithoutEvntsInput = {
 export type UserUpdateWithoutEvntsInput = {
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableEnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   missions?: Prisma.MissionUpdateManyWithoutCreatorNestedInput
   userHasMissions?: Prisma.User_Has_MissionUpdateManyWithoutUserNestedInput
@@ -666,13 +695,14 @@ export type UserUncheckedUpdateWithoutEvntsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableEnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   missions?: Prisma.MissionUncheckedUpdateManyWithoutCreatorNestedInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedUpdateManyWithoutUserNestedInput
@@ -682,13 +712,14 @@ export type UserUncheckedUpdateWithoutEvntsInput = {
 export type UserCreateWithoutMissionsInput = {
   firstname: string
   lastname: string
-  gender: $Enums.GenderEnum
   email: string
   password: string
-  date_of_birth: Date | string
-  role?: $Enums.RoleEnum | null
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
   createdAt?: Date | string
   updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
   evnts?: Prisma.EvntCreateNestedManyWithoutCreatorInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   userHasMissions?: Prisma.User_Has_MissionCreateNestedManyWithoutUserInput
@@ -699,13 +730,14 @@ export type UserUncheckedCreateWithoutMissionsInput = {
   id?: number
   firstname: string
   lastname: string
-  gender: $Enums.GenderEnum
   email: string
   password: string
-  date_of_birth: Date | string
-  role?: $Enums.RoleEnum | null
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
   createdAt?: Date | string
   updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
   evnts?: Prisma.EvntUncheckedCreateNestedManyWithoutCreatorInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedCreateNestedManyWithoutUserInput
@@ -731,13 +763,14 @@ export type UserUpdateToOneWithWhereWithoutMissionsInput = {
 export type UserUpdateWithoutMissionsInput = {
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableEnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
   evnts?: Prisma.EvntUpdateManyWithoutCreatorNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   userHasMissions?: Prisma.User_Has_MissionUpdateManyWithoutUserNestedInput
@@ -748,13 +781,14 @@ export type UserUncheckedUpdateWithoutMissionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableEnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
   evnts?: Prisma.EvntUncheckedUpdateManyWithoutCreatorNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedUpdateManyWithoutUserNestedInput
@@ -764,13 +798,14 @@ export type UserUncheckedUpdateWithoutMissionsInput = {
 export type UserCreateWithoutNotificationsInput = {
   firstname: string
   lastname: string
-  gender: $Enums.GenderEnum
   email: string
   password: string
-  date_of_birth: Date | string
-  role?: $Enums.RoleEnum | null
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
   createdAt?: Date | string
   updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
   evnts?: Prisma.EvntCreateNestedManyWithoutCreatorInput
   missions?: Prisma.MissionCreateNestedManyWithoutCreatorInput
   userHasMissions?: Prisma.User_Has_MissionCreateNestedManyWithoutUserInput
@@ -781,13 +816,14 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   id?: number
   firstname: string
   lastname: string
-  gender: $Enums.GenderEnum
   email: string
   password: string
-  date_of_birth: Date | string
-  role?: $Enums.RoleEnum | null
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
   createdAt?: Date | string
   updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
   evnts?: Prisma.EvntUncheckedCreateNestedManyWithoutCreatorInput
   missions?: Prisma.MissionUncheckedCreateNestedManyWithoutCreatorInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedCreateNestedManyWithoutUserInput
@@ -813,13 +849,14 @@ export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
 export type UserUpdateWithoutNotificationsInput = {
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableEnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
   evnts?: Prisma.EvntUpdateManyWithoutCreatorNestedInput
   missions?: Prisma.MissionUpdateManyWithoutCreatorNestedInput
   userHasMissions?: Prisma.User_Has_MissionUpdateManyWithoutUserNestedInput
@@ -830,13 +867,14 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableEnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
   evnts?: Prisma.EvntUncheckedUpdateManyWithoutCreatorNestedInput
   missions?: Prisma.MissionUncheckedUpdateManyWithoutCreatorNestedInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedUpdateManyWithoutUserNestedInput
@@ -846,13 +884,14 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
 export type UserCreateWithoutUserHasSkillsInput = {
   firstname: string
   lastname: string
-  gender: $Enums.GenderEnum
   email: string
   password: string
-  date_of_birth: Date | string
-  role?: $Enums.RoleEnum | null
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
   createdAt?: Date | string
   updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
   evnts?: Prisma.EvntCreateNestedManyWithoutCreatorInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   missions?: Prisma.MissionCreateNestedManyWithoutCreatorInput
@@ -863,13 +902,14 @@ export type UserUncheckedCreateWithoutUserHasSkillsInput = {
   id?: number
   firstname: string
   lastname: string
-  gender: $Enums.GenderEnum
   email: string
   password: string
-  date_of_birth: Date | string
-  role?: $Enums.RoleEnum | null
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
   createdAt?: Date | string
   updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
   evnts?: Prisma.EvntUncheckedCreateNestedManyWithoutCreatorInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   missions?: Prisma.MissionUncheckedCreateNestedManyWithoutCreatorInput
@@ -895,13 +935,14 @@ export type UserUpdateToOneWithWhereWithoutUserHasSkillsInput = {
 export type UserUpdateWithoutUserHasSkillsInput = {
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableEnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
   evnts?: Prisma.EvntUpdateManyWithoutCreatorNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   missions?: Prisma.MissionUpdateManyWithoutCreatorNestedInput
@@ -912,13 +953,14 @@ export type UserUncheckedUpdateWithoutUserHasSkillsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableEnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
   evnts?: Prisma.EvntUncheckedUpdateManyWithoutCreatorNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   missions?: Prisma.MissionUncheckedUpdateManyWithoutCreatorNestedInput
@@ -928,13 +970,14 @@ export type UserUncheckedUpdateWithoutUserHasSkillsInput = {
 export type UserCreateWithoutUserHasMissionsInput = {
   firstname: string
   lastname: string
-  gender: $Enums.GenderEnum
   email: string
   password: string
-  date_of_birth: Date | string
-  role?: $Enums.RoleEnum | null
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
   createdAt?: Date | string
   updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
   evnts?: Prisma.EvntCreateNestedManyWithoutCreatorInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   missions?: Prisma.MissionCreateNestedManyWithoutCreatorInput
@@ -945,13 +988,14 @@ export type UserUncheckedCreateWithoutUserHasMissionsInput = {
   id?: number
   firstname: string
   lastname: string
-  gender: $Enums.GenderEnum
   email: string
   password: string
-  date_of_birth: Date | string
-  role?: $Enums.RoleEnum | null
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
   createdAt?: Date | string
   updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
   evnts?: Prisma.EvntUncheckedCreateNestedManyWithoutCreatorInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   missions?: Prisma.MissionUncheckedCreateNestedManyWithoutCreatorInput
@@ -977,13 +1021,14 @@ export type UserUpdateToOneWithWhereWithoutUserHasMissionsInput = {
 export type UserUpdateWithoutUserHasMissionsInput = {
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableEnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
   evnts?: Prisma.EvntUpdateManyWithoutCreatorNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   missions?: Prisma.MissionUpdateManyWithoutCreatorNestedInput
@@ -994,13 +1039,14 @@ export type UserUncheckedUpdateWithoutUserHasMissionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   firstname?: Prisma.StringFieldUpdateOperationsInput | string
   lastname?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderEnumFieldUpdateOperationsInput | $Enums.GenderEnum
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  role?: Prisma.NullableEnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum | null
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
   evnts?: Prisma.EvntUncheckedUpdateManyWithoutCreatorNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   missions?: Prisma.MissionUncheckedUpdateManyWithoutCreatorNestedInput
@@ -1078,13 +1124,14 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   firstname?: boolean
   lastname?: boolean
-  gender?: boolean
   email?: boolean
   password?: boolean
   date_of_birth?: boolean
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
   evnts?: boolean | Prisma.User$evntsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   missions?: boolean | Prisma.User$missionsArgs<ExtArgs>
@@ -1099,16 +1146,17 @@ export type UserSelectScalar = {
   id?: boolean
   firstname?: boolean
   lastname?: boolean
-  gender?: boolean
   email?: boolean
   password?: boolean
   date_of_birth?: boolean
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "gender" | "email" | "password" | "date_of_birth" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "email" | "password" | "date_of_birth" | "role" | "createdAt" | "updatedAt" | "mustChangePassword" | "isOnboarded", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   evnts?: boolean | Prisma.User$evntsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
@@ -1131,13 +1179,14 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: number
     firstname: string
     lastname: string
-    gender: $Enums.GenderEnum
     email: string
     password: string
-    date_of_birth: Date
-    role: $Enums.RoleEnum | null
+    date_of_birth: Date | null
+    role: $Enums.RoleEnum
     createdAt: Date
     updatedAt: Date
+    mustChangePassword: boolean
+    isOnboarded: boolean
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1515,13 +1564,14 @@ export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'Int'>
   readonly firstname: Prisma.FieldRef<"User", 'String'>
   readonly lastname: Prisma.FieldRef<"User", 'String'>
-  readonly gender: Prisma.FieldRef<"User", 'GenderEnum'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly date_of_birth: Prisma.FieldRef<"User", 'DateTime'>
   readonly role: Prisma.FieldRef<"User", 'RoleEnum'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly mustChangePassword: Prisma.FieldRef<"User", 'Boolean'>
+  readonly isOnboarded: Prisma.FieldRef<"User", 'Boolean'>
 }
     
 

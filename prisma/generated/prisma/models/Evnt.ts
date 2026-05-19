@@ -44,6 +44,8 @@ export type EvntMinAggregateOutputType = {
   id: number | null
   name: string | null
   date: Date | null
+  start_hour: Date | null
+  end_hour: Date | null
   location: string | null
   description: string | null
   categoryId: number | null
@@ -57,6 +59,8 @@ export type EvntMaxAggregateOutputType = {
   id: number | null
   name: string | null
   date: Date | null
+  start_hour: Date | null
+  end_hour: Date | null
   location: string | null
   description: string | null
   categoryId: number | null
@@ -70,6 +74,8 @@ export type EvntCountAggregateOutputType = {
   id: number
   name: number
   date: number
+  start_hour: number
+  end_hour: number
   location: number
   description: number
   categoryId: number
@@ -99,6 +105,8 @@ export type EvntMinAggregateInputType = {
   id?: true
   name?: true
   date?: true
+  start_hour?: true
+  end_hour?: true
   location?: true
   description?: true
   categoryId?: true
@@ -112,6 +120,8 @@ export type EvntMaxAggregateInputType = {
   id?: true
   name?: true
   date?: true
+  start_hour?: true
+  end_hour?: true
   location?: true
   description?: true
   categoryId?: true
@@ -125,6 +135,8 @@ export type EvntCountAggregateInputType = {
   id?: true
   name?: true
   date?: true
+  start_hour?: true
+  end_hour?: true
   location?: true
   description?: true
   categoryId?: true
@@ -225,6 +237,8 @@ export type EvntGroupByOutputType = {
   id: number
   name: string
   date: Date
+  start_hour: Date
+  end_hour: Date
   location: string | null
   description: string
   categoryId: number
@@ -261,6 +275,8 @@ export type EvntWhereInput = {
   id?: Prisma.IntFilter<"Evnt"> | number
   name?: Prisma.StringFilter<"Evnt"> | string
   date?: Prisma.DateTimeFilter<"Evnt"> | Date | string
+  start_hour?: Prisma.DateTimeFilter<"Evnt"> | Date | string
+  end_hour?: Prisma.DateTimeFilter<"Evnt"> | Date | string
   location?: Prisma.StringNullableFilter<"Evnt"> | string | null
   description?: Prisma.StringFilter<"Evnt"> | string
   categoryId?: Prisma.IntFilter<"Evnt"> | number
@@ -279,6 +295,8 @@ export type EvntOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  start_hour?: Prisma.SortOrder
+  end_hour?: Prisma.SortOrder
   location?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
@@ -301,6 +319,8 @@ export type EvntWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.EvntWhereInput | Prisma.EvntWhereInput[]
   name?: Prisma.StringFilter<"Evnt"> | string
   date?: Prisma.DateTimeFilter<"Evnt"> | Date | string
+  start_hour?: Prisma.DateTimeFilter<"Evnt"> | Date | string
+  end_hour?: Prisma.DateTimeFilter<"Evnt"> | Date | string
   location?: Prisma.StringNullableFilter<"Evnt"> | string | null
   description?: Prisma.StringFilter<"Evnt"> | string
   categoryId?: Prisma.IntFilter<"Evnt"> | number
@@ -319,6 +339,8 @@ export type EvntOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  start_hour?: Prisma.SortOrder
+  end_hour?: Prisma.SortOrder
   location?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
@@ -340,6 +362,8 @@ export type EvntScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Evnt"> | number
   name?: Prisma.StringWithAggregatesFilter<"Evnt"> | string
   date?: Prisma.DateTimeWithAggregatesFilter<"Evnt"> | Date | string
+  start_hour?: Prisma.DateTimeWithAggregatesFilter<"Evnt"> | Date | string
+  end_hour?: Prisma.DateTimeWithAggregatesFilter<"Evnt"> | Date | string
   location?: Prisma.StringNullableWithAggregatesFilter<"Evnt"> | string | null
   description?: Prisma.StringWithAggregatesFilter<"Evnt"> | string
   categoryId?: Prisma.IntWithAggregatesFilter<"Evnt"> | number
@@ -352,6 +376,8 @@ export type EvntScalarWhereWithAggregatesInput = {
 export type EvntCreateInput = {
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   createdAt?: Date | string
@@ -367,6 +393,8 @@ export type EvntUncheckedCreateInput = {
   id?: number
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   categoryId: number
@@ -381,6 +409,8 @@ export type EvntUncheckedCreateInput = {
 export type EvntUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -396,6 +426,8 @@ export type EvntUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -411,6 +443,8 @@ export type EvntCreateManyInput = {
   id?: number
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   categoryId: number
@@ -423,6 +457,8 @@ export type EvntCreateManyInput = {
 export type EvntUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -433,6 +469,8 @@ export type EvntUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -462,6 +500,8 @@ export type EvntCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  start_hour?: Prisma.SortOrder
+  end_hour?: Prisma.SortOrder
   location?: Prisma.SortOrder
   description?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
@@ -482,6 +522,8 @@ export type EvntMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  start_hour?: Prisma.SortOrder
+  end_hour?: Prisma.SortOrder
   location?: Prisma.SortOrder
   description?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
@@ -495,6 +537,8 @@ export type EvntMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  start_hour?: Prisma.SortOrder
+  end_hour?: Prisma.SortOrder
   location?: Prisma.SortOrder
   description?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
@@ -685,6 +729,8 @@ export type EvntUpdateOneRequiredWithoutDocumentHasEvntsNestedInput = {
 export type EvntCreateWithoutCreatorInput = {
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   createdAt?: Date | string
@@ -699,6 +745,8 @@ export type EvntUncheckedCreateWithoutCreatorInput = {
   id?: number
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   categoryId: number
@@ -742,6 +790,8 @@ export type EvntScalarWhereInput = {
   id?: Prisma.IntFilter<"Evnt"> | number
   name?: Prisma.StringFilter<"Evnt"> | string
   date?: Prisma.DateTimeFilter<"Evnt"> | Date | string
+  start_hour?: Prisma.DateTimeFilter<"Evnt"> | Date | string
+  end_hour?: Prisma.DateTimeFilter<"Evnt"> | Date | string
   location?: Prisma.StringNullableFilter<"Evnt"> | string | null
   description?: Prisma.StringFilter<"Evnt"> | string
   categoryId?: Prisma.IntFilter<"Evnt"> | number
@@ -754,6 +804,8 @@ export type EvntScalarWhereInput = {
 export type EvntCreateWithoutMissionsInput = {
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   createdAt?: Date | string
@@ -768,6 +820,8 @@ export type EvntUncheckedCreateWithoutMissionsInput = {
   id?: number
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   categoryId: number
@@ -797,6 +851,8 @@ export type EvntUpdateToOneWithWhereWithoutMissionsInput = {
 export type EvntUpdateWithoutMissionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -811,6 +867,8 @@ export type EvntUncheckedUpdateWithoutMissionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -824,6 +882,8 @@ export type EvntUncheckedUpdateWithoutMissionsInput = {
 export type EvntCreateWithoutCategoryInput = {
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   createdAt?: Date | string
@@ -838,6 +898,8 @@ export type EvntUncheckedCreateWithoutCategoryInput = {
   id?: number
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   creatorId: number
@@ -877,6 +939,8 @@ export type EvntUpdateManyWithWhereWithoutCategoryInput = {
 export type EvntCreateWithoutDocumentInput = {
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   createdAt?: Date | string
@@ -891,6 +955,8 @@ export type EvntUncheckedCreateWithoutDocumentInput = {
   id?: number
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   categoryId: number
@@ -930,6 +996,8 @@ export type EvntUpdateManyWithWhereWithoutDocumentInput = {
 export type EvntCreateWithoutDocumentHasEvntsInput = {
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   createdAt?: Date | string
@@ -944,6 +1012,8 @@ export type EvntUncheckedCreateWithoutDocumentHasEvntsInput = {
   id?: number
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   categoryId: number
@@ -973,6 +1043,8 @@ export type EvntUpdateToOneWithWhereWithoutDocumentHasEvntsInput = {
 export type EvntUpdateWithoutDocumentHasEvntsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -987,6 +1059,8 @@ export type EvntUncheckedUpdateWithoutDocumentHasEvntsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1001,6 +1075,8 @@ export type EvntCreateManyCreatorInput = {
   id?: number
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   categoryId: number
@@ -1012,6 +1088,8 @@ export type EvntCreateManyCreatorInput = {
 export type EvntUpdateWithoutCreatorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1026,6 +1104,8 @@ export type EvntUncheckedUpdateWithoutCreatorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1040,6 +1120,8 @@ export type EvntUncheckedUpdateManyWithoutCreatorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1052,6 +1134,8 @@ export type EvntCreateManyCategoryInput = {
   id?: number
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   creatorId: number
@@ -1063,6 +1147,8 @@ export type EvntCreateManyCategoryInput = {
 export type EvntUpdateWithoutCategoryInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1077,6 +1163,8 @@ export type EvntUncheckedUpdateWithoutCategoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1091,6 +1179,8 @@ export type EvntUncheckedUpdateManyWithoutCategoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1103,6 +1193,8 @@ export type EvntCreateManyDocumentInput = {
   id?: number
   name: string
   date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
   location?: string | null
   description: string
   categoryId: number
@@ -1114,6 +1206,8 @@ export type EvntCreateManyDocumentInput = {
 export type EvntUpdateWithoutDocumentInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1128,6 +1222,8 @@ export type EvntUncheckedUpdateWithoutDocumentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1142,6 +1238,8 @@ export type EvntUncheckedUpdateManyWithoutDocumentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1194,6 +1292,8 @@ export type EvntSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   name?: boolean
   date?: boolean
+  start_hour?: boolean
+  end_hour?: boolean
   location?: boolean
   description?: boolean
   categoryId?: boolean
@@ -1215,6 +1315,8 @@ export type EvntSelectScalar = {
   id?: boolean
   name?: boolean
   date?: boolean
+  start_hour?: boolean
+  end_hour?: boolean
   location?: boolean
   description?: boolean
   categoryId?: boolean
@@ -1224,7 +1326,7 @@ export type EvntSelectScalar = {
   updatedAt?: boolean
 }
 
-export type EvntOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "date" | "location" | "description" | "categoryId" | "creatorId" | "documentId" | "createdAt" | "updatedAt", ExtArgs["result"]["evnt"]>
+export type EvntOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "date" | "start_hour" | "end_hour" | "location" | "description" | "categoryId" | "creatorId" | "documentId" | "createdAt" | "updatedAt", ExtArgs["result"]["evnt"]>
 export type EvntInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
@@ -1247,6 +1349,8 @@ export type $EvntPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: number
     name: string
     date: Date
+    start_hour: Date
+    end_hour: Date
     location: string | null
     description: string
     categoryId: number
@@ -1631,6 +1735,8 @@ export interface EvntFieldRefs {
   readonly id: Prisma.FieldRef<"Evnt", 'Int'>
   readonly name: Prisma.FieldRef<"Evnt", 'String'>
   readonly date: Prisma.FieldRef<"Evnt", 'DateTime'>
+  readonly start_hour: Prisma.FieldRef<"Evnt", 'DateTime'>
+  readonly end_hour: Prisma.FieldRef<"Evnt", 'DateTime'>
   readonly location: Prisma.FieldRef<"Evnt", 'String'>
   readonly description: Prisma.FieldRef<"Evnt", 'String'>
   readonly categoryId: Prisma.FieldRef<"Evnt", 'Int'>

@@ -84,13 +84,14 @@ export const UserScalarFieldEnum = {
   id: 'id',
   firstname: 'firstname',
   lastname: 'lastname',
-  gender: 'gender',
   email: 'email',
   password: 'password',
   date_of_birth: 'date_of_birth',
   role: 'role',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  mustChangePassword: 'mustChangePassword',
+  isOnboarded: 'isOnboarded'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -100,6 +101,8 @@ export const EvntScalarFieldEnum = {
   id: 'id',
   name: 'name',
   date: 'date',
+  start_hour: 'start_hour',
+  end_hour: 'end_hour',
   location: 'location',
   description: 'description',
   categoryId: 'categoryId',
@@ -174,7 +177,8 @@ export type SkillScalarFieldEnum = (typeof SkillScalarFieldEnum)[keyof typeof Sk
 
 export const User_has_SkillScalarFieldEnum = {
   userId: 'userId',
-  skillId: 'skillId'
+  skillId: 'skillId',
+  createdAt: 'createdAt'
 } as const
 
 export type User_has_SkillScalarFieldEnum = (typeof User_has_SkillScalarFieldEnum)[keyof typeof User_has_SkillScalarFieldEnum]
@@ -182,7 +186,8 @@ export type User_has_SkillScalarFieldEnum = (typeof User_has_SkillScalarFieldEnu
 
 export const Mission_has_SkillScalarFieldEnum = {
   missionId: 'missionId',
-  skillId: 'skillId'
+  skillId: 'skillId',
+  createdAt: 'createdAt'
 } as const
 
 export type Mission_has_SkillScalarFieldEnum = (typeof Mission_has_SkillScalarFieldEnum)[keyof typeof Mission_has_SkillScalarFieldEnum]
@@ -191,8 +196,7 @@ export type Mission_has_SkillScalarFieldEnum = (typeof Mission_has_SkillScalarFi
 export const User_Has_MissionScalarFieldEnum = {
   userId: 'userId',
   missionId: 'missionId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  createdAt: 'createdAt'
 } as const
 
 export type User_Has_MissionScalarFieldEnum = (typeof User_Has_MissionScalarFieldEnum)[keyof typeof User_Has_MissionScalarFieldEnum]
@@ -200,7 +204,8 @@ export type User_Has_MissionScalarFieldEnum = (typeof User_Has_MissionScalarFiel
 
 export const Document_Has_EvntScalarFieldEnum = {
   documentId: 'documentId',
-  evntId: 'evntId'
+  evntId: 'evntId',
+  createdAt: 'createdAt'
 } as const
 
 export type Document_Has_EvntScalarFieldEnum = (typeof Document_Has_EvntScalarFieldEnum)[keyof typeof Document_Has_EvntScalarFieldEnum]

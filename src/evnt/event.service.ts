@@ -14,7 +14,11 @@ export class EventService {
 
     createEvent.date = new Date(createEvent.date)
     const newEvent : Evnt = await this.prisma.evnt.create({
-      data : createEvent
+      data : {
+        ...createEvent,
+        start_hour: new Date(`1970-01-01T${createEvent.start_hour}:00`),
+        end_hour: new Date(`1970-01-01T${createEvent.end_hour}:00`)
+      } 
     })
 
     return newEvent

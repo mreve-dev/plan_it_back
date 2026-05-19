@@ -11,16 +11,7 @@
 
 export const RoleEnum = {
   benevole: 'benevole',
-  referent_coordinateur: 'referent_coordinateur'
+  admin: 'admin'
 } as const
 
 export type RoleEnum = (typeof RoleEnum)[keyof typeof RoleEnum]
-
-
-export const GenderEnum = {
-  femme: 'femme',
-  homme: 'homme',
-  autre: 'autre'
-} as const
-
-export type GenderEnum = (typeof GenderEnum)[keyof typeof GenderEnum]

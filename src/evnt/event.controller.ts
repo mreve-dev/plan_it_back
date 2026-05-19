@@ -30,7 +30,7 @@ export class EventController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) : Promise<void> {
+  async remove(@Param('id') id: string) : Promise<Evnt> {
     return this.eventService.remove(+id);
   }
 }

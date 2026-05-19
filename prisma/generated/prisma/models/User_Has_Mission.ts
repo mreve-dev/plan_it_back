@@ -40,21 +40,18 @@ export type User_Has_MissionMinAggregateOutputType = {
   userId: number | null
   missionId: number | null
   createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type User_Has_MissionMaxAggregateOutputType = {
   userId: number | null
   missionId: number | null
   createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type User_Has_MissionCountAggregateOutputType = {
   userId: number
   missionId: number
   createdAt: number
-  updatedAt: number
   _all: number
 }
 
@@ -73,21 +70,18 @@ export type User_Has_MissionMinAggregateInputType = {
   userId?: true
   missionId?: true
   createdAt?: true
-  updatedAt?: true
 }
 
 export type User_Has_MissionMaxAggregateInputType = {
   userId?: true
   missionId?: true
   createdAt?: true
-  updatedAt?: true
 }
 
 export type User_Has_MissionCountAggregateInputType = {
   userId?: true
   missionId?: true
   createdAt?: true
-  updatedAt?: true
   _all?: true
 }
 
@@ -181,7 +175,6 @@ export type User_Has_MissionGroupByOutputType = {
   userId: number
   missionId: number
   createdAt: Date
-  updatedAt: Date
   _count: User_Has_MissionCountAggregateOutputType | null
   _avg: User_Has_MissionAvgAggregateOutputType | null
   _sum: User_Has_MissionSumAggregateOutputType | null
@@ -211,7 +204,6 @@ export type User_Has_MissionWhereInput = {
   userId?: Prisma.IntFilter<"User_Has_Mission"> | number
   missionId?: Prisma.IntFilter<"User_Has_Mission"> | number
   createdAt?: Prisma.DateTimeFilter<"User_Has_Mission"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"User_Has_Mission"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   mission?: Prisma.XOR<Prisma.MissionScalarRelationFilter, Prisma.MissionWhereInput>
 }
@@ -220,7 +212,6 @@ export type User_Has_MissionOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   missionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   mission?: Prisma.MissionOrderByWithRelationInput
 }
@@ -233,7 +224,6 @@ export type User_Has_MissionWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.IntFilter<"User_Has_Mission"> | number
   missionId?: Prisma.IntFilter<"User_Has_Mission"> | number
   createdAt?: Prisma.DateTimeFilter<"User_Has_Mission"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"User_Has_Mission"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   mission?: Prisma.XOR<Prisma.MissionScalarRelationFilter, Prisma.MissionWhereInput>
 }, "userId_missionId">
@@ -242,7 +232,6 @@ export type User_Has_MissionOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   missionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   _count?: Prisma.User_Has_MissionCountOrderByAggregateInput
   _avg?: Prisma.User_Has_MissionAvgOrderByAggregateInput
   _max?: Prisma.User_Has_MissionMaxOrderByAggregateInput
@@ -257,12 +246,10 @@ export type User_Has_MissionScalarWhereWithAggregatesInput = {
   userId?: Prisma.IntWithAggregatesFilter<"User_Has_Mission"> | number
   missionId?: Prisma.IntWithAggregatesFilter<"User_Has_Mission"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User_Has_Mission"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User_Has_Mission"> | Date | string
 }
 
 export type User_Has_MissionCreateInput = {
   createdAt?: Date | string
-  updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutUserHasMissionsInput
   mission: Prisma.MissionCreateNestedOneWithoutUserHasMissionsInput
 }
@@ -271,12 +258,10 @@ export type User_Has_MissionUncheckedCreateInput = {
   userId: number
   missionId: number
   createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type User_Has_MissionUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutUserHasMissionsNestedInput
   mission?: Prisma.MissionUpdateOneRequiredWithoutUserHasMissionsNestedInput
 }
@@ -285,26 +270,22 @@ export type User_Has_MissionUncheckedUpdateInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   missionId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type User_Has_MissionCreateManyInput = {
   userId: number
   missionId: number
   createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type User_Has_MissionUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type User_Has_MissionUncheckedUpdateManyInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   missionId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type User_Has_MissionListRelationFilter = {
@@ -326,7 +307,6 @@ export type User_Has_MissionCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   missionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type User_Has_MissionAvgOrderByAggregateInput = {
@@ -338,14 +318,12 @@ export type User_Has_MissionMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   missionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type User_Has_MissionMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   missionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type User_Has_MissionSumOrderByAggregateInput = {
@@ -439,14 +417,12 @@ export type User_Has_MissionUncheckedUpdateManyWithoutMissionNestedInput = {
 
 export type User_Has_MissionCreateWithoutUserInput = {
   createdAt?: Date | string
-  updatedAt?: Date | string
   mission: Prisma.MissionCreateNestedOneWithoutUserHasMissionsInput
 }
 
 export type User_Has_MissionUncheckedCreateWithoutUserInput = {
   missionId: number
   createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type User_Has_MissionCreateOrConnectWithoutUserInput = {
@@ -482,19 +458,16 @@ export type User_Has_MissionScalarWhereInput = {
   userId?: Prisma.IntFilter<"User_Has_Mission"> | number
   missionId?: Prisma.IntFilter<"User_Has_Mission"> | number
   createdAt?: Prisma.DateTimeFilter<"User_Has_Mission"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"User_Has_Mission"> | Date | string
 }
 
 export type User_Has_MissionCreateWithoutMissionInput = {
   createdAt?: Date | string
-  updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutUserHasMissionsInput
 }
 
 export type User_Has_MissionUncheckedCreateWithoutMissionInput = {
   userId: number
   createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type User_Has_MissionCreateOrConnectWithoutMissionInput = {
@@ -526,49 +499,41 @@ export type User_Has_MissionUpdateManyWithWhereWithoutMissionInput = {
 export type User_Has_MissionCreateManyUserInput = {
   missionId: number
   createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type User_Has_MissionUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mission?: Prisma.MissionUpdateOneRequiredWithoutUserHasMissionsNestedInput
 }
 
 export type User_Has_MissionUncheckedUpdateWithoutUserInput = {
   missionId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type User_Has_MissionUncheckedUpdateManyWithoutUserInput = {
   missionId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type User_Has_MissionCreateManyMissionInput = {
   userId: number
   createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type User_Has_MissionUpdateWithoutMissionInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutUserHasMissionsNestedInput
 }
 
 export type User_Has_MissionUncheckedUpdateWithoutMissionInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type User_Has_MissionUncheckedUpdateManyWithoutMissionInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -577,7 +542,6 @@ export type User_Has_MissionSelect<ExtArgs extends runtime.Types.Extensions.Inte
   userId?: boolean
   missionId?: boolean
   createdAt?: boolean
-  updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user_Has_Mission"]>
@@ -588,10 +552,9 @@ export type User_Has_MissionSelectScalar = {
   userId?: boolean
   missionId?: boolean
   createdAt?: boolean
-  updatedAt?: boolean
 }
 
-export type User_Has_MissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"userId" | "missionId" | "createdAt" | "updatedAt", ExtArgs["result"]["user_Has_Mission"]>
+export type User_Has_MissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"userId" | "missionId" | "createdAt", ExtArgs["result"]["user_Has_Mission"]>
 export type User_Has_MissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
@@ -607,7 +570,6 @@ export type $User_Has_MissionPayload<ExtArgs extends runtime.Types.Extensions.In
     userId: number
     missionId: number
     createdAt: Date
-    updatedAt: Date
   }, ExtArgs["result"]["user_Has_Mission"]>
   composites: {}
 }
@@ -982,7 +944,6 @@ export interface User_Has_MissionFieldRefs {
   readonly userId: Prisma.FieldRef<"User_Has_Mission", 'Int'>
   readonly missionId: Prisma.FieldRef<"User_Has_Mission", 'Int'>
   readonly createdAt: Prisma.FieldRef<"User_Has_Mission", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"User_Has_Mission", 'DateTime'>
 }
     
 

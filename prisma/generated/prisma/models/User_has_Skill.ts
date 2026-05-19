@@ -39,16 +39,19 @@ export type User_has_SkillSumAggregateOutputType = {
 export type User_has_SkillMinAggregateOutputType = {
   userId: number | null
   skillId: number | null
+  createdAt: Date | null
 }
 
 export type User_has_SkillMaxAggregateOutputType = {
   userId: number | null
   skillId: number | null
+  createdAt: Date | null
 }
 
 export type User_has_SkillCountAggregateOutputType = {
   userId: number
   skillId: number
+  createdAt: number
   _all: number
 }
 
@@ -66,16 +69,19 @@ export type User_has_SkillSumAggregateInputType = {
 export type User_has_SkillMinAggregateInputType = {
   userId?: true
   skillId?: true
+  createdAt?: true
 }
 
 export type User_has_SkillMaxAggregateInputType = {
   userId?: true
   skillId?: true
+  createdAt?: true
 }
 
 export type User_has_SkillCountAggregateInputType = {
   userId?: true
   skillId?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -168,6 +174,7 @@ export type User_has_SkillGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 export type User_has_SkillGroupByOutputType = {
   userId: number
   skillId: number
+  createdAt: Date
   _count: User_has_SkillCountAggregateOutputType | null
   _avg: User_has_SkillAvgAggregateOutputType | null
   _sum: User_has_SkillSumAggregateOutputType | null
@@ -196,6 +203,7 @@ export type User_has_SkillWhereInput = {
   NOT?: Prisma.User_has_SkillWhereInput | Prisma.User_has_SkillWhereInput[]
   userId?: Prisma.IntFilter<"User_has_Skill"> | number
   skillId?: Prisma.IntFilter<"User_has_Skill"> | number
+  createdAt?: Prisma.DateTimeFilter<"User_has_Skill"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   skill?: Prisma.XOR<Prisma.SkillScalarRelationFilter, Prisma.SkillWhereInput>
 }
@@ -203,6 +211,7 @@ export type User_has_SkillWhereInput = {
 export type User_has_SkillOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   skillId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   skill?: Prisma.SkillOrderByWithRelationInput
 }
@@ -214,6 +223,7 @@ export type User_has_SkillWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.User_has_SkillWhereInput | Prisma.User_has_SkillWhereInput[]
   userId?: Prisma.IntFilter<"User_has_Skill"> | number
   skillId?: Prisma.IntFilter<"User_has_Skill"> | number
+  createdAt?: Prisma.DateTimeFilter<"User_has_Skill"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   skill?: Prisma.XOR<Prisma.SkillScalarRelationFilter, Prisma.SkillWhereInput>
 }, "userId_skillId">
@@ -221,6 +231,7 @@ export type User_has_SkillWhereUniqueInput = Prisma.AtLeast<{
 export type User_has_SkillOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   skillId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   _count?: Prisma.User_has_SkillCountOrderByAggregateInput
   _avg?: Prisma.User_has_SkillAvgOrderByAggregateInput
   _max?: Prisma.User_has_SkillMaxOrderByAggregateInput
@@ -234,9 +245,11 @@ export type User_has_SkillScalarWhereWithAggregatesInput = {
   NOT?: Prisma.User_has_SkillScalarWhereWithAggregatesInput | Prisma.User_has_SkillScalarWhereWithAggregatesInput[]
   userId?: Prisma.IntWithAggregatesFilter<"User_has_Skill"> | number
   skillId?: Prisma.IntWithAggregatesFilter<"User_has_Skill"> | number
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"User_has_Skill"> | Date | string
 }
 
 export type User_has_SkillCreateInput = {
+  createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutUserHasSkillsInput
   skill: Prisma.SkillCreateNestedOneWithoutUserHasSkillsInput
 }
@@ -244,9 +257,11 @@ export type User_has_SkillCreateInput = {
 export type User_has_SkillUncheckedCreateInput = {
   userId: number
   skillId: number
+  createdAt?: Date | string
 }
 
 export type User_has_SkillUpdateInput = {
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutUserHasSkillsNestedInput
   skill?: Prisma.SkillUpdateOneRequiredWithoutUserHasSkillsNestedInput
 }
@@ -254,20 +269,23 @@ export type User_has_SkillUpdateInput = {
 export type User_has_SkillUncheckedUpdateInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   skillId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type User_has_SkillCreateManyInput = {
   userId: number
   skillId: number
+  createdAt?: Date | string
 }
 
 export type User_has_SkillUpdateManyMutationInput = {
-
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type User_has_SkillUncheckedUpdateManyInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   skillId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type User_has_SkillListRelationFilter = {
@@ -288,6 +306,7 @@ export type User_has_SkillUserIdSkillIdCompoundUniqueInput = {
 export type User_has_SkillCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   skillId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type User_has_SkillAvgOrderByAggregateInput = {
@@ -298,11 +317,13 @@ export type User_has_SkillAvgOrderByAggregateInput = {
 export type User_has_SkillMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   skillId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type User_has_SkillMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   skillId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type User_has_SkillSumOrderByAggregateInput = {
@@ -395,11 +416,13 @@ export type User_has_SkillUncheckedUpdateManyWithoutSkillNestedInput = {
 }
 
 export type User_has_SkillCreateWithoutUserInput = {
+  createdAt?: Date | string
   skill: Prisma.SkillCreateNestedOneWithoutUserHasSkillsInput
 }
 
 export type User_has_SkillUncheckedCreateWithoutUserInput = {
   skillId: number
+  createdAt?: Date | string
 }
 
 export type User_has_SkillCreateOrConnectWithoutUserInput = {
@@ -434,14 +457,17 @@ export type User_has_SkillScalarWhereInput = {
   NOT?: Prisma.User_has_SkillScalarWhereInput | Prisma.User_has_SkillScalarWhereInput[]
   userId?: Prisma.IntFilter<"User_has_Skill"> | number
   skillId?: Prisma.IntFilter<"User_has_Skill"> | number
+  createdAt?: Prisma.DateTimeFilter<"User_has_Skill"> | Date | string
 }
 
 export type User_has_SkillCreateWithoutSkillInput = {
+  createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutUserHasSkillsInput
 }
 
 export type User_has_SkillUncheckedCreateWithoutSkillInput = {
   userId: number
+  createdAt?: Date | string
 }
 
 export type User_has_SkillCreateOrConnectWithoutSkillInput = {
@@ -472,34 +498,42 @@ export type User_has_SkillUpdateManyWithWhereWithoutSkillInput = {
 
 export type User_has_SkillCreateManyUserInput = {
   skillId: number
+  createdAt?: Date | string
 }
 
 export type User_has_SkillUpdateWithoutUserInput = {
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   skill?: Prisma.SkillUpdateOneRequiredWithoutUserHasSkillsNestedInput
 }
 
 export type User_has_SkillUncheckedUpdateWithoutUserInput = {
   skillId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type User_has_SkillUncheckedUpdateManyWithoutUserInput = {
   skillId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type User_has_SkillCreateManySkillInput = {
   userId: number
+  createdAt?: Date | string
 }
 
 export type User_has_SkillUpdateWithoutSkillInput = {
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutUserHasSkillsNestedInput
 }
 
 export type User_has_SkillUncheckedUpdateWithoutSkillInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type User_has_SkillUncheckedUpdateManyWithoutSkillInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -507,6 +541,7 @@ export type User_has_SkillUncheckedUpdateManyWithoutSkillInput = {
 export type User_has_SkillSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   userId?: boolean
   skillId?: boolean
+  createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user_has_Skill"]>
@@ -516,9 +551,10 @@ export type User_has_SkillSelect<ExtArgs extends runtime.Types.Extensions.Intern
 export type User_has_SkillSelectScalar = {
   userId?: boolean
   skillId?: boolean
+  createdAt?: boolean
 }
 
-export type User_has_SkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"userId" | "skillId", ExtArgs["result"]["user_has_Skill"]>
+export type User_has_SkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"userId" | "skillId" | "createdAt", ExtArgs["result"]["user_has_Skill"]>
 export type User_has_SkillInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
@@ -533,6 +569,7 @@ export type $User_has_SkillPayload<ExtArgs extends runtime.Types.Extensions.Inte
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     userId: number
     skillId: number
+    createdAt: Date
   }, ExtArgs["result"]["user_has_Skill"]>
   composites: {}
 }
@@ -906,6 +943,7 @@ export interface Prisma__User_has_SkillClient<T, Null = never, ExtArgs extends r
 export interface User_has_SkillFieldRefs {
   readonly userId: Prisma.FieldRef<"User_has_Skill", 'Int'>
   readonly skillId: Prisma.FieldRef<"User_has_Skill", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"User_has_Skill", 'DateTime'>
 }
     
 

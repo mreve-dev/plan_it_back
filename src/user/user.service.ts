@@ -4,56 +4,104 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'prisma/prisma.service';
 import { User } from 'prisma/generated/prisma/client';
 import { UserWTPwd } from './interface/userWTPwd.interface';
+import { OnBoarding } from './dto/onBoarding.dto';
 
- @Injectable()
+@Injectable()
 export class UserService {
 
   constructor(private readonly prisma: PrismaService) { }
 
-  async create(data: CreateUserDto): Promise<UserWTPwd> {
-    
-      const newUser : UserWTPwd = await this.prisma.user.create({
-        data,
-        omit: {password:true}
-      })
-  
-      return newUser
+  async create(userData: CreateUserDto): Promise<UserWTPwd> {
+
+    const newUser: UserWTPwd = await this.prisma.user.create({
+      data: userData,
+      omit: { password: true }
+    })
+
+    return newUser
   }
 
-  async findAll() : Promise<User[] | null> {
-    return this.prisma.user.findMany();
+  // Retourne aussi les skills en plus des données de la table user
+
+  async findAll(): Promise<User[] | null> {
+    return this.prisma.user.findMany({
+      include: {
+        userHasSkills: {
+          include: {
+            skill: true
+          }
+        }
+      }
+    });
   }
 
   async findOne(id: number): Promise<User | null> {
-    return this.prisma.user.findUnique({where: {id}});
+    return this.prisma.user.findUnique({ where: { id } });
   }
 
-  async findOneByEmail(email: string) : Promise<User | null> {
-    return this.prisma.user.findUnique({where : {email}})
+  async findOneByEmail(email: string): Promise<User | null> {
+    return this.prisma.user.findUnique({ where: { email } })
   }
 
   async countEmail(email: string): Promise<number> {
-    return this.prisma.user.count({where: {email}})
+    return this.prisma.user.count({ where: { email } })
+  }
+
+
+  async onboarding(id: number, data: OnBoarding): Promise<User> {
+    const user = await this.prisma.user.update({
+      where: { id },
+      data: {
+        isOnboarded: true,
+        userHasSkills: {
+          // Pour chaque id de skill dans le tableau reçu (ex: [1, 3, 5]),
+          // on crée une ligne dans User_has_Skill qui relie l'user à ce skill.
+          // .map() transforme [1, 3, 5] en [{skill: {connect: {id: 1}}}, {skill: {connect: {id: 3}}}, ...]
+          create: data.skillIds.map(skillId => ({
+            skill: { connect: { id: skillId } }
+          }))
+        }
+      }
+    })
+
+    return user
   }
 
   async update(id: number, updateUser: UpdateUserDto): Promise<User> {
     return this.prisma.user.update({
-      where: {id},
-      data: updateUser
+      where: { id },
+      data: {
+        ...updateUser,
+        userHasSkills: {
+          create: [{
+            skill: {
+              connectOrCreate: {
+                create: {
+                  name: "creativité"
+                },
+                where: {
+                  id: 1
+                }
+              }
+            }
+          }]
+        }
+      },
+
     });
   }
-  
 
-  async remove(id: number): Promise<void> { 
+
+  async remove(id: number): Promise<void> {
 
     // this.prisma.user_has_Skill.createMany({
     //   data: [{skillId,userId}]
     // })
 
-    const deleteUser : User = await this.prisma.user.delete({where: {id}});
+    const deleteUser: User = await this.prisma.user.delete({ where: { id } });
 
     return
   }
 
-  
+
 }

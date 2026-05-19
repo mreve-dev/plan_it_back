@@ -39,16 +39,19 @@ export type Document_Has_EvntSumAggregateOutputType = {
 export type Document_Has_EvntMinAggregateOutputType = {
   documentId: number | null
   evntId: number | null
+  createdAt: Date | null
 }
 
 export type Document_Has_EvntMaxAggregateOutputType = {
   documentId: number | null
   evntId: number | null
+  createdAt: Date | null
 }
 
 export type Document_Has_EvntCountAggregateOutputType = {
   documentId: number
   evntId: number
+  createdAt: number
   _all: number
 }
 
@@ -66,16 +69,19 @@ export type Document_Has_EvntSumAggregateInputType = {
 export type Document_Has_EvntMinAggregateInputType = {
   documentId?: true
   evntId?: true
+  createdAt?: true
 }
 
 export type Document_Has_EvntMaxAggregateInputType = {
   documentId?: true
   evntId?: true
+  createdAt?: true
 }
 
 export type Document_Has_EvntCountAggregateInputType = {
   documentId?: true
   evntId?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -168,6 +174,7 @@ export type Document_Has_EvntGroupByArgs<ExtArgs extends runtime.Types.Extension
 export type Document_Has_EvntGroupByOutputType = {
   documentId: number
   evntId: number
+  createdAt: Date
   _count: Document_Has_EvntCountAggregateOutputType | null
   _avg: Document_Has_EvntAvgAggregateOutputType | null
   _sum: Document_Has_EvntSumAggregateOutputType | null
@@ -196,6 +203,7 @@ export type Document_Has_EvntWhereInput = {
   NOT?: Prisma.Document_Has_EvntWhereInput | Prisma.Document_Has_EvntWhereInput[]
   documentId?: Prisma.IntFilter<"Document_Has_Evnt"> | number
   evntId?: Prisma.IntFilter<"Document_Has_Evnt"> | number
+  createdAt?: Prisma.DateTimeFilter<"Document_Has_Evnt"> | Date | string
   document?: Prisma.XOR<Prisma.DocumentScalarRelationFilter, Prisma.DocumentWhereInput>
   evnt?: Prisma.XOR<Prisma.EvntScalarRelationFilter, Prisma.EvntWhereInput>
 }
@@ -203,6 +211,7 @@ export type Document_Has_EvntWhereInput = {
 export type Document_Has_EvntOrderByWithRelationInput = {
   documentId?: Prisma.SortOrder
   evntId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   document?: Prisma.DocumentOrderByWithRelationInput
   evnt?: Prisma.EvntOrderByWithRelationInput
 }
@@ -214,6 +223,7 @@ export type Document_Has_EvntWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.Document_Has_EvntWhereInput | Prisma.Document_Has_EvntWhereInput[]
   documentId?: Prisma.IntFilter<"Document_Has_Evnt"> | number
   evntId?: Prisma.IntFilter<"Document_Has_Evnt"> | number
+  createdAt?: Prisma.DateTimeFilter<"Document_Has_Evnt"> | Date | string
   document?: Prisma.XOR<Prisma.DocumentScalarRelationFilter, Prisma.DocumentWhereInput>
   evnt?: Prisma.XOR<Prisma.EvntScalarRelationFilter, Prisma.EvntWhereInput>
 }, "documentId_evntId">
@@ -221,6 +231,7 @@ export type Document_Has_EvntWhereUniqueInput = Prisma.AtLeast<{
 export type Document_Has_EvntOrderByWithAggregationInput = {
   documentId?: Prisma.SortOrder
   evntId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   _count?: Prisma.Document_Has_EvntCountOrderByAggregateInput
   _avg?: Prisma.Document_Has_EvntAvgOrderByAggregateInput
   _max?: Prisma.Document_Has_EvntMaxOrderByAggregateInput
@@ -234,9 +245,11 @@ export type Document_Has_EvntScalarWhereWithAggregatesInput = {
   NOT?: Prisma.Document_Has_EvntScalarWhereWithAggregatesInput | Prisma.Document_Has_EvntScalarWhereWithAggregatesInput[]
   documentId?: Prisma.IntWithAggregatesFilter<"Document_Has_Evnt"> | number
   evntId?: Prisma.IntWithAggregatesFilter<"Document_Has_Evnt"> | number
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Document_Has_Evnt"> | Date | string
 }
 
 export type Document_Has_EvntCreateInput = {
+  createdAt?: Date | string
   document: Prisma.DocumentCreateNestedOneWithoutDocumentHasEvntsInput
   evnt: Prisma.EvntCreateNestedOneWithoutDocumentHasEvntsInput
 }
@@ -244,9 +257,11 @@ export type Document_Has_EvntCreateInput = {
 export type Document_Has_EvntUncheckedCreateInput = {
   documentId: number
   evntId: number
+  createdAt?: Date | string
 }
 
 export type Document_Has_EvntUpdateInput = {
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   document?: Prisma.DocumentUpdateOneRequiredWithoutDocumentHasEvntsNestedInput
   evnt?: Prisma.EvntUpdateOneRequiredWithoutDocumentHasEvntsNestedInput
 }
@@ -254,20 +269,23 @@ export type Document_Has_EvntUpdateInput = {
 export type Document_Has_EvntUncheckedUpdateInput = {
   documentId?: Prisma.IntFieldUpdateOperationsInput | number
   evntId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Document_Has_EvntCreateManyInput = {
   documentId: number
   evntId: number
+  createdAt?: Date | string
 }
 
 export type Document_Has_EvntUpdateManyMutationInput = {
-
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Document_Has_EvntUncheckedUpdateManyInput = {
   documentId?: Prisma.IntFieldUpdateOperationsInput | number
   evntId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Document_Has_EvntListRelationFilter = {
@@ -288,6 +306,7 @@ export type Document_Has_EvntDocumentIdEvntIdCompoundUniqueInput = {
 export type Document_Has_EvntCountOrderByAggregateInput = {
   documentId?: Prisma.SortOrder
   evntId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type Document_Has_EvntAvgOrderByAggregateInput = {
@@ -298,11 +317,13 @@ export type Document_Has_EvntAvgOrderByAggregateInput = {
 export type Document_Has_EvntMaxOrderByAggregateInput = {
   documentId?: Prisma.SortOrder
   evntId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type Document_Has_EvntMinOrderByAggregateInput = {
   documentId?: Prisma.SortOrder
   evntId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type Document_Has_EvntSumOrderByAggregateInput = {
@@ -395,11 +416,13 @@ export type Document_Has_EvntUncheckedUpdateManyWithoutDocumentNestedInput = {
 }
 
 export type Document_Has_EvntCreateWithoutEvntInput = {
+  createdAt?: Date | string
   document: Prisma.DocumentCreateNestedOneWithoutDocumentHasEvntsInput
 }
 
 export type Document_Has_EvntUncheckedCreateWithoutEvntInput = {
   documentId: number
+  createdAt?: Date | string
 }
 
 export type Document_Has_EvntCreateOrConnectWithoutEvntInput = {
@@ -434,14 +457,17 @@ export type Document_Has_EvntScalarWhereInput = {
   NOT?: Prisma.Document_Has_EvntScalarWhereInput | Prisma.Document_Has_EvntScalarWhereInput[]
   documentId?: Prisma.IntFilter<"Document_Has_Evnt"> | number
   evntId?: Prisma.IntFilter<"Document_Has_Evnt"> | number
+  createdAt?: Prisma.DateTimeFilter<"Document_Has_Evnt"> | Date | string
 }
 
 export type Document_Has_EvntCreateWithoutDocumentInput = {
+  createdAt?: Date | string
   evnt: Prisma.EvntCreateNestedOneWithoutDocumentHasEvntsInput
 }
 
 export type Document_Has_EvntUncheckedCreateWithoutDocumentInput = {
   evntId: number
+  createdAt?: Date | string
 }
 
 export type Document_Has_EvntCreateOrConnectWithoutDocumentInput = {
@@ -472,34 +498,42 @@ export type Document_Has_EvntUpdateManyWithWhereWithoutDocumentInput = {
 
 export type Document_Has_EvntCreateManyEvntInput = {
   documentId: number
+  createdAt?: Date | string
 }
 
 export type Document_Has_EvntUpdateWithoutEvntInput = {
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   document?: Prisma.DocumentUpdateOneRequiredWithoutDocumentHasEvntsNestedInput
 }
 
 export type Document_Has_EvntUncheckedUpdateWithoutEvntInput = {
   documentId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Document_Has_EvntUncheckedUpdateManyWithoutEvntInput = {
   documentId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Document_Has_EvntCreateManyDocumentInput = {
   evntId: number
+  createdAt?: Date | string
 }
 
 export type Document_Has_EvntUpdateWithoutDocumentInput = {
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   evnt?: Prisma.EvntUpdateOneRequiredWithoutDocumentHasEvntsNestedInput
 }
 
 export type Document_Has_EvntUncheckedUpdateWithoutDocumentInput = {
   evntId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Document_Has_EvntUncheckedUpdateManyWithoutDocumentInput = {
   evntId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -507,6 +541,7 @@ export type Document_Has_EvntUncheckedUpdateManyWithoutDocumentInput = {
 export type Document_Has_EvntSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   documentId?: boolean
   evntId?: boolean
+  createdAt?: boolean
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
   evnt?: boolean | Prisma.EvntDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["document_Has_Evnt"]>
@@ -516,9 +551,10 @@ export type Document_Has_EvntSelect<ExtArgs extends runtime.Types.Extensions.Int
 export type Document_Has_EvntSelectScalar = {
   documentId?: boolean
   evntId?: boolean
+  createdAt?: boolean
 }
 
-export type Document_Has_EvntOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"documentId" | "evntId", ExtArgs["result"]["document_Has_Evnt"]>
+export type Document_Has_EvntOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"documentId" | "evntId" | "createdAt", ExtArgs["result"]["document_Has_Evnt"]>
 export type Document_Has_EvntInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
   evnt?: boolean | Prisma.EvntDefaultArgs<ExtArgs>
@@ -533,6 +569,7 @@ export type $Document_Has_EvntPayload<ExtArgs extends runtime.Types.Extensions.I
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     documentId: number
     evntId: number
+    createdAt: Date
   }, ExtArgs["result"]["document_Has_Evnt"]>
   composites: {}
 }
@@ -906,6 +943,7 @@ export interface Prisma__Document_Has_EvntClient<T, Null = never, ExtArgs extend
 export interface Document_Has_EvntFieldRefs {
   readonly documentId: Prisma.FieldRef<"Document_Has_Evnt", 'Int'>
   readonly evntId: Prisma.FieldRef<"Document_Has_Evnt", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"Document_Has_Evnt", 'DateTime'>
 }
     
 

@@ -8,9 +8,11 @@ import { UserModule } from './user/user.module';
 import { MissionModule } from './mission/mission.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { CategoryModule } from './category/category.module';
+import { SkillModule } from './skill/skill.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({isGlobal:true}), EventModule, PrismaModule, UserModule, MissionModule, AuthModule],
+  imports: [ConfigModule.forRoot({isGlobal:true}), EventModule, PrismaModule, UserModule, MissionModule, AuthModule, CategoryModule, SkillModule],
   controllers: [AppController],
   providers: [AppService],
 })
