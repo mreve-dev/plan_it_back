@@ -7,7 +7,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
 
     @IsBoolean()
     @IsOptional()
-    mustChangepassword?: boolean
+    mustChangePassword?: boolean
 
 
     @IsBoolean()

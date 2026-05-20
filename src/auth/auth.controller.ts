@@ -68,7 +68,7 @@ export class AuthController {
 
     const newUser : UserWTPwd = await this.userService.update(req.user, {
       password : changePassword.newpassword,
-      mustChangepassword: false
+      mustChangePassword: false
     })
     
   }
