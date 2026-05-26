@@ -602,10 +602,6 @@ export type EvntUncheckedUpdateManyWithoutCreatorNestedInput = {
   deleteMany?: Prisma.EvntScalarWhereInput | Prisma.EvntScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type NullableIntFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number

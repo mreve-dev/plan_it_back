@@ -43,6 +43,14 @@ export class UserService {
     return this.prisma.user.findUnique({ where: { email } })
   }
 
+
+  // findFirst : comme findUnique mais pour un champ qui n'est pas marqué @unique dans Prisma. Retourne le premier résultat trouvé
+  async findOneByResetToken(token: string): Promise<User | null>{
+    return this.prisma.user.findFirst({
+      where: {resetPasswordToken: token}
+    })
+  }
+
   async countEmail(email: string): Promise<number> {
     return this.prisma.user.count({ where: { email } })
   }
@@ -70,23 +78,7 @@ export class UserService {
   async update(id: number, updateUser: UpdateUserDto): Promise<User> {
     return this.prisma.user.update({
       where: { id },
-      data: {
-        ...updateUser,
-        userHasSkills: {
-          create: [{
-            skill: {
-              connectOrCreate: {
-                create: {
-                  name: "creativité"
-                },
-                where: {
-                  id: 1
-                }
-              }
-            }
-          }]
-        }
-      },
+      data: updateUser
 
     });
   }
@@ -102,6 +94,7 @@ export class UserService {
 
     return
   }
+
 
 
 }

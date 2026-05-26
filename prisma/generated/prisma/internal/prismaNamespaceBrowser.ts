@@ -91,7 +91,9 @@ export const UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   mustChangePassword: 'mustChangePassword',
-  isOnboarded: 'isOnboarded'
+  isOnboarded: 'isOnboarded',
+  resetPasswordToken: 'resetPasswordToken',
+  resetPasswordExpires: 'resetPasswordExpires'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -231,7 +233,8 @@ export const UserOrderByRelevanceFieldEnum = {
   firstname: 'firstname',
   lastname: 'lastname',
   email: 'email',
-  password: 'password'
+  password: 'password',
+  resetPasswordToken: 'resetPasswordToken'
 } as const
 
 export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]

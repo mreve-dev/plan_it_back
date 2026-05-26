@@ -1,6 +1,8 @@
-import { Body, Injectable } from '@nestjs/common';
+import { Body, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as argon2 from 'argon2';
+//génère des chapines de caractères aléatoires
+import * as crypto from 'crypto'
 
 @Injectable()
 export class AuthService {
@@ -19,7 +21,7 @@ export class AuthService {
 
         return result
     }
-    
+
     async createTokens(id: number): Promise<{ accessToken: string, refreshToken: string }> {
         const payload = { sub: id }
         const accessToken = await this.jwtService.signAsync(payload,
@@ -36,5 +38,27 @@ export class AuthService {
         })
 
         return { accessToken, refreshToken }
+    }
+
+    async verifyRefreshToken(refreshToken: string): Promise<{ sub: number }> {
+        try {
+            const payload = await this.jwtService.verifyAsync(refreshToken, {
+                secret: process.env.REFRESHSECRET as string
+            })
+            return payload
+        } catch (error) {
+            throw new UnauthorizedException('Refresh token invalide ou expiré')
+        }
+    }
+
+    async generateResetToken(): Promise<{ token: string, expires: Date }> {
+        // génère une chaîne aléatoire de 32 octets en hexadecimal
+        const token = crypto.randomBytes(32).toString('hex')
+
+        //expire dans 1h, datetime retourne le stimestamp actuel en millisecondes et on ajoute 1h (3 600 000ms)
+
+        const expires = new Date(Date.now() + 60 * 60 * 1000)
+
+        return { token, expires }
     }
 }

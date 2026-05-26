@@ -49,29 +49,14 @@ async function main() {
 
     // 2 - Création de deux utilisateurs de base
 
+    const hashedPassword1 = await argon2.hash("123!Mdp")
 
-    const hashedPassword1 = await argon2.hash("Lmpd!123")
-    const hashedPassword2 = await argon2.hash("123!Mdp")
-
-    const user1 = await prisma.user.create({
-        data: {
-            firstname: "Momo",
-            lastname: "Lepetitchat",
-            email: "momo@email.com",
-            password: hashedPassword1,
-            date_of_birth: new Date("1993-10-23"),
-            role: "benevole",
-            isOnboarded: false,
-            mustChangePassword: true
-        }
-    })
-
-    const user2 = await prisma.user.create({
+    const user = await prisma.user.create({
         data: {
             firstname: "Admin",
             lastname: "istrateur",
             email: "admin@email.com",
-            password: hashedPassword2,
+            password: hashedPassword1,
             date_of_birth: new Date("1993-10-23"),
             role: "admin",
             isOnboarded: true,
@@ -83,7 +68,7 @@ async function main() {
 
     await prisma.user_has_Skill.createMany({
         data: skills.map(skill => ({
-            userId: user2.id,
+            userId: user.id,
             skillId: skill.id
         }))
     })
@@ -108,7 +93,7 @@ async function main() {
             start_hour: new Date("1970-01-01T09:00:00"),
             end_hour: new Date("1970-01-01T18:00:00"),
             categoryId: category1.id,
-            creatorId: user1.id
+            creatorId: user.id
         }
     })
 
