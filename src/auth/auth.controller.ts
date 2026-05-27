@@ -59,7 +59,7 @@ export class AuthController {
 
     // Créer les tokens
 
-    const { accessToken, refreshToken } = await this.authService.createTokens(userData.id)
+    const { accessToken, refreshToken } = await this.authService.createTokens(userData.id, userData.role)
 
     // Stocker le refreshToken dans un cookie httpOnly
     // dit au navigateur "stocke ce token JWT dans un cookie nommé refreshToken, garde le 7 jours et ne laisse pas JS y toucher"
@@ -92,7 +92,9 @@ export class AuthController {
 
     // Générer un nouvel accessToken
 
-    const { accessToken } = await this.authService.createTokens(payload.sub)
+    const user = await this.userService.findOne(payload.sub)
+    if (!user) throw new UnauthorizedException('Utilisateur introuvable')
+    const { accessToken } = await this.authService.createTokens(payload.sub, user.role)
 
     return {
       data: { accessToken },
@@ -106,7 +108,7 @@ export class AuthController {
   @Patch('newpassword')
   async changepassword(@Req() req, @Body() changePassword: ChangePassword): Promise<void> {
 
-    const user = await this.userService.findOne(req.user)
+    const user = await this.userService.findOne(req.user.id)
 
     if (!user) throw new NotFoundException('Email ou mot de passe incorrect')
 
@@ -114,7 +116,7 @@ export class AuthController {
 
     changePassword.newpassword = await this.authService.hash(changePassword.newpassword)
 
-    const newUser: UserWTPwd = await this.userService.update(req.user, {
+    const newUser: UserWTPwd = await this.userService.update(req.user.id, {
       password: changePassword.newpassword,
       mustChangePassword: false
     })

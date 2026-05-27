@@ -42,8 +42,6 @@ export class MailService {
             return console.error({ error });
         }
 
-        console.log({ data });
-
         return data
 
     }
@@ -83,10 +81,26 @@ export class MailService {
             return console.error({ error });
         }
 
-        console.log({ data });
-
         return data
     }
+
+
+    async sendPasswordChangeConfirmation(to: string, firstname: string) {
+        await this.resend.emails.send({
+            from: 'Acme <onboarding@resend.dev>',
+            to: [to],
+            subject: `Plan'it - Votre mot de passe a été modifié`,
+            html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                <h2 style="color: #104e64;">Mot de passe modifié</h2>
+                <p>Bonjour ${firstname},</p>
+                <p>Votre mot de passe a bien été modifié.</p>
+                <p style="color: #879191; font-size: 12px;">Si vous n'êtes pas à l'origine de cette modification, contactez un administrateur immédiatement.</p>
+            </div>
+        `
+        })
+    }
+
 
 }
 

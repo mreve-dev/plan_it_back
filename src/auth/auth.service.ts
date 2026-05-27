@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as argon2 from 'argon2';
 //génère des chapines de caractères aléatoires
 import * as crypto from 'crypto'
+import { RoleEnum } from 'prisma/generated/prisma/enums';
 
 @Injectable()
 export class AuthService {
@@ -22,8 +23,8 @@ export class AuthService {
         return result
     }
 
-    async createTokens(id: number): Promise<{ accessToken: string, refreshToken: string }> {
-        const payload = { sub: id }
+    async createTokens(id: number, role: RoleEnum): Promise<{ accessToken: string, refreshToken: string }> {
+        const payload = { sub: id, role: role }
         const accessToken = await this.jwtService.signAsync(payload,
             {
                 expiresIn: process.env.ACCESEXPIRE ?? "7d" as any,
