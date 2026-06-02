@@ -1,58 +1,42 @@
 import { Injectable } from '@nestjs/common';
-import passport from 'passport';
-import { Resend } from 'resend';
+import * as nodemailer from 'nodemailer'
+
 
 @Injectable()
 export class MailService {
 
 
 
-    private resend = new Resend(process.env.RESEND_API_KEY);
-
-
-    async sendChangePasswordEmail(to: string, resetLink: string) {
-        const { data, error } = await this.resend.emails.send({
-            from: 'Acme <onboarding@resend.dev>',
-            to: [to],
-            subject: `Plan'it - Réinitialisation de votre mot de passe`,
-            html: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                <h2 style="color: #104e64;">Réinitialisation de mot de passe</h2>
-                
-                <p>Vous avez demandé à réinitialiser votre mot de passe.</p>
-                
-                <p>Cliquez sur le bouton ci-dessous pour choisir un nouveau mot de passe :</p>
-                
-                <a href="${resetLink}" 
-                   style="background-color: #4f9288; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block;">
-                    Réinitialiser mon mot de passe
-                </a>
-
-                <p style="color: #879191; font-size: 12px; margin-top: 24px;">
-                    Ce lien expire dans 1 heure.
-                </p>
-                <p style="color: #879191; font-size: 12px;">
-                    Si vous n'avez pas fait cette demande, ignorez cet email.
-                </p>
-            </div>
-            `,
-        });
-
-        if (error) {
-            return console.error({ error });
+    private transporter = nodemailer.createTransport({
+        host: 'smtp-relay.brevo.com',
+        port: 587,
+        auth: {
+            user: process.env.BREVO_SMTP_USER,
+            pass: process.env.BREVO_SMTP_PASS
+        },
+        tls: {
+            rejectUnauthorized: false
         }
+    })
 
-        return data
-
+    private async sendEmail(to: string, subject: string, html: string): Promise<void> {
+        try {
+            await this.transporter.sendMail({
+                from: `"Plan'it" <morganereveau11@gmail.com>`,
+                to,
+                subject,
+                html
+            })
+        } catch (error) {
+            console.error('Erreur envoi email:', error);
+            // On ne throw pas l'erreur pour ne pas bloquer le flux principal
+            // Si l'email échoue, l'action (création compte, reset ...) continue quand même
+        }
     }
 
     async sendWelcomeEmail(to: string, firstname: string, password: string) {
-        const { data, error } = await this.resend.emails.send({
-            from: 'Acme <onboarding@resend.dev>',
-            to: [to],
-            subject: `Plan'it - Bienvenue chez nous !`,
-            html: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        await this.sendEmail(to, `Plan'it - Bienvenue !`, `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
                 <h2 style="color: #104e64;">Bienvenue sur Plan'it, ${firstname} !</h2>
                 
                 <p>Votre compte a été créé par un administrateur du club.</p>
@@ -74,33 +58,43 @@ export class MailService {
                     Pour des raisons de sécurité, vous devrez changer votre mot de passe lors de votre première connexion.
                 </p>
             </div>
-            `,
-        });
-
-        if (error) {
-            return console.error({ error });
-        }
-
-        return data
+            `)
     }
 
+    async sendChangePasswordEmail(to: string, resetLink: string): Promise<void> {
+        await this.sendEmail(to, `Plan'it - Réinitialisation de votre mot de passe`, `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                <h2 style="color: #104e64;">Réinitialisation de mot de passe</h2>
+                
+                <p>Vous avez demandé à réinitialiser votre mot de passe.</p>
+                
+                <p>Cliquez sur le bouton ci-dessous pour choisir un nouveau mot de passe :</p>
+                
+                <a href="${resetLink}" 
+                   style="background-color: #4f9288; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block;">
+                    Réinitialiser mon mot de passe
+                </a>
 
-    async sendPasswordChangeConfirmation(to: string, firstname: string) {
-        await this.resend.emails.send({
-            from: 'Acme <onboarding@resend.dev>',
-            to: [to],
-            subject: `Plan'it - Votre mot de passe a été modifié`,
-            html: `
+                <p style="color: #879191; font-size: 12px; margin-top: 24px;">
+                    Ce lien expire dans 1 heure.
+                </p>
+                <p style="color: #879191; font-size: 12px;">
+                    Si vous n'avez pas fait cette demande, ignorez cet email.
+                </p>
+            </div>
+            `)
+    }
+
+    async sendPasswordChangeConfirmation(to: string, firstname: string): Promise<void> {
+        await this.sendEmail(to, `Plan'it - Votre mot de passe a été modifié`, `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
                 <h2 style="color: #104e64;">Mot de passe modifié</h2>
                 <p>Bonjour ${firstname},</p>
                 <p>Votre mot de passe a bien été modifié.</p>
                 <p style="color: #879191; font-size: 12px;">Si vous n'êtes pas à l'origine de cette modification, contactez un administrateur immédiatement.</p>
             </div>
-        `
-        })
+        `)
     }
-
 
 }
 

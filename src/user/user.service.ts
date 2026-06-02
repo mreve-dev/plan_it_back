@@ -86,9 +86,9 @@ export class UserService {
 
   async remove(id: number): Promise<void> {
 
-    // this.prisma.user_has_Skill.createMany({
-    //   data: [{skillId,userId}]
-    // })
+    await this.prisma.user_has_Skill.deleteMany({where: {userId: id}})
+    await this.prisma.user_Has_Mission.deleteMany({where: {userId: id}})
+    await this.prisma.notification.deleteMany({where: {userId: id}})
 
     const deleteUser: User = await this.prisma.user.delete({ where: { id } });
 
