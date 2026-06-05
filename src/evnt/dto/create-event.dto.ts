@@ -10,13 +10,13 @@ export class CreateEventDto {
     @IsDate()
     date!: Date
 
-    @Matches(/^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/, {
+    @Matches(/^([01]\d|2[0-3]):([0-5]\d)$/, {
         message: "start_hour must be in HH:mm format"
     })
     start_hour!: string
 
 
-    @Matches(/^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/, {
+    @Matches(/^([01]\d|2[0-3]):([0-5]\d)$/, {
         message: "end_hour must be in HH:mm format"
     })
     end_hour!: string

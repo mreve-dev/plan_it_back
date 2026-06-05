@@ -25,7 +25,12 @@ export class EventService {
   }
 
   async findAll(): Promise<Evnt[]> {
-    return this.prisma.evnt.findMany();
+    return this.prisma.evnt.findMany({
+      include: {
+        category: true,
+        missions: true
+      }
+    });
   }
 
   async findOne(id: number): Promise<Evnt | null> {

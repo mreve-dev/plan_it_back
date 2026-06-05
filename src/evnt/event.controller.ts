@@ -1,16 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { Evnt } from 'prisma/generated/prisma/client';
+import { Roles } from 'src/auth/guard/decorators/roles.decorator';
+import { AuthGuard } from 'src/auth/guard/auth.guard';
+import { RolesGuard } from 'src/auth/guard/role.guard';
 
 @Controller('event')
 export class EventController {
   constructor(private readonly eventService: EventService) {}
 
+  @Roles('admin')
+  @UseGuards(AuthGuard, RolesGuard)
   @Post()
   async create(@Body() createEventDto: CreateEventDto) : Promise<Evnt> {
-    console.log("🚀 ~ EventController ~ create ~ createEventDto:", createEventDto)
     return this.eventService.create(createEventDto);
   }
 
