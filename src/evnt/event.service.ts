@@ -57,9 +57,6 @@ export class EventService {
 
   async update(id: number, updateEventDto: UpdateEventDto, userId: number): Promise<Evnt> {
 
-    console.log("🚀 update id:", id)
-    console.log("🚀 update dto:", updateEventDto)
-    console.log("🚀 update userId:", userId)
 
 
     const updated = await this.prisma.evnt.update({
@@ -72,7 +69,6 @@ export class EventService {
       }
     });
 
-    console.log("🚀 updated:", updated)
     return updated
   }
 
