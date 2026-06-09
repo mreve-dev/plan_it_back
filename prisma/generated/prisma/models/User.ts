@@ -285,6 +285,7 @@ export type UserWhereInput = {
   missions?: Prisma.MissionListRelationFilter
   userHasMissions?: Prisma.User_Has_MissionListRelationFilter
   userHasSkills?: Prisma.User_has_SkillListRelationFilter
+  updatedEvent?: Prisma.EvntListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -306,6 +307,7 @@ export type UserOrderByWithRelationInput = {
   missions?: Prisma.MissionOrderByRelationAggregateInput
   userHasMissions?: Prisma.User_Has_MissionOrderByRelationAggregateInput
   userHasSkills?: Prisma.User_has_SkillOrderByRelationAggregateInput
+  updatedEvent?: Prisma.EvntOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -331,6 +333,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   missions?: Prisma.MissionListRelationFilter
   userHasMissions?: Prisma.User_Has_MissionListRelationFilter
   userHasSkills?: Prisma.User_has_SkillListRelationFilter
+  updatedEvent?: Prisma.EvntListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -391,6 +394,7 @@ export type UserCreateInput = {
   missions?: Prisma.MissionCreateNestedManyWithoutCreatorInput
   userHasMissions?: Prisma.User_Has_MissionCreateNestedManyWithoutUserInput
   userHasSkills?: Prisma.User_has_SkillCreateNestedManyWithoutUserInput
+  updatedEvent?: Prisma.EvntCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -412,6 +416,7 @@ export type UserUncheckedCreateInput = {
   missions?: Prisma.MissionUncheckedCreateNestedManyWithoutCreatorInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedCreateNestedManyWithoutUserInput
   userHasSkills?: Prisma.User_has_SkillUncheckedCreateNestedManyWithoutUserInput
+  updatedEvent?: Prisma.EvntUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUpdateInput = {
@@ -432,6 +437,7 @@ export type UserUpdateInput = {
   missions?: Prisma.MissionUpdateManyWithoutCreatorNestedInput
   userHasMissions?: Prisma.User_Has_MissionUpdateManyWithoutUserNestedInput
   userHasSkills?: Prisma.User_has_SkillUpdateManyWithoutUserNestedInput
+  updatedEvent?: Prisma.EvntUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -453,6 +459,7 @@ export type UserUncheckedUpdateInput = {
   missions?: Prisma.MissionUncheckedUpdateManyWithoutCreatorNestedInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedUpdateManyWithoutUserNestedInput
   userHasSkills?: Prisma.User_has_SkillUncheckedUpdateManyWithoutUserNestedInput
+  updatedEvent?: Prisma.EvntUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -569,6 +576,11 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -607,12 +619,28 @@ export type UserCreateNestedOneWithoutEvntsInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
+export type UserCreateNestedOneWithoutUpdatedEventInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedEventInput, Prisma.UserUncheckedCreateWithoutUpdatedEventInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedEventInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
 export type UserUpdateOneRequiredWithoutEvntsNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutEvntsInput, Prisma.UserUncheckedCreateWithoutEvntsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutEvntsInput
   upsert?: Prisma.UserUpsertWithoutEvntsInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEvntsInput, Prisma.UserUpdateWithoutEvntsInput>, Prisma.UserUncheckedUpdateWithoutEvntsInput>
+}
+
+export type UserUpdateOneWithoutUpdatedEventNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedEventInput, Prisma.UserUncheckedCreateWithoutUpdatedEventInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedEventInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedEventInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedEventInput, Prisma.UserUpdateWithoutUpdatedEventInput>, Prisma.UserUncheckedUpdateWithoutUpdatedEventInput>
 }
 
 export type UserCreateNestedOneWithoutMissionsInput = {
@@ -688,6 +716,7 @@ export type UserCreateWithoutEvntsInput = {
   missions?: Prisma.MissionCreateNestedManyWithoutCreatorInput
   userHasMissions?: Prisma.User_Has_MissionCreateNestedManyWithoutUserInput
   userHasSkills?: Prisma.User_has_SkillCreateNestedManyWithoutUserInput
+  updatedEvent?: Prisma.EvntCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateWithoutEvntsInput = {
@@ -708,11 +737,58 @@ export type UserUncheckedCreateWithoutEvntsInput = {
   missions?: Prisma.MissionUncheckedCreateNestedManyWithoutCreatorInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedCreateNestedManyWithoutUserInput
   userHasSkills?: Prisma.User_has_SkillUncheckedCreateNestedManyWithoutUserInput
+  updatedEvent?: Prisma.EvntUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserCreateOrConnectWithoutEvntsInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutEvntsInput, Prisma.UserUncheckedCreateWithoutEvntsInput>
+}
+
+export type UserCreateWithoutUpdatedEventInput = {
+  firstname: string
+  lastname: string
+  email: string
+  password: string
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
+  resetPasswordToken?: string | null
+  resetPasswordExpires?: Date | string | null
+  evnts?: Prisma.EvntCreateNestedManyWithoutCreatorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  missions?: Prisma.MissionCreateNestedManyWithoutCreatorInput
+  userHasMissions?: Prisma.User_Has_MissionCreateNestedManyWithoutUserInput
+  userHasSkills?: Prisma.User_has_SkillCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedEventInput = {
+  id?: number
+  firstname: string
+  lastname: string
+  email: string
+  password: string
+  date_of_birth?: Date | string | null
+  role: $Enums.RoleEnum
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  mustChangePassword?: boolean
+  isOnboarded?: boolean
+  resetPasswordToken?: string | null
+  resetPasswordExpires?: Date | string | null
+  evnts?: Prisma.EvntUncheckedCreateNestedManyWithoutCreatorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  missions?: Prisma.MissionUncheckedCreateNestedManyWithoutCreatorInput
+  userHasMissions?: Prisma.User_Has_MissionUncheckedCreateNestedManyWithoutUserInput
+  userHasSkills?: Prisma.User_has_SkillUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedEventInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedEventInput, Prisma.UserUncheckedCreateWithoutUpdatedEventInput>
 }
 
 export type UserUpsertWithoutEvntsInput = {
@@ -743,6 +819,7 @@ export type UserUpdateWithoutEvntsInput = {
   missions?: Prisma.MissionUpdateManyWithoutCreatorNestedInput
   userHasMissions?: Prisma.User_Has_MissionUpdateManyWithoutUserNestedInput
   userHasSkills?: Prisma.User_has_SkillUpdateManyWithoutUserNestedInput
+  updatedEvent?: Prisma.EvntUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEvntsInput = {
@@ -759,6 +836,59 @@ export type UserUncheckedUpdateWithoutEvntsInput = {
   isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
   resetPasswordToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPasswordExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  missions?: Prisma.MissionUncheckedUpdateManyWithoutCreatorNestedInput
+  userHasMissions?: Prisma.User_Has_MissionUncheckedUpdateManyWithoutUserNestedInput
+  userHasSkills?: Prisma.User_has_SkillUncheckedUpdateManyWithoutUserNestedInput
+  updatedEvent?: Prisma.EvntUncheckedUpdateManyWithoutUpdaterNestedInput
+}
+
+export type UserUpsertWithoutUpdatedEventInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedEventInput, Prisma.UserUncheckedUpdateWithoutUpdatedEventInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedEventInput, Prisma.UserUncheckedCreateWithoutUpdatedEventInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedEventInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedEventInput, Prisma.UserUncheckedUpdateWithoutUpdatedEventInput>
+}
+
+export type UserUpdateWithoutUpdatedEventInput = {
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPasswordToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPasswordExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evnts?: Prisma.EvntUpdateManyWithoutCreatorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  missions?: Prisma.MissionUpdateManyWithoutCreatorNestedInput
+  userHasMissions?: Prisma.User_Has_MissionUpdateManyWithoutUserNestedInput
+  userHasSkills?: Prisma.User_has_SkillUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedEventInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumRoleEnumFieldUpdateOperationsInput | $Enums.RoleEnum
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  mustChangePassword?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPasswordToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPasswordExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evnts?: Prisma.EvntUncheckedUpdateManyWithoutCreatorNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   missions?: Prisma.MissionUncheckedUpdateManyWithoutCreatorNestedInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedUpdateManyWithoutUserNestedInput
@@ -782,6 +912,7 @@ export type UserCreateWithoutMissionsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   userHasMissions?: Prisma.User_Has_MissionCreateNestedManyWithoutUserInput
   userHasSkills?: Prisma.User_has_SkillCreateNestedManyWithoutUserInput
+  updatedEvent?: Prisma.EvntCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateWithoutMissionsInput = {
@@ -802,6 +933,7 @@ export type UserUncheckedCreateWithoutMissionsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedCreateNestedManyWithoutUserInput
   userHasSkills?: Prisma.User_has_SkillUncheckedCreateNestedManyWithoutUserInput
+  updatedEvent?: Prisma.EvntUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserCreateOrConnectWithoutMissionsInput = {
@@ -837,6 +969,7 @@ export type UserUpdateWithoutMissionsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   userHasMissions?: Prisma.User_Has_MissionUpdateManyWithoutUserNestedInput
   userHasSkills?: Prisma.User_has_SkillUpdateManyWithoutUserNestedInput
+  updatedEvent?: Prisma.EvntUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMissionsInput = {
@@ -857,6 +990,7 @@ export type UserUncheckedUpdateWithoutMissionsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedUpdateManyWithoutUserNestedInput
   userHasSkills?: Prisma.User_has_SkillUncheckedUpdateManyWithoutUserNestedInput
+  updatedEvent?: Prisma.EvntUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -876,6 +1010,7 @@ export type UserCreateWithoutNotificationsInput = {
   missions?: Prisma.MissionCreateNestedManyWithoutCreatorInput
   userHasMissions?: Prisma.User_Has_MissionCreateNestedManyWithoutUserInput
   userHasSkills?: Prisma.User_has_SkillCreateNestedManyWithoutUserInput
+  updatedEvent?: Prisma.EvntCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -896,6 +1031,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   missions?: Prisma.MissionUncheckedCreateNestedManyWithoutCreatorInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedCreateNestedManyWithoutUserInput
   userHasSkills?: Prisma.User_has_SkillUncheckedCreateNestedManyWithoutUserInput
+  updatedEvent?: Prisma.EvntUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -931,6 +1067,7 @@ export type UserUpdateWithoutNotificationsInput = {
   missions?: Prisma.MissionUpdateManyWithoutCreatorNestedInput
   userHasMissions?: Prisma.User_Has_MissionUpdateManyWithoutUserNestedInput
   userHasSkills?: Prisma.User_has_SkillUpdateManyWithoutUserNestedInput
+  updatedEvent?: Prisma.EvntUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -951,6 +1088,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   missions?: Prisma.MissionUncheckedUpdateManyWithoutCreatorNestedInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedUpdateManyWithoutUserNestedInput
   userHasSkills?: Prisma.User_has_SkillUncheckedUpdateManyWithoutUserNestedInput
+  updatedEvent?: Prisma.EvntUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserCreateWithoutUserHasSkillsInput = {
@@ -970,6 +1108,7 @@ export type UserCreateWithoutUserHasSkillsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   missions?: Prisma.MissionCreateNestedManyWithoutCreatorInput
   userHasMissions?: Prisma.User_Has_MissionCreateNestedManyWithoutUserInput
+  updatedEvent?: Prisma.EvntCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateWithoutUserHasSkillsInput = {
@@ -990,6 +1129,7 @@ export type UserUncheckedCreateWithoutUserHasSkillsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   missions?: Prisma.MissionUncheckedCreateNestedManyWithoutCreatorInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedCreateNestedManyWithoutUserInput
+  updatedEvent?: Prisma.EvntUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserCreateOrConnectWithoutUserHasSkillsInput = {
@@ -1025,6 +1165,7 @@ export type UserUpdateWithoutUserHasSkillsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   missions?: Prisma.MissionUpdateManyWithoutCreatorNestedInput
   userHasMissions?: Prisma.User_Has_MissionUpdateManyWithoutUserNestedInput
+  updatedEvent?: Prisma.EvntUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserHasSkillsInput = {
@@ -1045,6 +1186,7 @@ export type UserUncheckedUpdateWithoutUserHasSkillsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   missions?: Prisma.MissionUncheckedUpdateManyWithoutCreatorNestedInput
   userHasMissions?: Prisma.User_Has_MissionUncheckedUpdateManyWithoutUserNestedInput
+  updatedEvent?: Prisma.EvntUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserCreateWithoutUserHasMissionsInput = {
@@ -1064,6 +1206,7 @@ export type UserCreateWithoutUserHasMissionsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   missions?: Prisma.MissionCreateNestedManyWithoutCreatorInput
   userHasSkills?: Prisma.User_has_SkillCreateNestedManyWithoutUserInput
+  updatedEvent?: Prisma.EvntCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserUncheckedCreateWithoutUserHasMissionsInput = {
@@ -1084,6 +1227,7 @@ export type UserUncheckedCreateWithoutUserHasMissionsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   missions?: Prisma.MissionUncheckedCreateNestedManyWithoutCreatorInput
   userHasSkills?: Prisma.User_has_SkillUncheckedCreateNestedManyWithoutUserInput
+  updatedEvent?: Prisma.EvntUncheckedCreateNestedManyWithoutUpdaterInput
 }
 
 export type UserCreateOrConnectWithoutUserHasMissionsInput = {
@@ -1119,6 +1263,7 @@ export type UserUpdateWithoutUserHasMissionsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   missions?: Prisma.MissionUpdateManyWithoutCreatorNestedInput
   userHasSkills?: Prisma.User_has_SkillUpdateManyWithoutUserNestedInput
+  updatedEvent?: Prisma.EvntUpdateManyWithoutUpdaterNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserHasMissionsInput = {
@@ -1139,6 +1284,7 @@ export type UserUncheckedUpdateWithoutUserHasMissionsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   missions?: Prisma.MissionUncheckedUpdateManyWithoutCreatorNestedInput
   userHasSkills?: Prisma.User_has_SkillUncheckedUpdateManyWithoutUserNestedInput
+  updatedEvent?: Prisma.EvntUncheckedUpdateManyWithoutUpdaterNestedInput
 }
 
 
@@ -1152,6 +1298,7 @@ export type UserCountOutputType = {
   missions: number
   userHasMissions: number
   userHasSkills: number
+  updatedEvent: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1160,6 +1307,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   missions?: boolean | UserCountOutputTypeCountMissionsArgs
   userHasMissions?: boolean | UserCountOutputTypeCountUserHasMissionsArgs
   userHasSkills?: boolean | UserCountOutputTypeCountUserHasSkillsArgs
+  updatedEvent?: boolean | UserCountOutputTypeCountUpdatedEventArgs
 }
 
 /**
@@ -1207,6 +1355,13 @@ export type UserCountOutputTypeCountUserHasSkillsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.User_has_SkillWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedEventArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EvntWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1227,6 +1382,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   missions?: boolean | Prisma.User$missionsArgs<ExtArgs>
   userHasMissions?: boolean | Prisma.User$userHasMissionsArgs<ExtArgs>
   userHasSkills?: boolean | Prisma.User$userHasSkillsArgs<ExtArgs>
+  updatedEvent?: boolean | Prisma.User$updatedEventArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1255,6 +1411,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   missions?: boolean | Prisma.User$missionsArgs<ExtArgs>
   userHasMissions?: boolean | Prisma.User$userHasMissionsArgs<ExtArgs>
   userHasSkills?: boolean | Prisma.User$userHasSkillsArgs<ExtArgs>
+  updatedEvent?: boolean | Prisma.User$updatedEventArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1266,6 +1423,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     missions: Prisma.$MissionPayload<ExtArgs>[]
     userHasMissions: Prisma.$User_Has_MissionPayload<ExtArgs>[]
     userHasSkills: Prisma.$User_has_SkillPayload<ExtArgs>[]
+    updatedEvent: Prisma.$EvntPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1626,6 +1784,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   missions<T extends Prisma.User$missionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$missionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userHasMissions<T extends Prisma.User$userHasMissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userHasMissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$User_Has_MissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userHasSkills<T extends Prisma.User$userHasSkillsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userHasSkillsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$User_has_SkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedEvent<T extends Prisma.User$updatedEventArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedEventArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EvntPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2133,6 +2292,30 @@ export type User$userHasSkillsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.User_has_SkillScalarFieldEnum | Prisma.User_has_SkillScalarFieldEnum[]
+}
+
+/**
+ * User.updatedEvent
+ */
+export type User$updatedEventArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Evnt
+   */
+  select?: Prisma.EvntSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Evnt
+   */
+  omit?: Prisma.EvntOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EvntInclude<ExtArgs> | null
+  where?: Prisma.EvntWhereInput
+  orderBy?: Prisma.EvntOrderByWithRelationInput | Prisma.EvntOrderByWithRelationInput[]
+  cursor?: Prisma.EvntWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EvntScalarFieldEnum | Prisma.EvntScalarFieldEnum[]
 }
 
 /**

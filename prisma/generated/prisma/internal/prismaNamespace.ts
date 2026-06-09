@@ -1208,6 +1208,7 @@ export const EvntScalarFieldEnum = {
   description: 'description',
   categoryId: 'categoryId',
   creatorId: 'creatorId',
+  updatedById: 'updatedById',
   documentId: 'documentId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

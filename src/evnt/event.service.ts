@@ -49,17 +49,31 @@ export class EventService {
             }
           },
           eventHasDocument: {
-            include: {document: true}
+            include: { document: true }
           }
         }
       });
   }
 
-  async update(id: number, updateEventDto: UpdateEventDto): Promise<Evnt> {
-    return this.prisma.evnt.update({
+  async update(id: number, updateEventDto: UpdateEventDto, userId: number): Promise<Evnt> {
+
+    console.log("🚀 update id:", id)
+    console.log("🚀 update dto:", updateEventDto)
+    console.log("🚀 update userId:", userId)
+
+
+    const updated = await this.prisma.evnt.update({
+
       where: { id },
-      data: updateEventDto
+      data: {
+        ...updateEventDto,
+        start_hour: new Date(`1970-01-01T${updateEventDto.start_hour}:00`),
+        end_hour: new Date(`1970-01-01T${updateEventDto.end_hour}:00`)
+      }
     });
+
+    console.log("🚀 updated:", updated)
+    return updated
   }
 
 

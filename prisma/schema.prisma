@@ -33,11 +33,12 @@ model User {
   resetPasswordToken   String?
   resetPasswordExpires DateTime?
 
-  evnts           Evnt[]
+  evnts           Evnt[]             @relation("EventCreator")
   notifications   Notification[]
   missions        Mission[]
   userHasMissions User_Has_Mission[]
   userHasSkills   User_has_Skill[]
+  updatedEvent    Evnt[]             @relation("EventUpdater")
 }
 
 model Evnt {
@@ -50,13 +51,15 @@ model Evnt {
   description String
   categoryId  Int
   creatorId   Int
+  updatedById Int?
   documentId  Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  creator  User      @relation(fields: [creatorId], references: [id])
+  creator  User      @relation("EventCreator", fields: [creatorId], references: [id])
   category Category  @relation(fields: [categoryId], references: [id])
   document Document? @relation(fields: [documentId], references: [id])
+  updater  User?     @relation("EventUpdater", fields: [updatedById], references: [id])
 
   missions         Mission[]
   eventHasDocument Event_Has_Document[]

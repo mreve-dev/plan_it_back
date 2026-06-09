@@ -30,6 +30,7 @@ export type EvntAvgAggregateOutputType = {
   id: number | null
   categoryId: number | null
   creatorId: number | null
+  updatedById: number | null
   documentId: number | null
 }
 
@@ -37,6 +38,7 @@ export type EvntSumAggregateOutputType = {
   id: number | null
   categoryId: number | null
   creatorId: number | null
+  updatedById: number | null
   documentId: number | null
 }
 
@@ -50,6 +52,7 @@ export type EvntMinAggregateOutputType = {
   description: string | null
   categoryId: number | null
   creatorId: number | null
+  updatedById: number | null
   documentId: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -65,6 +68,7 @@ export type EvntMaxAggregateOutputType = {
   description: string | null
   categoryId: number | null
   creatorId: number | null
+  updatedById: number | null
   documentId: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -80,6 +84,7 @@ export type EvntCountAggregateOutputType = {
   description: number
   categoryId: number
   creatorId: number
+  updatedById: number
   documentId: number
   createdAt: number
   updatedAt: number
@@ -91,6 +96,7 @@ export type EvntAvgAggregateInputType = {
   id?: true
   categoryId?: true
   creatorId?: true
+  updatedById?: true
   documentId?: true
 }
 
@@ -98,6 +104,7 @@ export type EvntSumAggregateInputType = {
   id?: true
   categoryId?: true
   creatorId?: true
+  updatedById?: true
   documentId?: true
 }
 
@@ -111,6 +118,7 @@ export type EvntMinAggregateInputType = {
   description?: true
   categoryId?: true
   creatorId?: true
+  updatedById?: true
   documentId?: true
   createdAt?: true
   updatedAt?: true
@@ -126,6 +134,7 @@ export type EvntMaxAggregateInputType = {
   description?: true
   categoryId?: true
   creatorId?: true
+  updatedById?: true
   documentId?: true
   createdAt?: true
   updatedAt?: true
@@ -141,6 +150,7 @@ export type EvntCountAggregateInputType = {
   description?: true
   categoryId?: true
   creatorId?: true
+  updatedById?: true
   documentId?: true
   createdAt?: true
   updatedAt?: true
@@ -243,6 +253,7 @@ export type EvntGroupByOutputType = {
   description: string
   categoryId: number
   creatorId: number
+  updatedById: number | null
   documentId: number | null
   createdAt: Date
   updatedAt: Date
@@ -281,12 +292,14 @@ export type EvntWhereInput = {
   description?: Prisma.StringFilter<"Evnt"> | string
   categoryId?: Prisma.IntFilter<"Evnt"> | number
   creatorId?: Prisma.IntFilter<"Evnt"> | number
+  updatedById?: Prisma.IntNullableFilter<"Evnt"> | number | null
   documentId?: Prisma.IntNullableFilter<"Evnt"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Evnt"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Evnt"> | Date | string
   creator?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
   document?: Prisma.XOR<Prisma.DocumentNullableScalarRelationFilter, Prisma.DocumentWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   missions?: Prisma.MissionListRelationFilter
   eventHasDocument?: Prisma.Event_Has_DocumentListRelationFilter
 }
@@ -301,12 +314,14 @@ export type EvntOrderByWithRelationInput = {
   description?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   creatorId?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   documentId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   creator?: Prisma.UserOrderByWithRelationInput
   category?: Prisma.CategoryOrderByWithRelationInput
   document?: Prisma.DocumentOrderByWithRelationInput
+  updater?: Prisma.UserOrderByWithRelationInput
   missions?: Prisma.MissionOrderByRelationAggregateInput
   eventHasDocument?: Prisma.Event_Has_DocumentOrderByRelationAggregateInput
   _relevance?: Prisma.EvntOrderByRelevanceInput
@@ -325,12 +340,14 @@ export type EvntWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringFilter<"Evnt"> | string
   categoryId?: Prisma.IntFilter<"Evnt"> | number
   creatorId?: Prisma.IntFilter<"Evnt"> | number
+  updatedById?: Prisma.IntNullableFilter<"Evnt"> | number | null
   documentId?: Prisma.IntNullableFilter<"Evnt"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Evnt"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Evnt"> | Date | string
   creator?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
   document?: Prisma.XOR<Prisma.DocumentNullableScalarRelationFilter, Prisma.DocumentWhereInput> | null
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   missions?: Prisma.MissionListRelationFilter
   eventHasDocument?: Prisma.Event_Has_DocumentListRelationFilter
 }, "id">
@@ -345,6 +362,7 @@ export type EvntOrderByWithAggregationInput = {
   description?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   creatorId?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   documentId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -368,6 +386,7 @@ export type EvntScalarWhereWithAggregatesInput = {
   description?: Prisma.StringWithAggregatesFilter<"Evnt"> | string
   categoryId?: Prisma.IntWithAggregatesFilter<"Evnt"> | number
   creatorId?: Prisma.IntWithAggregatesFilter<"Evnt"> | number
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"Evnt"> | number | null
   documentId?: Prisma.IntNullableWithAggregatesFilter<"Evnt"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Evnt"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Evnt"> | Date | string
@@ -385,6 +404,7 @@ export type EvntCreateInput = {
   creator: Prisma.UserCreateNestedOneWithoutEvntsInput
   category: Prisma.CategoryCreateNestedOneWithoutEvntsInput
   document?: Prisma.DocumentCreateNestedOneWithoutEvntsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEventInput
   missions?: Prisma.MissionCreateNestedManyWithoutEventInput
   eventHasDocument?: Prisma.Event_Has_DocumentCreateNestedManyWithoutEvntInput
 }
@@ -399,6 +419,7 @@ export type EvntUncheckedCreateInput = {
   description: string
   categoryId: number
   creatorId: number
+  updatedById?: number | null
   documentId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -418,6 +439,7 @@ export type EvntUpdateInput = {
   creator?: Prisma.UserUpdateOneRequiredWithoutEvntsNestedInput
   category?: Prisma.CategoryUpdateOneRequiredWithoutEvntsNestedInput
   document?: Prisma.DocumentUpdateOneWithoutEvntsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEventNestedInput
   missions?: Prisma.MissionUpdateManyWithoutEventNestedInput
   eventHasDocument?: Prisma.Event_Has_DocumentUpdateManyWithoutEvntNestedInput
 }
@@ -432,6 +454,7 @@ export type EvntUncheckedUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   documentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -449,6 +472,7 @@ export type EvntCreateManyInput = {
   description: string
   categoryId: number
   creatorId: number
+  updatedById?: number | null
   documentId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -475,6 +499,7 @@ export type EvntUncheckedUpdateManyInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   documentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -506,6 +531,7 @@ export type EvntCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   creatorId?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -515,6 +541,7 @@ export type EvntAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   creatorId?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
 }
 
@@ -528,6 +555,7 @@ export type EvntMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   creatorId?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -543,6 +571,7 @@ export type EvntMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   creatorId?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -552,6 +581,7 @@ export type EvntSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   creatorId?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
 }
 
@@ -567,10 +597,24 @@ export type EvntCreateNestedManyWithoutCreatorInput = {
   connect?: Prisma.EvntWhereUniqueInput | Prisma.EvntWhereUniqueInput[]
 }
 
+export type EvntCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.EvntCreateWithoutUpdaterInput, Prisma.EvntUncheckedCreateWithoutUpdaterInput> | Prisma.EvntCreateWithoutUpdaterInput[] | Prisma.EvntUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.EvntCreateOrConnectWithoutUpdaterInput | Prisma.EvntCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.EvntCreateManyUpdaterInputEnvelope
+  connect?: Prisma.EvntWhereUniqueInput | Prisma.EvntWhereUniqueInput[]
+}
+
 export type EvntUncheckedCreateNestedManyWithoutCreatorInput = {
   create?: Prisma.XOR<Prisma.EvntCreateWithoutCreatorInput, Prisma.EvntUncheckedCreateWithoutCreatorInput> | Prisma.EvntCreateWithoutCreatorInput[] | Prisma.EvntUncheckedCreateWithoutCreatorInput[]
   connectOrCreate?: Prisma.EvntCreateOrConnectWithoutCreatorInput | Prisma.EvntCreateOrConnectWithoutCreatorInput[]
   createMany?: Prisma.EvntCreateManyCreatorInputEnvelope
+  connect?: Prisma.EvntWhereUniqueInput | Prisma.EvntWhereUniqueInput[]
+}
+
+export type EvntUncheckedCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.EvntCreateWithoutUpdaterInput, Prisma.EvntUncheckedCreateWithoutUpdaterInput> | Prisma.EvntCreateWithoutUpdaterInput[] | Prisma.EvntUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.EvntCreateOrConnectWithoutUpdaterInput | Prisma.EvntCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.EvntCreateManyUpdaterInputEnvelope
   connect?: Prisma.EvntWhereUniqueInput | Prisma.EvntWhereUniqueInput[]
 }
 
@@ -588,6 +632,20 @@ export type EvntUpdateManyWithoutCreatorNestedInput = {
   deleteMany?: Prisma.EvntScalarWhereInput | Prisma.EvntScalarWhereInput[]
 }
 
+export type EvntUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.EvntCreateWithoutUpdaterInput, Prisma.EvntUncheckedCreateWithoutUpdaterInput> | Prisma.EvntCreateWithoutUpdaterInput[] | Prisma.EvntUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.EvntCreateOrConnectWithoutUpdaterInput | Prisma.EvntCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.EvntUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.EvntUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.EvntCreateManyUpdaterInputEnvelope
+  set?: Prisma.EvntWhereUniqueInput | Prisma.EvntWhereUniqueInput[]
+  disconnect?: Prisma.EvntWhereUniqueInput | Prisma.EvntWhereUniqueInput[]
+  delete?: Prisma.EvntWhereUniqueInput | Prisma.EvntWhereUniqueInput[]
+  connect?: Prisma.EvntWhereUniqueInput | Prisma.EvntWhereUniqueInput[]
+  update?: Prisma.EvntUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.EvntUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.EvntUpdateManyWithWhereWithoutUpdaterInput | Prisma.EvntUpdateManyWithWhereWithoutUpdaterInput[]
+  deleteMany?: Prisma.EvntScalarWhereInput | Prisma.EvntScalarWhereInput[]
+}
+
 export type EvntUncheckedUpdateManyWithoutCreatorNestedInput = {
   create?: Prisma.XOR<Prisma.EvntCreateWithoutCreatorInput, Prisma.EvntUncheckedCreateWithoutCreatorInput> | Prisma.EvntCreateWithoutCreatorInput[] | Prisma.EvntUncheckedCreateWithoutCreatorInput[]
   connectOrCreate?: Prisma.EvntCreateOrConnectWithoutCreatorInput | Prisma.EvntCreateOrConnectWithoutCreatorInput[]
@@ -599,6 +657,20 @@ export type EvntUncheckedUpdateManyWithoutCreatorNestedInput = {
   connect?: Prisma.EvntWhereUniqueInput | Prisma.EvntWhereUniqueInput[]
   update?: Prisma.EvntUpdateWithWhereUniqueWithoutCreatorInput | Prisma.EvntUpdateWithWhereUniqueWithoutCreatorInput[]
   updateMany?: Prisma.EvntUpdateManyWithWhereWithoutCreatorInput | Prisma.EvntUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.EvntScalarWhereInput | Prisma.EvntScalarWhereInput[]
+}
+
+export type EvntUncheckedUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.EvntCreateWithoutUpdaterInput, Prisma.EvntUncheckedCreateWithoutUpdaterInput> | Prisma.EvntCreateWithoutUpdaterInput[] | Prisma.EvntUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.EvntCreateOrConnectWithoutUpdaterInput | Prisma.EvntCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.EvntUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.EvntUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.EvntCreateManyUpdaterInputEnvelope
+  set?: Prisma.EvntWhereUniqueInput | Prisma.EvntWhereUniqueInput[]
+  disconnect?: Prisma.EvntWhereUniqueInput | Prisma.EvntWhereUniqueInput[]
+  delete?: Prisma.EvntWhereUniqueInput | Prisma.EvntWhereUniqueInput[]
+  connect?: Prisma.EvntWhereUniqueInput | Prisma.EvntWhereUniqueInput[]
+  update?: Prisma.EvntUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.EvntUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.EvntUpdateManyWithWhereWithoutUpdaterInput | Prisma.EvntUpdateManyWithWhereWithoutUpdaterInput[]
   deleteMany?: Prisma.EvntScalarWhereInput | Prisma.EvntScalarWhereInput[]
 }
 
@@ -733,6 +805,7 @@ export type EvntCreateWithoutCreatorInput = {
   updatedAt?: Date | string
   category: Prisma.CategoryCreateNestedOneWithoutEvntsInput
   document?: Prisma.DocumentCreateNestedOneWithoutEvntsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEventInput
   missions?: Prisma.MissionCreateNestedManyWithoutEventInput
   eventHasDocument?: Prisma.Event_Has_DocumentCreateNestedManyWithoutEvntInput
 }
@@ -746,6 +819,7 @@ export type EvntUncheckedCreateWithoutCreatorInput = {
   location?: string | null
   description: string
   categoryId: number
+  updatedById?: number | null
   documentId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -760,6 +834,49 @@ export type EvntCreateOrConnectWithoutCreatorInput = {
 
 export type EvntCreateManyCreatorInputEnvelope = {
   data: Prisma.EvntCreateManyCreatorInput | Prisma.EvntCreateManyCreatorInput[]
+  skipDuplicates?: boolean
+}
+
+export type EvntCreateWithoutUpdaterInput = {
+  name: string
+  date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
+  location?: string | null
+  description: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutEvntsInput
+  category: Prisma.CategoryCreateNestedOneWithoutEvntsInput
+  document?: Prisma.DocumentCreateNestedOneWithoutEvntsInput
+  missions?: Prisma.MissionCreateNestedManyWithoutEventInput
+  eventHasDocument?: Prisma.Event_Has_DocumentCreateNestedManyWithoutEvntInput
+}
+
+export type EvntUncheckedCreateWithoutUpdaterInput = {
+  id?: number
+  name: string
+  date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
+  location?: string | null
+  description: string
+  categoryId: number
+  creatorId: number
+  documentId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  missions?: Prisma.MissionUncheckedCreateNestedManyWithoutEventInput
+  eventHasDocument?: Prisma.Event_Has_DocumentUncheckedCreateNestedManyWithoutEvntInput
+}
+
+export type EvntCreateOrConnectWithoutUpdaterInput = {
+  where: Prisma.EvntWhereUniqueInput
+  create: Prisma.XOR<Prisma.EvntCreateWithoutUpdaterInput, Prisma.EvntUncheckedCreateWithoutUpdaterInput>
+}
+
+export type EvntCreateManyUpdaterInputEnvelope = {
+  data: Prisma.EvntCreateManyUpdaterInput | Prisma.EvntCreateManyUpdaterInput[]
   skipDuplicates?: boolean
 }
 
@@ -792,9 +909,26 @@ export type EvntScalarWhereInput = {
   description?: Prisma.StringFilter<"Evnt"> | string
   categoryId?: Prisma.IntFilter<"Evnt"> | number
   creatorId?: Prisma.IntFilter<"Evnt"> | number
+  updatedById?: Prisma.IntNullableFilter<"Evnt"> | number | null
   documentId?: Prisma.IntNullableFilter<"Evnt"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Evnt"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Evnt"> | Date | string
+}
+
+export type EvntUpsertWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.EvntWhereUniqueInput
+  update: Prisma.XOR<Prisma.EvntUpdateWithoutUpdaterInput, Prisma.EvntUncheckedUpdateWithoutUpdaterInput>
+  create: Prisma.XOR<Prisma.EvntCreateWithoutUpdaterInput, Prisma.EvntUncheckedCreateWithoutUpdaterInput>
+}
+
+export type EvntUpdateWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.EvntWhereUniqueInput
+  data: Prisma.XOR<Prisma.EvntUpdateWithoutUpdaterInput, Prisma.EvntUncheckedUpdateWithoutUpdaterInput>
+}
+
+export type EvntUpdateManyWithWhereWithoutUpdaterInput = {
+  where: Prisma.EvntScalarWhereInput
+  data: Prisma.XOR<Prisma.EvntUpdateManyMutationInput, Prisma.EvntUncheckedUpdateManyWithoutUpdaterInput>
 }
 
 export type EvntCreateWithoutMissionsInput = {
@@ -809,6 +943,7 @@ export type EvntCreateWithoutMissionsInput = {
   creator: Prisma.UserCreateNestedOneWithoutEvntsInput
   category: Prisma.CategoryCreateNestedOneWithoutEvntsInput
   document?: Prisma.DocumentCreateNestedOneWithoutEvntsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEventInput
   eventHasDocument?: Prisma.Event_Has_DocumentCreateNestedManyWithoutEvntInput
 }
 
@@ -822,6 +957,7 @@ export type EvntUncheckedCreateWithoutMissionsInput = {
   description: string
   categoryId: number
   creatorId: number
+  updatedById?: number | null
   documentId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -856,6 +992,7 @@ export type EvntUpdateWithoutMissionsInput = {
   creator?: Prisma.UserUpdateOneRequiredWithoutEvntsNestedInput
   category?: Prisma.CategoryUpdateOneRequiredWithoutEvntsNestedInput
   document?: Prisma.DocumentUpdateOneWithoutEvntsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEventNestedInput
   eventHasDocument?: Prisma.Event_Has_DocumentUpdateManyWithoutEvntNestedInput
 }
 
@@ -869,6 +1006,7 @@ export type EvntUncheckedUpdateWithoutMissionsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   documentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -886,6 +1024,7 @@ export type EvntCreateWithoutCategoryInput = {
   updatedAt?: Date | string
   creator: Prisma.UserCreateNestedOneWithoutEvntsInput
   document?: Prisma.DocumentCreateNestedOneWithoutEvntsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEventInput
   missions?: Prisma.MissionCreateNestedManyWithoutEventInput
   eventHasDocument?: Prisma.Event_Has_DocumentCreateNestedManyWithoutEvntInput
 }
@@ -899,6 +1038,7 @@ export type EvntUncheckedCreateWithoutCategoryInput = {
   location?: string | null
   description: string
   creatorId: number
+  updatedById?: number | null
   documentId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -943,6 +1083,7 @@ export type EvntCreateWithoutDocumentInput = {
   updatedAt?: Date | string
   creator: Prisma.UserCreateNestedOneWithoutEvntsInput
   category: Prisma.CategoryCreateNestedOneWithoutEvntsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEventInput
   missions?: Prisma.MissionCreateNestedManyWithoutEventInput
   eventHasDocument?: Prisma.Event_Has_DocumentCreateNestedManyWithoutEvntInput
 }
@@ -957,6 +1098,7 @@ export type EvntUncheckedCreateWithoutDocumentInput = {
   description: string
   categoryId: number
   creatorId: number
+  updatedById?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   missions?: Prisma.MissionUncheckedCreateNestedManyWithoutEventInput
@@ -1001,6 +1143,7 @@ export type EvntCreateWithoutEventHasDocumentInput = {
   creator: Prisma.UserCreateNestedOneWithoutEvntsInput
   category: Prisma.CategoryCreateNestedOneWithoutEvntsInput
   document?: Prisma.DocumentCreateNestedOneWithoutEvntsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedEventInput
   missions?: Prisma.MissionCreateNestedManyWithoutEventInput
 }
 
@@ -1014,6 +1157,7 @@ export type EvntUncheckedCreateWithoutEventHasDocumentInput = {
   description: string
   categoryId: number
   creatorId: number
+  updatedById?: number | null
   documentId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1048,6 +1192,7 @@ export type EvntUpdateWithoutEventHasDocumentInput = {
   creator?: Prisma.UserUpdateOneRequiredWithoutEvntsNestedInput
   category?: Prisma.CategoryUpdateOneRequiredWithoutEvntsNestedInput
   document?: Prisma.DocumentUpdateOneWithoutEvntsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEventNestedInput
   missions?: Prisma.MissionUpdateManyWithoutEventNestedInput
 }
 
@@ -1061,6 +1206,7 @@ export type EvntUncheckedUpdateWithoutEventHasDocumentInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   documentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1076,6 +1222,22 @@ export type EvntCreateManyCreatorInput = {
   location?: string | null
   description: string
   categoryId: number
+  updatedById?: number | null
+  documentId?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type EvntCreateManyUpdaterInput = {
+  id?: number
+  name: string
+  date: Date | string
+  start_hour: Date | string
+  end_hour: Date | string
+  location?: string | null
+  description: string
+  categoryId: number
+  creatorId: number
   documentId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1092,6 +1254,7 @@ export type EvntUpdateWithoutCreatorInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.CategoryUpdateOneRequiredWithoutEvntsNestedInput
   document?: Prisma.DocumentUpdateOneWithoutEvntsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEventNestedInput
   missions?: Prisma.MissionUpdateManyWithoutEventNestedInput
   eventHasDocument?: Prisma.Event_Has_DocumentUpdateManyWithoutEvntNestedInput
 }
@@ -1105,6 +1268,7 @@ export type EvntUncheckedUpdateWithoutCreatorInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   documentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1121,6 +1285,55 @@ export type EvntUncheckedUpdateManyWithoutCreatorInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  documentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EvntUpdateWithoutUpdaterInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutEvntsNestedInput
+  category?: Prisma.CategoryUpdateOneRequiredWithoutEvntsNestedInput
+  document?: Prisma.DocumentUpdateOneWithoutEvntsNestedInput
+  missions?: Prisma.MissionUpdateManyWithoutEventNestedInput
+  eventHasDocument?: Prisma.Event_Has_DocumentUpdateManyWithoutEvntNestedInput
+}
+
+export type EvntUncheckedUpdateWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
+  creatorId?: Prisma.IntFieldUpdateOperationsInput | number
+  documentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  missions?: Prisma.MissionUncheckedUpdateManyWithoutEventNestedInput
+  eventHasDocument?: Prisma.Event_Has_DocumentUncheckedUpdateManyWithoutEvntNestedInput
+}
+
+export type EvntUncheckedUpdateManyWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
+  creatorId?: Prisma.IntFieldUpdateOperationsInput | number
   documentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1135,6 +1348,7 @@ export type EvntCreateManyCategoryInput = {
   location?: string | null
   description: string
   creatorId: number
+  updatedById?: number | null
   documentId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1151,6 +1365,7 @@ export type EvntUpdateWithoutCategoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creator?: Prisma.UserUpdateOneRequiredWithoutEvntsNestedInput
   document?: Prisma.DocumentUpdateOneWithoutEvntsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEventNestedInput
   missions?: Prisma.MissionUpdateManyWithoutEventNestedInput
   eventHasDocument?: Prisma.Event_Has_DocumentUpdateManyWithoutEvntNestedInput
 }
@@ -1164,6 +1379,7 @@ export type EvntUncheckedUpdateWithoutCategoryInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   documentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1180,6 +1396,7 @@ export type EvntUncheckedUpdateManyWithoutCategoryInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   documentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1195,6 +1412,7 @@ export type EvntCreateManyDocumentInput = {
   description: string
   categoryId: number
   creatorId: number
+  updatedById?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1210,6 +1428,7 @@ export type EvntUpdateWithoutDocumentInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creator?: Prisma.UserUpdateOneRequiredWithoutEvntsNestedInput
   category?: Prisma.CategoryUpdateOneRequiredWithoutEvntsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedEventNestedInput
   missions?: Prisma.MissionUpdateManyWithoutEventNestedInput
   eventHasDocument?: Prisma.Event_Has_DocumentUpdateManyWithoutEvntNestedInput
 }
@@ -1224,6 +1443,7 @@ export type EvntUncheckedUpdateWithoutDocumentInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   missions?: Prisma.MissionUncheckedUpdateManyWithoutEventNestedInput
@@ -1240,6 +1460,7 @@ export type EvntUncheckedUpdateManyWithoutDocumentInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1294,12 +1515,14 @@ export type EvntSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   description?: boolean
   categoryId?: boolean
   creatorId?: boolean
+  updatedById?: boolean
   documentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
   document?: boolean | Prisma.Evnt$documentArgs<ExtArgs>
+  updater?: boolean | Prisma.Evnt$updaterArgs<ExtArgs>
   missions?: boolean | Prisma.Evnt$missionsArgs<ExtArgs>
   eventHasDocument?: boolean | Prisma.Evnt$eventHasDocumentArgs<ExtArgs>
   _count?: boolean | Prisma.EvntCountOutputTypeDefaultArgs<ExtArgs>
@@ -1317,16 +1540,18 @@ export type EvntSelectScalar = {
   description?: boolean
   categoryId?: boolean
   creatorId?: boolean
+  updatedById?: boolean
   documentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type EvntOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "date" | "start_hour" | "end_hour" | "location" | "description" | "categoryId" | "creatorId" | "documentId" | "createdAt" | "updatedAt", ExtArgs["result"]["evnt"]>
+export type EvntOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "date" | "start_hour" | "end_hour" | "location" | "description" | "categoryId" | "creatorId" | "updatedById" | "documentId" | "createdAt" | "updatedAt", ExtArgs["result"]["evnt"]>
 export type EvntInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
   document?: boolean | Prisma.Evnt$documentArgs<ExtArgs>
+  updater?: boolean | Prisma.Evnt$updaterArgs<ExtArgs>
   missions?: boolean | Prisma.Evnt$missionsArgs<ExtArgs>
   eventHasDocument?: boolean | Prisma.Evnt$eventHasDocumentArgs<ExtArgs>
   _count?: boolean | Prisma.EvntCountOutputTypeDefaultArgs<ExtArgs>
@@ -1338,6 +1563,7 @@ export type $EvntPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     creator: Prisma.$UserPayload<ExtArgs>
     category: Prisma.$CategoryPayload<ExtArgs>
     document: Prisma.$DocumentPayload<ExtArgs> | null
+    updater: Prisma.$UserPayload<ExtArgs> | null
     missions: Prisma.$MissionPayload<ExtArgs>[]
     eventHasDocument: Prisma.$Event_Has_DocumentPayload<ExtArgs>[]
   }
@@ -1351,6 +1577,7 @@ export type $EvntPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     description: string
     categoryId: number
     creatorId: number
+    updatedById: number | null
     documentId: number | null
     createdAt: Date
     updatedAt: Date
@@ -1697,6 +1924,7 @@ export interface Prisma__EvntClient<T, Null = never, ExtArgs extends runtime.Typ
   creator<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   category<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   document<T extends Prisma.Evnt$documentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Evnt$documentArgs<ExtArgs>>): Prisma.Prisma__DocumentClient<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  updater<T extends Prisma.Evnt$updaterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Evnt$updaterArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   missions<T extends Prisma.Evnt$missionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Evnt$missionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   eventHasDocument<T extends Prisma.Evnt$eventHasDocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Evnt$eventHasDocumentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$Event_Has_DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1737,6 +1965,7 @@ export interface EvntFieldRefs {
   readonly description: Prisma.FieldRef<"Evnt", 'String'>
   readonly categoryId: Prisma.FieldRef<"Evnt", 'Int'>
   readonly creatorId: Prisma.FieldRef<"Evnt", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"Evnt", 'Int'>
   readonly documentId: Prisma.FieldRef<"Evnt", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Evnt", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Evnt", 'DateTime'>
@@ -2104,6 +2333,25 @@ export type Evnt$documentArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   include?: Prisma.DocumentInclude<ExtArgs> | null
   where?: Prisma.DocumentWhereInput
+}
+
+/**
+ * Evnt.updater
+ */
+export type Evnt$updaterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

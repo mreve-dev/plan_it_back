@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
@@ -28,9 +28,11 @@ export class EventController {
     return this.eventService.findOne(+id);
   }
 
+  @Roles('admin')
+  @UseGuards(AuthGuard, RolesGuard)
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateEvent: UpdateEventDto) : Promise<Evnt> {
-    return this.eventService.update(+id, updateEvent)
+  async update(@Param('id') id: string, @Body() updateEvent: UpdateEventDto, @Req() req) : Promise<Evnt> {
+    return this.eventService.update(+id, updateEvent, req.user.id)
   }
 
   @Delete(':id')
