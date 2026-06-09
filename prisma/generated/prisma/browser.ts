@@ -68,7 +68,7 @@ export type Mission_has_Skill = Prisma.Mission_has_SkillModel
  */
 export type User_Has_Mission = Prisma.User_Has_MissionModel
 /**
- * Model Document_Has_Evnt
+ * Model Event_Has_Document
  * 
  */
-export type Document_Has_Evnt = Prisma.Document_Has_EvntModel
+export type Event_Has_Document = Prisma.Event_Has_DocumentModel

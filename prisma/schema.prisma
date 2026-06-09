@@ -59,7 +59,7 @@ model Evnt {
   document Document? @relation(fields: [documentId], references: [id])
 
   missions         Mission[]
-  documentHasEvnts Document_Has_Evnt[]
+  eventHasDocument Event_Has_Document[]
 }
 
 model Mission {
@@ -93,11 +93,12 @@ model Category {
 model Document {
   id        Int      @id @default(autoincrement())
   name      String   @unique
+  url       String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   evnts            Evnt[]
-  documentHasEvnts Document_Has_Evnt[]
+  eventHasDocument Event_Has_Document[]
 }
 
 model Notification {
@@ -154,7 +155,7 @@ model User_Has_Mission {
   @@id([userId, missionId])
 }
 
-model Document_Has_Evnt {
+model Event_Has_Document {
   documentId Int
   evntId     Int
   createdAt  DateTime @default(now())

@@ -61,7 +61,7 @@ export const ModelName = {
   User_has_Skill: 'User_has_Skill',
   Mission_has_Skill: 'Mission_has_Skill',
   User_Has_Mission: 'User_Has_Mission',
-  Document_Has_Evnt: 'Document_Has_Evnt'
+  Event_Has_Document: 'Event_Has_Document'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -147,6 +147,7 @@ export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typ
 export const DocumentScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  url: 'url',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -204,13 +205,13 @@ export const User_Has_MissionScalarFieldEnum = {
 export type User_Has_MissionScalarFieldEnum = (typeof User_Has_MissionScalarFieldEnum)[keyof typeof User_Has_MissionScalarFieldEnum]
 
 
-export const Document_Has_EvntScalarFieldEnum = {
+export const Event_Has_DocumentScalarFieldEnum = {
   documentId: 'documentId',
   evntId: 'evntId',
   createdAt: 'createdAt'
 } as const
 
-export type Document_Has_EvntScalarFieldEnum = (typeof Document_Has_EvntScalarFieldEnum)[keyof typeof Document_Has_EvntScalarFieldEnum]
+export type Event_Has_DocumentScalarFieldEnum = (typeof Event_Has_DocumentScalarFieldEnum)[keyof typeof Event_Has_DocumentScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -265,7 +266,8 @@ export type CategoryOrderByRelevanceFieldEnum = (typeof CategoryOrderByRelevance
 
 
 export const DocumentOrderByRelevanceFieldEnum = {
-  name: 'name'
+  name: 'name',
+  url: 'url'
 } as const
 
 export type DocumentOrderByRelevanceFieldEnum = (typeof DocumentOrderByRelevanceFieldEnum)[keyof typeof DocumentOrderByRelevanceFieldEnum]

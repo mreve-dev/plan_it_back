@@ -37,6 +37,7 @@ export type DocumentSumAggregateOutputType = {
 export type DocumentMinAggregateOutputType = {
   id: number | null
   name: string | null
+  url: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -44,6 +45,7 @@ export type DocumentMinAggregateOutputType = {
 export type DocumentMaxAggregateOutputType = {
   id: number | null
   name: string | null
+  url: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -51,6 +53,7 @@ export type DocumentMaxAggregateOutputType = {
 export type DocumentCountAggregateOutputType = {
   id: number
   name: number
+  url: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -68,6 +71,7 @@ export type DocumentSumAggregateInputType = {
 export type DocumentMinAggregateInputType = {
   id?: true
   name?: true
+  url?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -75,6 +79,7 @@ export type DocumentMinAggregateInputType = {
 export type DocumentMaxAggregateInputType = {
   id?: true
   name?: true
+  url?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -82,6 +87,7 @@ export type DocumentMaxAggregateInputType = {
 export type DocumentCountAggregateInputType = {
   id?: true
   name?: true
+  url?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -176,6 +182,7 @@ export type DocumentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type DocumentGroupByOutputType = {
   id: number
   name: string
+  url: string
   createdAt: Date
   updatedAt: Date
   _count: DocumentCountAggregateOutputType | null
@@ -206,19 +213,21 @@ export type DocumentWhereInput = {
   NOT?: Prisma.DocumentWhereInput | Prisma.DocumentWhereInput[]
   id?: Prisma.IntFilter<"Document"> | number
   name?: Prisma.StringFilter<"Document"> | string
+  url?: Prisma.StringFilter<"Document"> | string
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   evnts?: Prisma.EvntListRelationFilter
-  documentHasEvnts?: Prisma.Document_Has_EvntListRelationFilter
+  eventHasDocument?: Prisma.Event_Has_DocumentListRelationFilter
 }
 
 export type DocumentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   evnts?: Prisma.EvntOrderByRelationAggregateInput
-  documentHasEvnts?: Prisma.Document_Has_EvntOrderByRelationAggregateInput
+  eventHasDocument?: Prisma.Event_Has_DocumentOrderByRelationAggregateInput
   _relevance?: Prisma.DocumentOrderByRelevanceInput
 }
 
@@ -228,15 +237,17 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.DocumentWhereInput | Prisma.DocumentWhereInput[]
   OR?: Prisma.DocumentWhereInput[]
   NOT?: Prisma.DocumentWhereInput | Prisma.DocumentWhereInput[]
+  url?: Prisma.StringFilter<"Document"> | string
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   evnts?: Prisma.EvntListRelationFilter
-  documentHasEvnts?: Prisma.Document_Has_EvntListRelationFilter
+  eventHasDocument?: Prisma.Event_Has_DocumentListRelationFilter
 }, "id" | "name">
 
 export type DocumentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.DocumentCountOrderByAggregateInput
@@ -252,53 +263,60 @@ export type DocumentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.DocumentScalarWhereWithAggregatesInput | Prisma.DocumentScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Document"> | number
   name?: Prisma.StringWithAggregatesFilter<"Document"> | string
+  url?: Prisma.StringWithAggregatesFilter<"Document"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Document"> | Date | string
 }
 
 export type DocumentCreateInput = {
   name: string
+  url: string
   createdAt?: Date | string
   updatedAt?: Date | string
   evnts?: Prisma.EvntCreateNestedManyWithoutDocumentInput
-  documentHasEvnts?: Prisma.Document_Has_EvntCreateNestedManyWithoutDocumentInput
+  eventHasDocument?: Prisma.Event_Has_DocumentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateInput = {
   id?: number
   name: string
+  url: string
   createdAt?: Date | string
   updatedAt?: Date | string
   evnts?: Prisma.EvntUncheckedCreateNestedManyWithoutDocumentInput
-  documentHasEvnts?: Prisma.Document_Has_EvntUncheckedCreateNestedManyWithoutDocumentInput
+  eventHasDocument?: Prisma.Event_Has_DocumentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   evnts?: Prisma.EvntUpdateManyWithoutDocumentNestedInput
-  documentHasEvnts?: Prisma.Document_Has_EvntUpdateManyWithoutDocumentNestedInput
+  eventHasDocument?: Prisma.Event_Has_DocumentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   evnts?: Prisma.EvntUncheckedUpdateManyWithoutDocumentNestedInput
-  documentHasEvnts?: Prisma.Document_Has_EvntUncheckedUpdateManyWithoutDocumentNestedInput
+  eventHasDocument?: Prisma.Event_Has_DocumentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentCreateManyInput = {
   id?: number
   name: string
+  url: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type DocumentUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -306,6 +324,7 @@ export type DocumentUpdateManyMutationInput = {
 export type DocumentUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -324,6 +343,7 @@ export type DocumentOrderByRelevanceInput = {
 export type DocumentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -335,6 +355,7 @@ export type DocumentAvgOrderByAggregateInput = {
 export type DocumentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -342,6 +363,7 @@ export type DocumentMaxOrderByAggregateInput = {
 export type DocumentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -371,33 +393,35 @@ export type DocumentUpdateOneWithoutEvntsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutEvntsInput, Prisma.DocumentUpdateWithoutEvntsInput>, Prisma.DocumentUncheckedUpdateWithoutEvntsInput>
 }
 
-export type DocumentCreateNestedOneWithoutDocumentHasEvntsInput = {
-  create?: Prisma.XOR<Prisma.DocumentCreateWithoutDocumentHasEvntsInput, Prisma.DocumentUncheckedCreateWithoutDocumentHasEvntsInput>
-  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutDocumentHasEvntsInput
+export type DocumentCreateNestedOneWithoutEventHasDocumentInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutEventHasDocumentInput, Prisma.DocumentUncheckedCreateWithoutEventHasDocumentInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutEventHasDocumentInput
   connect?: Prisma.DocumentWhereUniqueInput
 }
 
-export type DocumentUpdateOneRequiredWithoutDocumentHasEvntsNestedInput = {
-  create?: Prisma.XOR<Prisma.DocumentCreateWithoutDocumentHasEvntsInput, Prisma.DocumentUncheckedCreateWithoutDocumentHasEvntsInput>
-  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutDocumentHasEvntsInput
-  upsert?: Prisma.DocumentUpsertWithoutDocumentHasEvntsInput
+export type DocumentUpdateOneRequiredWithoutEventHasDocumentNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutEventHasDocumentInput, Prisma.DocumentUncheckedCreateWithoutEventHasDocumentInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutEventHasDocumentInput
+  upsert?: Prisma.DocumentUpsertWithoutEventHasDocumentInput
   connect?: Prisma.DocumentWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutDocumentHasEvntsInput, Prisma.DocumentUpdateWithoutDocumentHasEvntsInput>, Prisma.DocumentUncheckedUpdateWithoutDocumentHasEvntsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutEventHasDocumentInput, Prisma.DocumentUpdateWithoutEventHasDocumentInput>, Prisma.DocumentUncheckedUpdateWithoutEventHasDocumentInput>
 }
 
 export type DocumentCreateWithoutEvntsInput = {
   name: string
+  url: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  documentHasEvnts?: Prisma.Document_Has_EvntCreateNestedManyWithoutDocumentInput
+  eventHasDocument?: Prisma.Event_Has_DocumentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutEvntsInput = {
   id?: number
   name: string
+  url: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  documentHasEvnts?: Prisma.Document_Has_EvntUncheckedCreateNestedManyWithoutDocumentInput
+  eventHasDocument?: Prisma.Event_Has_DocumentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutEvntsInput = {
@@ -418,60 +442,66 @@ export type DocumentUpdateToOneWithWhereWithoutEvntsInput = {
 
 export type DocumentUpdateWithoutEvntsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  documentHasEvnts?: Prisma.Document_Has_EvntUpdateManyWithoutDocumentNestedInput
+  eventHasDocument?: Prisma.Event_Has_DocumentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutEvntsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  documentHasEvnts?: Prisma.Document_Has_EvntUncheckedUpdateManyWithoutDocumentNestedInput
+  eventHasDocument?: Prisma.Event_Has_DocumentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
-export type DocumentCreateWithoutDocumentHasEvntsInput = {
+export type DocumentCreateWithoutEventHasDocumentInput = {
   name: string
+  url: string
   createdAt?: Date | string
   updatedAt?: Date | string
   evnts?: Prisma.EvntCreateNestedManyWithoutDocumentInput
 }
 
-export type DocumentUncheckedCreateWithoutDocumentHasEvntsInput = {
+export type DocumentUncheckedCreateWithoutEventHasDocumentInput = {
   id?: number
   name: string
+  url: string
   createdAt?: Date | string
   updatedAt?: Date | string
   evnts?: Prisma.EvntUncheckedCreateNestedManyWithoutDocumentInput
 }
 
-export type DocumentCreateOrConnectWithoutDocumentHasEvntsInput = {
+export type DocumentCreateOrConnectWithoutEventHasDocumentInput = {
   where: Prisma.DocumentWhereUniqueInput
-  create: Prisma.XOR<Prisma.DocumentCreateWithoutDocumentHasEvntsInput, Prisma.DocumentUncheckedCreateWithoutDocumentHasEvntsInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutEventHasDocumentInput, Prisma.DocumentUncheckedCreateWithoutEventHasDocumentInput>
 }
 
-export type DocumentUpsertWithoutDocumentHasEvntsInput = {
-  update: Prisma.XOR<Prisma.DocumentUpdateWithoutDocumentHasEvntsInput, Prisma.DocumentUncheckedUpdateWithoutDocumentHasEvntsInput>
-  create: Prisma.XOR<Prisma.DocumentCreateWithoutDocumentHasEvntsInput, Prisma.DocumentUncheckedCreateWithoutDocumentHasEvntsInput>
+export type DocumentUpsertWithoutEventHasDocumentInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutEventHasDocumentInput, Prisma.DocumentUncheckedUpdateWithoutEventHasDocumentInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutEventHasDocumentInput, Prisma.DocumentUncheckedCreateWithoutEventHasDocumentInput>
   where?: Prisma.DocumentWhereInput
 }
 
-export type DocumentUpdateToOneWithWhereWithoutDocumentHasEvntsInput = {
+export type DocumentUpdateToOneWithWhereWithoutEventHasDocumentInput = {
   where?: Prisma.DocumentWhereInput
-  data: Prisma.XOR<Prisma.DocumentUpdateWithoutDocumentHasEvntsInput, Prisma.DocumentUncheckedUpdateWithoutDocumentHasEvntsInput>
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutEventHasDocumentInput, Prisma.DocumentUncheckedUpdateWithoutEventHasDocumentInput>
 }
 
-export type DocumentUpdateWithoutDocumentHasEvntsInput = {
+export type DocumentUpdateWithoutEventHasDocumentInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   evnts?: Prisma.EvntUpdateManyWithoutDocumentNestedInput
 }
 
-export type DocumentUncheckedUpdateWithoutDocumentHasEvntsInput = {
+export type DocumentUncheckedUpdateWithoutEventHasDocumentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   evnts?: Prisma.EvntUncheckedUpdateManyWithoutDocumentNestedInput
@@ -484,12 +514,12 @@ export type DocumentUncheckedUpdateWithoutDocumentHasEvntsInput = {
 
 export type DocumentCountOutputType = {
   evnts: number
-  documentHasEvnts: number
+  eventHasDocument: number
 }
 
 export type DocumentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   evnts?: boolean | DocumentCountOutputTypeCountEvntsArgs
-  documentHasEvnts?: boolean | DocumentCountOutputTypeCountDocumentHasEvntsArgs
+  eventHasDocument?: boolean | DocumentCountOutputTypeCountEventHasDocumentArgs
 }
 
 /**
@@ -512,18 +542,19 @@ export type DocumentCountOutputTypeCountEvntsArgs<ExtArgs extends runtime.Types.
 /**
  * DocumentCountOutputType without action
  */
-export type DocumentCountOutputTypeCountDocumentHasEvntsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.Document_Has_EvntWhereInput
+export type DocumentCountOutputTypeCountEventHasDocumentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.Event_Has_DocumentWhereInput
 }
 
 
 export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  url?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   evnts?: boolean | Prisma.Document$evntsArgs<ExtArgs>
-  documentHasEvnts?: boolean | Prisma.Document$documentHasEvntsArgs<ExtArgs>
+  eventHasDocument?: boolean | Prisma.Document$eventHasDocumentArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["document"]>
 
@@ -532,14 +563,15 @@ export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type DocumentSelectScalar = {
   id?: boolean
   name?: boolean
+  url?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
+export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "url" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
 export type DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   evnts?: boolean | Prisma.Document$evntsArgs<ExtArgs>
-  documentHasEvnts?: boolean | Prisma.Document$documentHasEvntsArgs<ExtArgs>
+  eventHasDocument?: boolean | Prisma.Document$eventHasDocumentArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -547,11 +579,12 @@ export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "Document"
   objects: {
     evnts: Prisma.$EvntPayload<ExtArgs>[]
-    documentHasEvnts: Prisma.$Document_Has_EvntPayload<ExtArgs>[]
+    eventHasDocument: Prisma.$Event_Has_DocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
+    url: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["document"]>
@@ -895,7 +928,7 @@ readonly fields: DocumentFieldRefs;
 export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   evnts<T extends Prisma.Document$evntsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$evntsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EvntPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  documentHasEvnts<T extends Prisma.Document$documentHasEvntsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$documentHasEvntsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$Document_Has_EvntPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  eventHasDocument<T extends Prisma.Document$eventHasDocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$eventHasDocumentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$Event_Has_DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -927,6 +960,7 @@ export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends runtime
 export interface DocumentFieldRefs {
   readonly id: Prisma.FieldRef<"Document", 'Int'>
   readonly name: Prisma.FieldRef<"Document", 'String'>
+  readonly url: Prisma.FieldRef<"Document", 'String'>
   readonly createdAt: Prisma.FieldRef<"Document", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Document", 'DateTime'>
 }
@@ -1301,27 +1335,27 @@ export type Document$evntsArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Document.documentHasEvnts
+ * Document.eventHasDocument
  */
-export type Document$documentHasEvntsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Document$eventHasDocumentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Document_Has_Evnt
+   * Select specific fields to fetch from the Event_Has_Document
    */
-  select?: Prisma.Document_Has_EvntSelect<ExtArgs> | null
+  select?: Prisma.Event_Has_DocumentSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Document_Has_Evnt
+   * Omit specific fields from the Event_Has_Document
    */
-  omit?: Prisma.Document_Has_EvntOmit<ExtArgs> | null
+  omit?: Prisma.Event_Has_DocumentOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.Document_Has_EvntInclude<ExtArgs> | null
-  where?: Prisma.Document_Has_EvntWhereInput
-  orderBy?: Prisma.Document_Has_EvntOrderByWithRelationInput | Prisma.Document_Has_EvntOrderByWithRelationInput[]
-  cursor?: Prisma.Document_Has_EvntWhereUniqueInput
+  include?: Prisma.Event_Has_DocumentInclude<ExtArgs> | null
+  where?: Prisma.Event_Has_DocumentWhereInput
+  orderBy?: Prisma.Event_Has_DocumentOrderByWithRelationInput | Prisma.Event_Has_DocumentOrderByWithRelationInput[]
+  cursor?: Prisma.Event_Has_DocumentWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.Document_Has_EvntScalarFieldEnum | Prisma.Document_Has_EvntScalarFieldEnum[]
+  distinct?: Prisma.Event_Has_DocumentScalarFieldEnum | Prisma.Event_Has_DocumentScalarFieldEnum[]
 }
 
 /**

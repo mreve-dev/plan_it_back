@@ -24,8 +24,10 @@ export class CategoryService {
   // Création d'une catégorie pour les évènements
   async create(createCategory: CreateCategoryDto): Promise<Category> {
 
-    const newCategory: Category = await this.prisma.category.create({
-      data: createCategory
+    const newCategory: Category = await this.prisma.category.upsert({
+      where: {name: createCategory.name},
+      update: {},
+      create: {name: createCategory.name}
     })
 
     return newCategory

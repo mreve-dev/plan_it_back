@@ -8,17 +8,17 @@ import { Evnt } from 'prisma/generated/prisma/client';
 @Injectable()
 export class EventService {
 
-  constructor(private readonly prisma : PrismaService){}
+  constructor(private readonly prisma: PrismaService) { }
 
   async create(createEvent: CreateEventDto) {
 
     createEvent.date = new Date(createEvent.date)
-    const newEvent : Evnt = await this.prisma.evnt.create({
-      data : {
+    const newEvent: Evnt = await this.prisma.evnt.create({
+      data: {
         ...createEvent,
         start_hour: new Date(`1970-01-01T${createEvent.start_hour}:00`),
         end_hour: new Date(`1970-01-01T${createEvent.end_hour}:00`)
-      } 
+      }
     })
 
     return newEvent
@@ -34,18 +34,36 @@ export class EventService {
   }
 
   async findOne(id: number): Promise<Evnt | null> {
-    return this.prisma.evnt.findUnique({where: {id}});
+    return this.prisma.evnt.findUnique(
+      {
+        where: { id },
+        include: {
+          category: true,
+          missions: {
+            include: {
+              userHasMissions: {
+                include: {
+                  user: true
+                }
+              }
+            }
+          },
+          eventHasDocument: {
+            include: {document: true}
+          }
+        }
+      });
   }
 
-  async update(id: number, updateEventDto: UpdateEventDto) : Promise<Evnt> {
+  async update(id: number, updateEventDto: UpdateEventDto): Promise<Evnt> {
     return this.prisma.evnt.update({
-      where : {id},
+      where: { id },
       data: updateEventDto
     });
   }
 
 
-  async remove(id: number) : Promise<Evnt> {
-    return this.prisma.evnt.delete({where : {id}});
+  async remove(id: number): Promise<Evnt> {
+    return this.prisma.evnt.delete({ where: { id } });
   }
 }

@@ -394,7 +394,7 @@ export const ModelName = {
   User_has_Skill: 'User_has_Skill',
   Mission_has_Skill: 'Mission_has_Skill',
   User_Has_Mission: 'User_Has_Mission',
-  Document_Has_Evnt: 'Document_Has_Evnt'
+  Event_Has_Document: 'Event_Has_Document'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -410,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "evnt" | "mission" | "category" | "document" | "notification" | "skill" | "user_has_Skill" | "mission_has_Skill" | "user_Has_Mission" | "document_Has_Evnt"
+    modelProps: "user" | "evnt" | "mission" | "category" | "document" | "notification" | "skill" | "user_has_Skill" | "mission_has_Skill" | "user_Has_Mission" | "event_Has_Document"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1074,69 +1074,69 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Document_Has_Evnt: {
-      payload: Prisma.$Document_Has_EvntPayload<ExtArgs>
-      fields: Prisma.Document_Has_EvntFieldRefs
+    Event_Has_Document: {
+      payload: Prisma.$Event_Has_DocumentPayload<ExtArgs>
+      fields: Prisma.Event_Has_DocumentFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.Document_Has_EvntFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$Document_Has_EvntPayload> | null
+          args: Prisma.Event_Has_DocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Event_Has_DocumentPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.Document_Has_EvntFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$Document_Has_EvntPayload>
+          args: Prisma.Event_Has_DocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Event_Has_DocumentPayload>
         }
         findFirst: {
-          args: Prisma.Document_Has_EvntFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$Document_Has_EvntPayload> | null
+          args: Prisma.Event_Has_DocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Event_Has_DocumentPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.Document_Has_EvntFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$Document_Has_EvntPayload>
+          args: Prisma.Event_Has_DocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Event_Has_DocumentPayload>
         }
         findMany: {
-          args: Prisma.Document_Has_EvntFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$Document_Has_EvntPayload>[]
+          args: Prisma.Event_Has_DocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Event_Has_DocumentPayload>[]
         }
         create: {
-          args: Prisma.Document_Has_EvntCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$Document_Has_EvntPayload>
+          args: Prisma.Event_Has_DocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Event_Has_DocumentPayload>
         }
         createMany: {
-          args: Prisma.Document_Has_EvntCreateManyArgs<ExtArgs>
+          args: Prisma.Event_Has_DocumentCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         delete: {
-          args: Prisma.Document_Has_EvntDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$Document_Has_EvntPayload>
+          args: Prisma.Event_Has_DocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Event_Has_DocumentPayload>
         }
         update: {
-          args: Prisma.Document_Has_EvntUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$Document_Has_EvntPayload>
+          args: Prisma.Event_Has_DocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Event_Has_DocumentPayload>
         }
         deleteMany: {
-          args: Prisma.Document_Has_EvntDeleteManyArgs<ExtArgs>
+          args: Prisma.Event_Has_DocumentDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.Document_Has_EvntUpdateManyArgs<ExtArgs>
+          args: Prisma.Event_Has_DocumentUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         upsert: {
-          args: Prisma.Document_Has_EvntUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$Document_Has_EvntPayload>
+          args: Prisma.Event_Has_DocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Event_Has_DocumentPayload>
         }
         aggregate: {
-          args: Prisma.Document_Has_EvntAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateDocument_Has_Evnt>
+          args: Prisma.Event_Has_DocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEvent_Has_Document>
         }
         groupBy: {
-          args: Prisma.Document_Has_EvntGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.Document_Has_EvntGroupByOutputType>[]
+          args: Prisma.Event_Has_DocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Event_Has_DocumentGroupByOutputType>[]
         }
         count: {
-          args: Prisma.Document_Has_EvntCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.Document_Has_EvntCountAggregateOutputType> | number
+          args: Prisma.Event_Has_DocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Event_Has_DocumentCountAggregateOutputType> | number
         }
       }
     }
@@ -1246,6 +1246,7 @@ export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typ
 export const DocumentScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  url: 'url',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1303,13 +1304,13 @@ export const User_Has_MissionScalarFieldEnum = {
 export type User_Has_MissionScalarFieldEnum = (typeof User_Has_MissionScalarFieldEnum)[keyof typeof User_Has_MissionScalarFieldEnum]
 
 
-export const Document_Has_EvntScalarFieldEnum = {
+export const Event_Has_DocumentScalarFieldEnum = {
   documentId: 'documentId',
   evntId: 'evntId',
   createdAt: 'createdAt'
 } as const
 
-export type Document_Has_EvntScalarFieldEnum = (typeof Document_Has_EvntScalarFieldEnum)[keyof typeof Document_Has_EvntScalarFieldEnum]
+export type Event_Has_DocumentScalarFieldEnum = (typeof Event_Has_DocumentScalarFieldEnum)[keyof typeof Event_Has_DocumentScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1364,7 +1365,8 @@ export type CategoryOrderByRelevanceFieldEnum = (typeof CategoryOrderByRelevance
 
 
 export const DocumentOrderByRelevanceFieldEnum = {
-  name: 'name'
+  name: 'name',
+  url: 'url'
 } as const
 
 export type DocumentOrderByRelevanceFieldEnum = (typeof DocumentOrderByRelevanceFieldEnum)[keyof typeof DocumentOrderByRelevanceFieldEnum]
@@ -1536,7 +1538,7 @@ export type GlobalOmitConfig = {
   user_has_Skill?: Prisma.User_has_SkillOmit
   mission_has_Skill?: Prisma.Mission_has_SkillOmit
   user_Has_Mission?: Prisma.User_Has_MissionOmit
-  document_Has_Evnt?: Prisma.Document_Has_EvntOmit
+  event_Has_Document?: Prisma.Event_Has_DocumentOmit
 }
 
 /* Types for Logging */
