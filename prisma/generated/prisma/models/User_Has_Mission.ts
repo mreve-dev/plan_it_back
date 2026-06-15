@@ -28,29 +28,29 @@ export type AggregateUser_Has_Mission = {
 
 export type User_Has_MissionAvgAggregateOutputType = {
   userId: number | null
-  missionId: number | null
+  slotId: number | null
 }
 
 export type User_Has_MissionSumAggregateOutputType = {
   userId: number | null
-  missionId: number | null
+  slotId: number | null
 }
 
 export type User_Has_MissionMinAggregateOutputType = {
   userId: number | null
-  missionId: number | null
+  slotId: number | null
   createdAt: Date | null
 }
 
 export type User_Has_MissionMaxAggregateOutputType = {
   userId: number | null
-  missionId: number | null
+  slotId: number | null
   createdAt: Date | null
 }
 
 export type User_Has_MissionCountAggregateOutputType = {
   userId: number
-  missionId: number
+  slotId: number
   createdAt: number
   _all: number
 }
@@ -58,29 +58,29 @@ export type User_Has_MissionCountAggregateOutputType = {
 
 export type User_Has_MissionAvgAggregateInputType = {
   userId?: true
-  missionId?: true
+  slotId?: true
 }
 
 export type User_Has_MissionSumAggregateInputType = {
   userId?: true
-  missionId?: true
+  slotId?: true
 }
 
 export type User_Has_MissionMinAggregateInputType = {
   userId?: true
-  missionId?: true
+  slotId?: true
   createdAt?: true
 }
 
 export type User_Has_MissionMaxAggregateInputType = {
   userId?: true
-  missionId?: true
+  slotId?: true
   createdAt?: true
 }
 
 export type User_Has_MissionCountAggregateInputType = {
   userId?: true
-  missionId?: true
+  slotId?: true
   createdAt?: true
   _all?: true
 }
@@ -173,7 +173,7 @@ export type User_Has_MissionGroupByArgs<ExtArgs extends runtime.Types.Extensions
 
 export type User_Has_MissionGroupByOutputType = {
   userId: number
-  missionId: number
+  slotId: number
   createdAt: Date
   _count: User_Has_MissionCountAggregateOutputType | null
   _avg: User_Has_MissionAvgAggregateOutputType | null
@@ -202,35 +202,35 @@ export type User_Has_MissionWhereInput = {
   OR?: Prisma.User_Has_MissionWhereInput[]
   NOT?: Prisma.User_Has_MissionWhereInput | Prisma.User_Has_MissionWhereInput[]
   userId?: Prisma.IntFilter<"User_Has_Mission"> | number
-  missionId?: Prisma.IntFilter<"User_Has_Mission"> | number
+  slotId?: Prisma.IntFilter<"User_Has_Mission"> | number
   createdAt?: Prisma.DateTimeFilter<"User_Has_Mission"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  mission?: Prisma.XOR<Prisma.MissionScalarRelationFilter, Prisma.MissionWhereInput>
+  slot?: Prisma.XOR<Prisma.MissionSlotScalarRelationFilter, Prisma.MissionSlotWhereInput>
 }
 
 export type User_Has_MissionOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
-  missionId?: Prisma.SortOrder
+  slotId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
-  mission?: Prisma.MissionOrderByWithRelationInput
+  slot?: Prisma.MissionSlotOrderByWithRelationInput
 }
 
 export type User_Has_MissionWhereUniqueInput = Prisma.AtLeast<{
-  userId_missionId?: Prisma.User_Has_MissionUserIdMissionIdCompoundUniqueInput
+  userId_slotId?: Prisma.User_Has_MissionUserIdSlotIdCompoundUniqueInput
   AND?: Prisma.User_Has_MissionWhereInput | Prisma.User_Has_MissionWhereInput[]
   OR?: Prisma.User_Has_MissionWhereInput[]
   NOT?: Prisma.User_Has_MissionWhereInput | Prisma.User_Has_MissionWhereInput[]
   userId?: Prisma.IntFilter<"User_Has_Mission"> | number
-  missionId?: Prisma.IntFilter<"User_Has_Mission"> | number
+  slotId?: Prisma.IntFilter<"User_Has_Mission"> | number
   createdAt?: Prisma.DateTimeFilter<"User_Has_Mission"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  mission?: Prisma.XOR<Prisma.MissionScalarRelationFilter, Prisma.MissionWhereInput>
-}, "userId_missionId">
+  slot?: Prisma.XOR<Prisma.MissionSlotScalarRelationFilter, Prisma.MissionSlotWhereInput>
+}, "userId_slotId">
 
 export type User_Has_MissionOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
-  missionId?: Prisma.SortOrder
+  slotId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.User_Has_MissionCountOrderByAggregateInput
   _avg?: Prisma.User_Has_MissionAvgOrderByAggregateInput
@@ -244,37 +244,37 @@ export type User_Has_MissionScalarWhereWithAggregatesInput = {
   OR?: Prisma.User_Has_MissionScalarWhereWithAggregatesInput[]
   NOT?: Prisma.User_Has_MissionScalarWhereWithAggregatesInput | Prisma.User_Has_MissionScalarWhereWithAggregatesInput[]
   userId?: Prisma.IntWithAggregatesFilter<"User_Has_Mission"> | number
-  missionId?: Prisma.IntWithAggregatesFilter<"User_Has_Mission"> | number
+  slotId?: Prisma.IntWithAggregatesFilter<"User_Has_Mission"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User_Has_Mission"> | Date | string
 }
 
 export type User_Has_MissionCreateInput = {
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutUserHasMissionsInput
-  mission: Prisma.MissionCreateNestedOneWithoutUserHasMissionsInput
+  slot: Prisma.MissionSlotCreateNestedOneWithoutUserHasMissionsInput
 }
 
 export type User_Has_MissionUncheckedCreateInput = {
   userId: number
-  missionId: number
+  slotId: number
   createdAt?: Date | string
 }
 
 export type User_Has_MissionUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutUserHasMissionsNestedInput
-  mission?: Prisma.MissionUpdateOneRequiredWithoutUserHasMissionsNestedInput
+  slot?: Prisma.MissionSlotUpdateOneRequiredWithoutUserHasMissionsNestedInput
 }
 
 export type User_Has_MissionUncheckedUpdateInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  missionId?: Prisma.IntFieldUpdateOperationsInput | number
+  slotId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type User_Has_MissionCreateManyInput = {
   userId: number
-  missionId: number
+  slotId: number
   createdAt?: Date | string
 }
 
@@ -284,7 +284,7 @@ export type User_Has_MissionUpdateManyMutationInput = {
 
 export type User_Has_MissionUncheckedUpdateManyInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  missionId?: Prisma.IntFieldUpdateOperationsInput | number
+  slotId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -298,37 +298,37 @@ export type User_Has_MissionOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type User_Has_MissionUserIdMissionIdCompoundUniqueInput = {
+export type User_Has_MissionUserIdSlotIdCompoundUniqueInput = {
   userId: number
-  missionId: number
+  slotId: number
 }
 
 export type User_Has_MissionCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
-  missionId?: Prisma.SortOrder
+  slotId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type User_Has_MissionAvgOrderByAggregateInput = {
   userId?: Prisma.SortOrder
-  missionId?: Prisma.SortOrder
+  slotId?: Prisma.SortOrder
 }
 
 export type User_Has_MissionMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
-  missionId?: Prisma.SortOrder
+  slotId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type User_Has_MissionMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
-  missionId?: Prisma.SortOrder
+  slotId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type User_Has_MissionSumOrderByAggregateInput = {
   userId?: Prisma.SortOrder
-  missionId?: Prisma.SortOrder
+  slotId?: Prisma.SortOrder
 }
 
 export type User_Has_MissionCreateNestedManyWithoutUserInput = {
@@ -373,55 +373,55 @@ export type User_Has_MissionUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.User_Has_MissionScalarWhereInput | Prisma.User_Has_MissionScalarWhereInput[]
 }
 
-export type User_Has_MissionCreateNestedManyWithoutMissionInput = {
-  create?: Prisma.XOR<Prisma.User_Has_MissionCreateWithoutMissionInput, Prisma.User_Has_MissionUncheckedCreateWithoutMissionInput> | Prisma.User_Has_MissionCreateWithoutMissionInput[] | Prisma.User_Has_MissionUncheckedCreateWithoutMissionInput[]
-  connectOrCreate?: Prisma.User_Has_MissionCreateOrConnectWithoutMissionInput | Prisma.User_Has_MissionCreateOrConnectWithoutMissionInput[]
-  createMany?: Prisma.User_Has_MissionCreateManyMissionInputEnvelope
+export type User_Has_MissionCreateNestedManyWithoutSlotInput = {
+  create?: Prisma.XOR<Prisma.User_Has_MissionCreateWithoutSlotInput, Prisma.User_Has_MissionUncheckedCreateWithoutSlotInput> | Prisma.User_Has_MissionCreateWithoutSlotInput[] | Prisma.User_Has_MissionUncheckedCreateWithoutSlotInput[]
+  connectOrCreate?: Prisma.User_Has_MissionCreateOrConnectWithoutSlotInput | Prisma.User_Has_MissionCreateOrConnectWithoutSlotInput[]
+  createMany?: Prisma.User_Has_MissionCreateManySlotInputEnvelope
   connect?: Prisma.User_Has_MissionWhereUniqueInput | Prisma.User_Has_MissionWhereUniqueInput[]
 }
 
-export type User_Has_MissionUncheckedCreateNestedManyWithoutMissionInput = {
-  create?: Prisma.XOR<Prisma.User_Has_MissionCreateWithoutMissionInput, Prisma.User_Has_MissionUncheckedCreateWithoutMissionInput> | Prisma.User_Has_MissionCreateWithoutMissionInput[] | Prisma.User_Has_MissionUncheckedCreateWithoutMissionInput[]
-  connectOrCreate?: Prisma.User_Has_MissionCreateOrConnectWithoutMissionInput | Prisma.User_Has_MissionCreateOrConnectWithoutMissionInput[]
-  createMany?: Prisma.User_Has_MissionCreateManyMissionInputEnvelope
+export type User_Has_MissionUncheckedCreateNestedManyWithoutSlotInput = {
+  create?: Prisma.XOR<Prisma.User_Has_MissionCreateWithoutSlotInput, Prisma.User_Has_MissionUncheckedCreateWithoutSlotInput> | Prisma.User_Has_MissionCreateWithoutSlotInput[] | Prisma.User_Has_MissionUncheckedCreateWithoutSlotInput[]
+  connectOrCreate?: Prisma.User_Has_MissionCreateOrConnectWithoutSlotInput | Prisma.User_Has_MissionCreateOrConnectWithoutSlotInput[]
+  createMany?: Prisma.User_Has_MissionCreateManySlotInputEnvelope
   connect?: Prisma.User_Has_MissionWhereUniqueInput | Prisma.User_Has_MissionWhereUniqueInput[]
 }
 
-export type User_Has_MissionUpdateManyWithoutMissionNestedInput = {
-  create?: Prisma.XOR<Prisma.User_Has_MissionCreateWithoutMissionInput, Prisma.User_Has_MissionUncheckedCreateWithoutMissionInput> | Prisma.User_Has_MissionCreateWithoutMissionInput[] | Prisma.User_Has_MissionUncheckedCreateWithoutMissionInput[]
-  connectOrCreate?: Prisma.User_Has_MissionCreateOrConnectWithoutMissionInput | Prisma.User_Has_MissionCreateOrConnectWithoutMissionInput[]
-  upsert?: Prisma.User_Has_MissionUpsertWithWhereUniqueWithoutMissionInput | Prisma.User_Has_MissionUpsertWithWhereUniqueWithoutMissionInput[]
-  createMany?: Prisma.User_Has_MissionCreateManyMissionInputEnvelope
+export type User_Has_MissionUpdateManyWithoutSlotNestedInput = {
+  create?: Prisma.XOR<Prisma.User_Has_MissionCreateWithoutSlotInput, Prisma.User_Has_MissionUncheckedCreateWithoutSlotInput> | Prisma.User_Has_MissionCreateWithoutSlotInput[] | Prisma.User_Has_MissionUncheckedCreateWithoutSlotInput[]
+  connectOrCreate?: Prisma.User_Has_MissionCreateOrConnectWithoutSlotInput | Prisma.User_Has_MissionCreateOrConnectWithoutSlotInput[]
+  upsert?: Prisma.User_Has_MissionUpsertWithWhereUniqueWithoutSlotInput | Prisma.User_Has_MissionUpsertWithWhereUniqueWithoutSlotInput[]
+  createMany?: Prisma.User_Has_MissionCreateManySlotInputEnvelope
   set?: Prisma.User_Has_MissionWhereUniqueInput | Prisma.User_Has_MissionWhereUniqueInput[]
   disconnect?: Prisma.User_Has_MissionWhereUniqueInput | Prisma.User_Has_MissionWhereUniqueInput[]
   delete?: Prisma.User_Has_MissionWhereUniqueInput | Prisma.User_Has_MissionWhereUniqueInput[]
   connect?: Prisma.User_Has_MissionWhereUniqueInput | Prisma.User_Has_MissionWhereUniqueInput[]
-  update?: Prisma.User_Has_MissionUpdateWithWhereUniqueWithoutMissionInput | Prisma.User_Has_MissionUpdateWithWhereUniqueWithoutMissionInput[]
-  updateMany?: Prisma.User_Has_MissionUpdateManyWithWhereWithoutMissionInput | Prisma.User_Has_MissionUpdateManyWithWhereWithoutMissionInput[]
+  update?: Prisma.User_Has_MissionUpdateWithWhereUniqueWithoutSlotInput | Prisma.User_Has_MissionUpdateWithWhereUniqueWithoutSlotInput[]
+  updateMany?: Prisma.User_Has_MissionUpdateManyWithWhereWithoutSlotInput | Prisma.User_Has_MissionUpdateManyWithWhereWithoutSlotInput[]
   deleteMany?: Prisma.User_Has_MissionScalarWhereInput | Prisma.User_Has_MissionScalarWhereInput[]
 }
 
-export type User_Has_MissionUncheckedUpdateManyWithoutMissionNestedInput = {
-  create?: Prisma.XOR<Prisma.User_Has_MissionCreateWithoutMissionInput, Prisma.User_Has_MissionUncheckedCreateWithoutMissionInput> | Prisma.User_Has_MissionCreateWithoutMissionInput[] | Prisma.User_Has_MissionUncheckedCreateWithoutMissionInput[]
-  connectOrCreate?: Prisma.User_Has_MissionCreateOrConnectWithoutMissionInput | Prisma.User_Has_MissionCreateOrConnectWithoutMissionInput[]
-  upsert?: Prisma.User_Has_MissionUpsertWithWhereUniqueWithoutMissionInput | Prisma.User_Has_MissionUpsertWithWhereUniqueWithoutMissionInput[]
-  createMany?: Prisma.User_Has_MissionCreateManyMissionInputEnvelope
+export type User_Has_MissionUncheckedUpdateManyWithoutSlotNestedInput = {
+  create?: Prisma.XOR<Prisma.User_Has_MissionCreateWithoutSlotInput, Prisma.User_Has_MissionUncheckedCreateWithoutSlotInput> | Prisma.User_Has_MissionCreateWithoutSlotInput[] | Prisma.User_Has_MissionUncheckedCreateWithoutSlotInput[]
+  connectOrCreate?: Prisma.User_Has_MissionCreateOrConnectWithoutSlotInput | Prisma.User_Has_MissionCreateOrConnectWithoutSlotInput[]
+  upsert?: Prisma.User_Has_MissionUpsertWithWhereUniqueWithoutSlotInput | Prisma.User_Has_MissionUpsertWithWhereUniqueWithoutSlotInput[]
+  createMany?: Prisma.User_Has_MissionCreateManySlotInputEnvelope
   set?: Prisma.User_Has_MissionWhereUniqueInput | Prisma.User_Has_MissionWhereUniqueInput[]
   disconnect?: Prisma.User_Has_MissionWhereUniqueInput | Prisma.User_Has_MissionWhereUniqueInput[]
   delete?: Prisma.User_Has_MissionWhereUniqueInput | Prisma.User_Has_MissionWhereUniqueInput[]
   connect?: Prisma.User_Has_MissionWhereUniqueInput | Prisma.User_Has_MissionWhereUniqueInput[]
-  update?: Prisma.User_Has_MissionUpdateWithWhereUniqueWithoutMissionInput | Prisma.User_Has_MissionUpdateWithWhereUniqueWithoutMissionInput[]
-  updateMany?: Prisma.User_Has_MissionUpdateManyWithWhereWithoutMissionInput | Prisma.User_Has_MissionUpdateManyWithWhereWithoutMissionInput[]
+  update?: Prisma.User_Has_MissionUpdateWithWhereUniqueWithoutSlotInput | Prisma.User_Has_MissionUpdateWithWhereUniqueWithoutSlotInput[]
+  updateMany?: Prisma.User_Has_MissionUpdateManyWithWhereWithoutSlotInput | Prisma.User_Has_MissionUpdateManyWithWhereWithoutSlotInput[]
   deleteMany?: Prisma.User_Has_MissionScalarWhereInput | Prisma.User_Has_MissionScalarWhereInput[]
 }
 
 export type User_Has_MissionCreateWithoutUserInput = {
   createdAt?: Date | string
-  mission: Prisma.MissionCreateNestedOneWithoutUserHasMissionsInput
+  slot: Prisma.MissionSlotCreateNestedOneWithoutUserHasMissionsInput
 }
 
 export type User_Has_MissionUncheckedCreateWithoutUserInput = {
-  missionId: number
+  slotId: number
   createdAt?: Date | string
 }
 
@@ -456,82 +456,82 @@ export type User_Has_MissionScalarWhereInput = {
   OR?: Prisma.User_Has_MissionScalarWhereInput[]
   NOT?: Prisma.User_Has_MissionScalarWhereInput | Prisma.User_Has_MissionScalarWhereInput[]
   userId?: Prisma.IntFilter<"User_Has_Mission"> | number
-  missionId?: Prisma.IntFilter<"User_Has_Mission"> | number
+  slotId?: Prisma.IntFilter<"User_Has_Mission"> | number
   createdAt?: Prisma.DateTimeFilter<"User_Has_Mission"> | Date | string
 }
 
-export type User_Has_MissionCreateWithoutMissionInput = {
+export type User_Has_MissionCreateWithoutSlotInput = {
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutUserHasMissionsInput
 }
 
-export type User_Has_MissionUncheckedCreateWithoutMissionInput = {
+export type User_Has_MissionUncheckedCreateWithoutSlotInput = {
   userId: number
   createdAt?: Date | string
 }
 
-export type User_Has_MissionCreateOrConnectWithoutMissionInput = {
+export type User_Has_MissionCreateOrConnectWithoutSlotInput = {
   where: Prisma.User_Has_MissionWhereUniqueInput
-  create: Prisma.XOR<Prisma.User_Has_MissionCreateWithoutMissionInput, Prisma.User_Has_MissionUncheckedCreateWithoutMissionInput>
+  create: Prisma.XOR<Prisma.User_Has_MissionCreateWithoutSlotInput, Prisma.User_Has_MissionUncheckedCreateWithoutSlotInput>
 }
 
-export type User_Has_MissionCreateManyMissionInputEnvelope = {
-  data: Prisma.User_Has_MissionCreateManyMissionInput | Prisma.User_Has_MissionCreateManyMissionInput[]
+export type User_Has_MissionCreateManySlotInputEnvelope = {
+  data: Prisma.User_Has_MissionCreateManySlotInput | Prisma.User_Has_MissionCreateManySlotInput[]
   skipDuplicates?: boolean
 }
 
-export type User_Has_MissionUpsertWithWhereUniqueWithoutMissionInput = {
+export type User_Has_MissionUpsertWithWhereUniqueWithoutSlotInput = {
   where: Prisma.User_Has_MissionWhereUniqueInput
-  update: Prisma.XOR<Prisma.User_Has_MissionUpdateWithoutMissionInput, Prisma.User_Has_MissionUncheckedUpdateWithoutMissionInput>
-  create: Prisma.XOR<Prisma.User_Has_MissionCreateWithoutMissionInput, Prisma.User_Has_MissionUncheckedCreateWithoutMissionInput>
+  update: Prisma.XOR<Prisma.User_Has_MissionUpdateWithoutSlotInput, Prisma.User_Has_MissionUncheckedUpdateWithoutSlotInput>
+  create: Prisma.XOR<Prisma.User_Has_MissionCreateWithoutSlotInput, Prisma.User_Has_MissionUncheckedCreateWithoutSlotInput>
 }
 
-export type User_Has_MissionUpdateWithWhereUniqueWithoutMissionInput = {
+export type User_Has_MissionUpdateWithWhereUniqueWithoutSlotInput = {
   where: Prisma.User_Has_MissionWhereUniqueInput
-  data: Prisma.XOR<Prisma.User_Has_MissionUpdateWithoutMissionInput, Prisma.User_Has_MissionUncheckedUpdateWithoutMissionInput>
+  data: Prisma.XOR<Prisma.User_Has_MissionUpdateWithoutSlotInput, Prisma.User_Has_MissionUncheckedUpdateWithoutSlotInput>
 }
 
-export type User_Has_MissionUpdateManyWithWhereWithoutMissionInput = {
+export type User_Has_MissionUpdateManyWithWhereWithoutSlotInput = {
   where: Prisma.User_Has_MissionScalarWhereInput
-  data: Prisma.XOR<Prisma.User_Has_MissionUpdateManyMutationInput, Prisma.User_Has_MissionUncheckedUpdateManyWithoutMissionInput>
+  data: Prisma.XOR<Prisma.User_Has_MissionUpdateManyMutationInput, Prisma.User_Has_MissionUncheckedUpdateManyWithoutSlotInput>
 }
 
 export type User_Has_MissionCreateManyUserInput = {
-  missionId: number
+  slotId: number
   createdAt?: Date | string
 }
 
 export type User_Has_MissionUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  mission?: Prisma.MissionUpdateOneRequiredWithoutUserHasMissionsNestedInput
+  slot?: Prisma.MissionSlotUpdateOneRequiredWithoutUserHasMissionsNestedInput
 }
 
 export type User_Has_MissionUncheckedUpdateWithoutUserInput = {
-  missionId?: Prisma.IntFieldUpdateOperationsInput | number
+  slotId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type User_Has_MissionUncheckedUpdateManyWithoutUserInput = {
-  missionId?: Prisma.IntFieldUpdateOperationsInput | number
+  slotId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type User_Has_MissionCreateManyMissionInput = {
+export type User_Has_MissionCreateManySlotInput = {
   userId: number
   createdAt?: Date | string
 }
 
-export type User_Has_MissionUpdateWithoutMissionInput = {
+export type User_Has_MissionUpdateWithoutSlotInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutUserHasMissionsNestedInput
 }
 
-export type User_Has_MissionUncheckedUpdateWithoutMissionInput = {
+export type User_Has_MissionUncheckedUpdateWithoutSlotInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type User_Has_MissionUncheckedUpdateManyWithoutMissionInput = {
+export type User_Has_MissionUncheckedUpdateManyWithoutSlotInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -540,35 +540,35 @@ export type User_Has_MissionUncheckedUpdateManyWithoutMissionInput = {
 
 export type User_Has_MissionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   userId?: boolean
-  missionId?: boolean
+  slotId?: boolean
   createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
+  slot?: boolean | Prisma.MissionSlotDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user_Has_Mission"]>
 
 
 
 export type User_Has_MissionSelectScalar = {
   userId?: boolean
-  missionId?: boolean
+  slotId?: boolean
   createdAt?: boolean
 }
 
-export type User_Has_MissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"userId" | "missionId" | "createdAt", ExtArgs["result"]["user_Has_Mission"]>
+export type User_Has_MissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"userId" | "slotId" | "createdAt", ExtArgs["result"]["user_Has_Mission"]>
 export type User_Has_MissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
+  slot?: boolean | Prisma.MissionSlotDefaultArgs<ExtArgs>
 }
 
 export type $User_Has_MissionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User_Has_Mission"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
-    mission: Prisma.$MissionPayload<ExtArgs>
+    slot: Prisma.$MissionSlotPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     userId: number
-    missionId: number
+    slotId: number
     createdAt: Date
   }, ExtArgs["result"]["user_Has_Mission"]>
   composites: {}
@@ -911,7 +911,7 @@ readonly fields: User_Has_MissionFieldRefs;
 export interface Prisma__User_Has_MissionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  mission<T extends Prisma.MissionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MissionDefaultArgs<ExtArgs>>): Prisma.Prisma__MissionClient<runtime.Types.Result.GetResult<Prisma.$MissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  slot<T extends Prisma.MissionSlotDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MissionSlotDefaultArgs<ExtArgs>>): Prisma.Prisma__MissionSlotClient<runtime.Types.Result.GetResult<Prisma.$MissionSlotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -942,7 +942,7 @@ export interface Prisma__User_Has_MissionClient<T, Null = never, ExtArgs extends
  */
 export interface User_Has_MissionFieldRefs {
   readonly userId: Prisma.FieldRef<"User_Has_Mission", 'Int'>
-  readonly missionId: Prisma.FieldRef<"User_Has_Mission", 'Int'>
+  readonly slotId: Prisma.FieldRef<"User_Has_Mission", 'Int'>
   readonly createdAt: Prisma.FieldRef<"User_Has_Mission", 'DateTime'>
 }
     

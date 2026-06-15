@@ -387,6 +387,7 @@ export const ModelName = {
   User: 'User',
   Evnt: 'Evnt',
   Mission: 'Mission',
+  MissionSlot: 'MissionSlot',
   Category: 'Category',
   Document: 'Document',
   Notification: 'Notification',
@@ -410,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "evnt" | "mission" | "category" | "document" | "notification" | "skill" | "user_has_Skill" | "mission_has_Skill" | "user_Has_Mission" | "event_Has_Document"
+    modelProps: "user" | "evnt" | "mission" | "missionSlot" | "category" | "document" | "notification" | "skill" | "user_has_Skill" | "mission_has_Skill" | "user_Has_Mission" | "event_Has_Document"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -609,6 +610,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.MissionCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.MissionCountAggregateOutputType> | number
+        }
+      }
+    }
+    MissionSlot: {
+      payload: Prisma.$MissionSlotPayload<ExtArgs>
+      fields: Prisma.MissionSlotFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MissionSlotFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissionSlotPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MissionSlotFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissionSlotPayload>
+        }
+        findFirst: {
+          args: Prisma.MissionSlotFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissionSlotPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MissionSlotFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissionSlotPayload>
+        }
+        findMany: {
+          args: Prisma.MissionSlotFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissionSlotPayload>[]
+        }
+        create: {
+          args: Prisma.MissionSlotCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissionSlotPayload>
+        }
+        createMany: {
+          args: Prisma.MissionSlotCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.MissionSlotDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissionSlotPayload>
+        }
+        update: {
+          args: Prisma.MissionSlotUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissionSlotPayload>
+        }
+        deleteMany: {
+          args: Prisma.MissionSlotDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MissionSlotUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.MissionSlotUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MissionSlotPayload>
+        }
+        aggregate: {
+          args: Prisma.MissionSlotAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMissionSlot>
+        }
+        groupBy: {
+          args: Prisma.MissionSlotGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MissionSlotGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MissionSlotCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MissionSlotCountAggregateOutputType> | number
         }
       }
     }
@@ -1201,7 +1268,8 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const EvntScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  date: 'date',
+  start_date: 'start_date',
+  end_date: 'end_date',
   start_hour: 'start_hour',
   end_hour: 'end_hour',
   location: 'location',
@@ -1221,17 +1289,29 @@ export const MissionScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
-  max_volunteers: 'max_volunteers',
+  eventId: 'eventId',
+  creatorId: 'creatorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  updatedById: 'updatedById'
+} as const
+
+export type MissionScalarFieldEnum = (typeof MissionScalarFieldEnum)[keyof typeof MissionScalarFieldEnum]
+
+
+export const MissionSlotScalarFieldEnum = {
+  id: 'id',
   date: 'date',
   start_hour: 'start_hour',
   end_hour: 'end_hour',
-  eventId: 'eventId',
-  creatorId: 'creatorId',
+  max_volunteers: 'max_volunteers',
+  missionId: 'missionId',
+  updatedById: 'updatedById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type MissionScalarFieldEnum = (typeof MissionScalarFieldEnum)[keyof typeof MissionScalarFieldEnum]
+export type MissionSlotScalarFieldEnum = (typeof MissionSlotScalarFieldEnum)[keyof typeof MissionSlotScalarFieldEnum]
 
 
 export const CategoryScalarFieldEnum = {
@@ -1298,7 +1378,7 @@ export type Mission_has_SkillScalarFieldEnum = (typeof Mission_has_SkillScalarFi
 
 export const User_Has_MissionScalarFieldEnum = {
   userId: 'userId',
-  missionId: 'missionId',
+  slotId: 'slotId',
   createdAt: 'createdAt'
 } as const
 
@@ -1532,6 +1612,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   evnt?: Prisma.EvntOmit
   mission?: Prisma.MissionOmit
+  missionSlot?: Prisma.MissionSlotOmit
   category?: Prisma.CategoryOmit
   document?: Prisma.DocumentOmit
   notification?: Prisma.NotificationOmit

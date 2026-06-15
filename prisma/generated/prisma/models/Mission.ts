@@ -28,116 +28,98 @@ export type AggregateMission = {
 
 export type MissionAvgAggregateOutputType = {
   id: number | null
-  max_volunteers: number | null
   eventId: number | null
   creatorId: number | null
+  updatedById: number | null
 }
 
 export type MissionSumAggregateOutputType = {
   id: number | null
-  max_volunteers: number | null
   eventId: number | null
   creatorId: number | null
+  updatedById: number | null
 }
 
 export type MissionMinAggregateOutputType = {
   id: number | null
   name: string | null
   description: string | null
-  max_volunteers: number | null
-  date: Date | null
-  start_hour: Date | null
-  end_hour: Date | null
   eventId: number | null
   creatorId: number | null
   createdAt: Date | null
   updatedAt: Date | null
+  updatedById: number | null
 }
 
 export type MissionMaxAggregateOutputType = {
   id: number | null
   name: string | null
   description: string | null
-  max_volunteers: number | null
-  date: Date | null
-  start_hour: Date | null
-  end_hour: Date | null
   eventId: number | null
   creatorId: number | null
   createdAt: Date | null
   updatedAt: Date | null
+  updatedById: number | null
 }
 
 export type MissionCountAggregateOutputType = {
   id: number
   name: number
   description: number
-  max_volunteers: number
-  date: number
-  start_hour: number
-  end_hour: number
   eventId: number
   creatorId: number
   createdAt: number
   updatedAt: number
+  updatedById: number
   _all: number
 }
 
 
 export type MissionAvgAggregateInputType = {
   id?: true
-  max_volunteers?: true
   eventId?: true
   creatorId?: true
+  updatedById?: true
 }
 
 export type MissionSumAggregateInputType = {
   id?: true
-  max_volunteers?: true
   eventId?: true
   creatorId?: true
+  updatedById?: true
 }
 
 export type MissionMinAggregateInputType = {
   id?: true
   name?: true
   description?: true
-  max_volunteers?: true
-  date?: true
-  start_hour?: true
-  end_hour?: true
   eventId?: true
   creatorId?: true
   createdAt?: true
   updatedAt?: true
+  updatedById?: true
 }
 
 export type MissionMaxAggregateInputType = {
   id?: true
   name?: true
   description?: true
-  max_volunteers?: true
-  date?: true
-  start_hour?: true
-  end_hour?: true
   eventId?: true
   creatorId?: true
   createdAt?: true
   updatedAt?: true
+  updatedById?: true
 }
 
 export type MissionCountAggregateInputType = {
   id?: true
   name?: true
   description?: true
-  max_volunteers?: true
-  date?: true
-  start_hour?: true
-  end_hour?: true
   eventId?: true
   creatorId?: true
   createdAt?: true
   updatedAt?: true
+  updatedById?: true
   _all?: true
 }
 
@@ -231,14 +213,11 @@ export type MissionGroupByOutputType = {
   id: number
   name: string
   description: string
-  max_volunteers: number
-  date: Date
-  start_hour: Date
-  end_hour: Date
   eventId: number
   creatorId: number
   createdAt: Date
   updatedAt: Date
+  updatedById: number | null
   _count: MissionCountAggregateOutputType | null
   _avg: MissionAvgAggregateOutputType | null
   _sum: MissionSumAggregateOutputType | null
@@ -268,36 +247,32 @@ export type MissionWhereInput = {
   id?: Prisma.IntFilter<"Mission"> | number
   name?: Prisma.StringFilter<"Mission"> | string
   description?: Prisma.StringFilter<"Mission"> | string
-  max_volunteers?: Prisma.IntFilter<"Mission"> | number
-  date?: Prisma.DateTimeFilter<"Mission"> | Date | string
-  start_hour?: Prisma.DateTimeFilter<"Mission"> | Date | string
-  end_hour?: Prisma.DateTimeFilter<"Mission"> | Date | string
   eventId?: Prisma.IntFilter<"Mission"> | number
   creatorId?: Prisma.IntFilter<"Mission"> | number
   createdAt?: Prisma.DateTimeFilter<"Mission"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Mission"> | Date | string
-  creator?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  updatedById?: Prisma.IntNullableFilter<"Mission"> | number | null
   event?: Prisma.XOR<Prisma.EvntScalarRelationFilter, Prisma.EvntWhereInput>
-  userHasMissions?: Prisma.User_Has_MissionListRelationFilter
+  creator?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   missionHasSkills?: Prisma.Mission_has_SkillListRelationFilter
+  missionSlots?: Prisma.MissionSlotListRelationFilter
 }
 
 export type MissionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  max_volunteers?: Prisma.SortOrder
-  date?: Prisma.SortOrder
-  start_hour?: Prisma.SortOrder
-  end_hour?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
   creatorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  creator?: Prisma.UserOrderByWithRelationInput
+  updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   event?: Prisma.EvntOrderByWithRelationInput
-  userHasMissions?: Prisma.User_Has_MissionOrderByRelationAggregateInput
+  creator?: Prisma.UserOrderByWithRelationInput
+  updater?: Prisma.UserOrderByWithRelationInput
   missionHasSkills?: Prisma.Mission_has_SkillOrderByRelationAggregateInput
+  missionSlots?: Prisma.MissionSlotOrderByRelationAggregateInput
   _relevance?: Prisma.MissionOrderByRelevanceInput
 }
 
@@ -308,32 +283,27 @@ export type MissionWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.MissionWhereInput | Prisma.MissionWhereInput[]
   name?: Prisma.StringFilter<"Mission"> | string
   description?: Prisma.StringFilter<"Mission"> | string
-  max_volunteers?: Prisma.IntFilter<"Mission"> | number
-  date?: Prisma.DateTimeFilter<"Mission"> | Date | string
-  start_hour?: Prisma.DateTimeFilter<"Mission"> | Date | string
-  end_hour?: Prisma.DateTimeFilter<"Mission"> | Date | string
   eventId?: Prisma.IntFilter<"Mission"> | number
   creatorId?: Prisma.IntFilter<"Mission"> | number
   createdAt?: Prisma.DateTimeFilter<"Mission"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Mission"> | Date | string
-  creator?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  updatedById?: Prisma.IntNullableFilter<"Mission"> | number | null
   event?: Prisma.XOR<Prisma.EvntScalarRelationFilter, Prisma.EvntWhereInput>
-  userHasMissions?: Prisma.User_Has_MissionListRelationFilter
+  creator?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  updater?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   missionHasSkills?: Prisma.Mission_has_SkillListRelationFilter
+  missionSlots?: Prisma.MissionSlotListRelationFilter
 }, "id">
 
 export type MissionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  max_volunteers?: Prisma.SortOrder
-  date?: Prisma.SortOrder
-  start_hour?: Prisma.SortOrder
-  end_hour?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
   creatorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.MissionCountOrderByAggregateInput
   _avg?: Prisma.MissionAvgOrderByAggregateInput
   _max?: Prisma.MissionMaxOrderByAggregateInput
@@ -348,99 +318,77 @@ export type MissionScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Mission"> | number
   name?: Prisma.StringWithAggregatesFilter<"Mission"> | string
   description?: Prisma.StringWithAggregatesFilter<"Mission"> | string
-  max_volunteers?: Prisma.IntWithAggregatesFilter<"Mission"> | number
-  date?: Prisma.DateTimeWithAggregatesFilter<"Mission"> | Date | string
-  start_hour?: Prisma.DateTimeWithAggregatesFilter<"Mission"> | Date | string
-  end_hour?: Prisma.DateTimeWithAggregatesFilter<"Mission"> | Date | string
   eventId?: Prisma.IntWithAggregatesFilter<"Mission"> | number
   creatorId?: Prisma.IntWithAggregatesFilter<"Mission"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Mission"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Mission"> | Date | string
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"Mission"> | number | null
 }
 
 export type MissionCreateInput = {
   name: string
   description: string
-  max_volunteers: number
-  date: Date | string
-  start_hour: Date | string
-  end_hour: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
-  creator: Prisma.UserCreateNestedOneWithoutMissionsInput
   event: Prisma.EvntCreateNestedOneWithoutMissionsInput
-  userHasMissions?: Prisma.User_Has_MissionCreateNestedManyWithoutMissionInput
+  creator: Prisma.UserCreateNestedOneWithoutMissionsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedMissionsInput
   missionHasSkills?: Prisma.Mission_has_SkillCreateNestedManyWithoutMissionInput
+  missionSlots?: Prisma.MissionSlotCreateNestedManyWithoutMissionInput
 }
 
 export type MissionUncheckedCreateInput = {
   id?: number
   name: string
   description: string
-  max_volunteers: number
-  date: Date | string
-  start_hour: Date | string
-  end_hour: Date | string
   eventId: number
   creatorId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  userHasMissions?: Prisma.User_Has_MissionUncheckedCreateNestedManyWithoutMissionInput
+  updatedById?: number | null
   missionHasSkills?: Prisma.Mission_has_SkillUncheckedCreateNestedManyWithoutMissionInput
+  missionSlots?: Prisma.MissionSlotUncheckedCreateNestedManyWithoutMissionInput
 }
 
 export type MissionUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  creator?: Prisma.UserUpdateOneRequiredWithoutMissionsNestedInput
   event?: Prisma.EvntUpdateOneRequiredWithoutMissionsNestedInput
-  userHasMissions?: Prisma.User_Has_MissionUpdateManyWithoutMissionNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutMissionsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedMissionsNestedInput
   missionHasSkills?: Prisma.Mission_has_SkillUpdateManyWithoutMissionNestedInput
+  missionSlots?: Prisma.MissionSlotUpdateManyWithoutMissionNestedInput
 }
 
 export type MissionUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventId?: Prisma.IntFieldUpdateOperationsInput | number
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userHasMissions?: Prisma.User_Has_MissionUncheckedUpdateManyWithoutMissionNestedInput
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   missionHasSkills?: Prisma.Mission_has_SkillUncheckedUpdateManyWithoutMissionNestedInput
+  missionSlots?: Prisma.MissionSlotUncheckedUpdateManyWithoutMissionNestedInput
 }
 
 export type MissionCreateManyInput = {
   id?: number
   name: string
   description: string
-  max_volunteers: number
-  date: Date | string
-  start_hour: Date | string
-  end_hour: Date | string
   eventId: number
   creatorId: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  updatedById?: number | null
 }
 
 export type MissionUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -449,14 +397,11 @@ export type MissionUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventId?: Prisma.IntFieldUpdateOperationsInput | number
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type MissionListRelationFilter = {
@@ -479,56 +424,47 @@ export type MissionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  max_volunteers?: Prisma.SortOrder
-  date?: Prisma.SortOrder
-  start_hour?: Prisma.SortOrder
-  end_hour?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
   creatorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
 }
 
 export type MissionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  max_volunteers?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
   creatorId?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
 }
 
 export type MissionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  max_volunteers?: Prisma.SortOrder
-  date?: Prisma.SortOrder
-  start_hour?: Prisma.SortOrder
-  end_hour?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
   creatorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
 }
 
 export type MissionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  max_volunteers?: Prisma.SortOrder
-  date?: Prisma.SortOrder
-  start_hour?: Prisma.SortOrder
-  end_hour?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
   creatorId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
 }
 
 export type MissionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  max_volunteers?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
   creatorId?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
 }
 
 export type MissionScalarRelationFilter = {
@@ -543,10 +479,24 @@ export type MissionCreateNestedManyWithoutCreatorInput = {
   connect?: Prisma.MissionWhereUniqueInput | Prisma.MissionWhereUniqueInput[]
 }
 
+export type MissionCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.MissionCreateWithoutUpdaterInput, Prisma.MissionUncheckedCreateWithoutUpdaterInput> | Prisma.MissionCreateWithoutUpdaterInput[] | Prisma.MissionUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.MissionCreateOrConnectWithoutUpdaterInput | Prisma.MissionCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.MissionCreateManyUpdaterInputEnvelope
+  connect?: Prisma.MissionWhereUniqueInput | Prisma.MissionWhereUniqueInput[]
+}
+
 export type MissionUncheckedCreateNestedManyWithoutCreatorInput = {
   create?: Prisma.XOR<Prisma.MissionCreateWithoutCreatorInput, Prisma.MissionUncheckedCreateWithoutCreatorInput> | Prisma.MissionCreateWithoutCreatorInput[] | Prisma.MissionUncheckedCreateWithoutCreatorInput[]
   connectOrCreate?: Prisma.MissionCreateOrConnectWithoutCreatorInput | Prisma.MissionCreateOrConnectWithoutCreatorInput[]
   createMany?: Prisma.MissionCreateManyCreatorInputEnvelope
+  connect?: Prisma.MissionWhereUniqueInput | Prisma.MissionWhereUniqueInput[]
+}
+
+export type MissionUncheckedCreateNestedManyWithoutUpdaterInput = {
+  create?: Prisma.XOR<Prisma.MissionCreateWithoutUpdaterInput, Prisma.MissionUncheckedCreateWithoutUpdaterInput> | Prisma.MissionCreateWithoutUpdaterInput[] | Prisma.MissionUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.MissionCreateOrConnectWithoutUpdaterInput | Prisma.MissionCreateOrConnectWithoutUpdaterInput[]
+  createMany?: Prisma.MissionCreateManyUpdaterInputEnvelope
   connect?: Prisma.MissionWhereUniqueInput | Prisma.MissionWhereUniqueInput[]
 }
 
@@ -564,6 +514,20 @@ export type MissionUpdateManyWithoutCreatorNestedInput = {
   deleteMany?: Prisma.MissionScalarWhereInput | Prisma.MissionScalarWhereInput[]
 }
 
+export type MissionUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.MissionCreateWithoutUpdaterInput, Prisma.MissionUncheckedCreateWithoutUpdaterInput> | Prisma.MissionCreateWithoutUpdaterInput[] | Prisma.MissionUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.MissionCreateOrConnectWithoutUpdaterInput | Prisma.MissionCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.MissionUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.MissionUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.MissionCreateManyUpdaterInputEnvelope
+  set?: Prisma.MissionWhereUniqueInput | Prisma.MissionWhereUniqueInput[]
+  disconnect?: Prisma.MissionWhereUniqueInput | Prisma.MissionWhereUniqueInput[]
+  delete?: Prisma.MissionWhereUniqueInput | Prisma.MissionWhereUniqueInput[]
+  connect?: Prisma.MissionWhereUniqueInput | Prisma.MissionWhereUniqueInput[]
+  update?: Prisma.MissionUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.MissionUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.MissionUpdateManyWithWhereWithoutUpdaterInput | Prisma.MissionUpdateManyWithWhereWithoutUpdaterInput[]
+  deleteMany?: Prisma.MissionScalarWhereInput | Prisma.MissionScalarWhereInput[]
+}
+
 export type MissionUncheckedUpdateManyWithoutCreatorNestedInput = {
   create?: Prisma.XOR<Prisma.MissionCreateWithoutCreatorInput, Prisma.MissionUncheckedCreateWithoutCreatorInput> | Prisma.MissionCreateWithoutCreatorInput[] | Prisma.MissionUncheckedCreateWithoutCreatorInput[]
   connectOrCreate?: Prisma.MissionCreateOrConnectWithoutCreatorInput | Prisma.MissionCreateOrConnectWithoutCreatorInput[]
@@ -575,6 +539,20 @@ export type MissionUncheckedUpdateManyWithoutCreatorNestedInput = {
   connect?: Prisma.MissionWhereUniqueInput | Prisma.MissionWhereUniqueInput[]
   update?: Prisma.MissionUpdateWithWhereUniqueWithoutCreatorInput | Prisma.MissionUpdateWithWhereUniqueWithoutCreatorInput[]
   updateMany?: Prisma.MissionUpdateManyWithWhereWithoutCreatorInput | Prisma.MissionUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.MissionScalarWhereInput | Prisma.MissionScalarWhereInput[]
+}
+
+export type MissionUncheckedUpdateManyWithoutUpdaterNestedInput = {
+  create?: Prisma.XOR<Prisma.MissionCreateWithoutUpdaterInput, Prisma.MissionUncheckedCreateWithoutUpdaterInput> | Prisma.MissionCreateWithoutUpdaterInput[] | Prisma.MissionUncheckedCreateWithoutUpdaterInput[]
+  connectOrCreate?: Prisma.MissionCreateOrConnectWithoutUpdaterInput | Prisma.MissionCreateOrConnectWithoutUpdaterInput[]
+  upsert?: Prisma.MissionUpsertWithWhereUniqueWithoutUpdaterInput | Prisma.MissionUpsertWithWhereUniqueWithoutUpdaterInput[]
+  createMany?: Prisma.MissionCreateManyUpdaterInputEnvelope
+  set?: Prisma.MissionWhereUniqueInput | Prisma.MissionWhereUniqueInput[]
+  disconnect?: Prisma.MissionWhereUniqueInput | Prisma.MissionWhereUniqueInput[]
+  delete?: Prisma.MissionWhereUniqueInput | Prisma.MissionWhereUniqueInput[]
+  connect?: Prisma.MissionWhereUniqueInput | Prisma.MissionWhereUniqueInput[]
+  update?: Prisma.MissionUpdateWithWhereUniqueWithoutUpdaterInput | Prisma.MissionUpdateWithWhereUniqueWithoutUpdaterInput[]
+  updateMany?: Prisma.MissionUpdateManyWithWhereWithoutUpdaterInput | Prisma.MissionUpdateManyWithWhereWithoutUpdaterInput[]
   deleteMany?: Prisma.MissionScalarWhereInput | Prisma.MissionScalarWhereInput[]
 }
 
@@ -620,6 +598,20 @@ export type MissionUncheckedUpdateManyWithoutEventNestedInput = {
   deleteMany?: Prisma.MissionScalarWhereInput | Prisma.MissionScalarWhereInput[]
 }
 
+export type MissionCreateNestedOneWithoutMissionSlotsInput = {
+  create?: Prisma.XOR<Prisma.MissionCreateWithoutMissionSlotsInput, Prisma.MissionUncheckedCreateWithoutMissionSlotsInput>
+  connectOrCreate?: Prisma.MissionCreateOrConnectWithoutMissionSlotsInput
+  connect?: Prisma.MissionWhereUniqueInput
+}
+
+export type MissionUpdateOneRequiredWithoutMissionSlotsNestedInput = {
+  create?: Prisma.XOR<Prisma.MissionCreateWithoutMissionSlotsInput, Prisma.MissionUncheckedCreateWithoutMissionSlotsInput>
+  connectOrCreate?: Prisma.MissionCreateOrConnectWithoutMissionSlotsInput
+  upsert?: Prisma.MissionUpsertWithoutMissionSlotsInput
+  connect?: Prisma.MissionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MissionUpdateToOneWithWhereWithoutMissionSlotsInput, Prisma.MissionUpdateWithoutMissionSlotsInput>, Prisma.MissionUncheckedUpdateWithoutMissionSlotsInput>
+}
+
 export type MissionCreateNestedOneWithoutMissionHasSkillsInput = {
   create?: Prisma.XOR<Prisma.MissionCreateWithoutMissionHasSkillsInput, Prisma.MissionUncheckedCreateWithoutMissionHasSkillsInput>
   connectOrCreate?: Prisma.MissionCreateOrConnectWithoutMissionHasSkillsInput
@@ -634,47 +626,27 @@ export type MissionUpdateOneRequiredWithoutMissionHasSkillsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MissionUpdateToOneWithWhereWithoutMissionHasSkillsInput, Prisma.MissionUpdateWithoutMissionHasSkillsInput>, Prisma.MissionUncheckedUpdateWithoutMissionHasSkillsInput>
 }
 
-export type MissionCreateNestedOneWithoutUserHasMissionsInput = {
-  create?: Prisma.XOR<Prisma.MissionCreateWithoutUserHasMissionsInput, Prisma.MissionUncheckedCreateWithoutUserHasMissionsInput>
-  connectOrCreate?: Prisma.MissionCreateOrConnectWithoutUserHasMissionsInput
-  connect?: Prisma.MissionWhereUniqueInput
-}
-
-export type MissionUpdateOneRequiredWithoutUserHasMissionsNestedInput = {
-  create?: Prisma.XOR<Prisma.MissionCreateWithoutUserHasMissionsInput, Prisma.MissionUncheckedCreateWithoutUserHasMissionsInput>
-  connectOrCreate?: Prisma.MissionCreateOrConnectWithoutUserHasMissionsInput
-  upsert?: Prisma.MissionUpsertWithoutUserHasMissionsInput
-  connect?: Prisma.MissionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.MissionUpdateToOneWithWhereWithoutUserHasMissionsInput, Prisma.MissionUpdateWithoutUserHasMissionsInput>, Prisma.MissionUncheckedUpdateWithoutUserHasMissionsInput>
-}
-
 export type MissionCreateWithoutCreatorInput = {
   name: string
   description: string
-  max_volunteers: number
-  date: Date | string
-  start_hour: Date | string
-  end_hour: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   event: Prisma.EvntCreateNestedOneWithoutMissionsInput
-  userHasMissions?: Prisma.User_Has_MissionCreateNestedManyWithoutMissionInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedMissionsInput
   missionHasSkills?: Prisma.Mission_has_SkillCreateNestedManyWithoutMissionInput
+  missionSlots?: Prisma.MissionSlotCreateNestedManyWithoutMissionInput
 }
 
 export type MissionUncheckedCreateWithoutCreatorInput = {
   id?: number
   name: string
   description: string
-  max_volunteers: number
-  date: Date | string
-  start_hour: Date | string
-  end_hour: Date | string
   eventId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  userHasMissions?: Prisma.User_Has_MissionUncheckedCreateNestedManyWithoutMissionInput
+  updatedById?: number | null
   missionHasSkills?: Prisma.Mission_has_SkillUncheckedCreateNestedManyWithoutMissionInput
+  missionSlots?: Prisma.MissionSlotUncheckedCreateNestedManyWithoutMissionInput
 }
 
 export type MissionCreateOrConnectWithoutCreatorInput = {
@@ -684,6 +656,39 @@ export type MissionCreateOrConnectWithoutCreatorInput = {
 
 export type MissionCreateManyCreatorInputEnvelope = {
   data: Prisma.MissionCreateManyCreatorInput | Prisma.MissionCreateManyCreatorInput[]
+  skipDuplicates?: boolean
+}
+
+export type MissionCreateWithoutUpdaterInput = {
+  name: string
+  description: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  event: Prisma.EvntCreateNestedOneWithoutMissionsInput
+  creator: Prisma.UserCreateNestedOneWithoutMissionsInput
+  missionHasSkills?: Prisma.Mission_has_SkillCreateNestedManyWithoutMissionInput
+  missionSlots?: Prisma.MissionSlotCreateNestedManyWithoutMissionInput
+}
+
+export type MissionUncheckedCreateWithoutUpdaterInput = {
+  id?: number
+  name: string
+  description: string
+  eventId: number
+  creatorId: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  missionHasSkills?: Prisma.Mission_has_SkillUncheckedCreateNestedManyWithoutMissionInput
+  missionSlots?: Prisma.MissionSlotUncheckedCreateNestedManyWithoutMissionInput
+}
+
+export type MissionCreateOrConnectWithoutUpdaterInput = {
+  where: Prisma.MissionWhereUniqueInput
+  create: Prisma.XOR<Prisma.MissionCreateWithoutUpdaterInput, Prisma.MissionUncheckedCreateWithoutUpdaterInput>
+}
+
+export type MissionCreateManyUpdaterInputEnvelope = {
+  data: Prisma.MissionCreateManyUpdaterInput | Prisma.MissionCreateManyUpdaterInput[]
   skipDuplicates?: boolean
 }
 
@@ -710,43 +715,50 @@ export type MissionScalarWhereInput = {
   id?: Prisma.IntFilter<"Mission"> | number
   name?: Prisma.StringFilter<"Mission"> | string
   description?: Prisma.StringFilter<"Mission"> | string
-  max_volunteers?: Prisma.IntFilter<"Mission"> | number
-  date?: Prisma.DateTimeFilter<"Mission"> | Date | string
-  start_hour?: Prisma.DateTimeFilter<"Mission"> | Date | string
-  end_hour?: Prisma.DateTimeFilter<"Mission"> | Date | string
   eventId?: Prisma.IntFilter<"Mission"> | number
   creatorId?: Prisma.IntFilter<"Mission"> | number
   createdAt?: Prisma.DateTimeFilter<"Mission"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Mission"> | Date | string
+  updatedById?: Prisma.IntNullableFilter<"Mission"> | number | null
+}
+
+export type MissionUpsertWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.MissionWhereUniqueInput
+  update: Prisma.XOR<Prisma.MissionUpdateWithoutUpdaterInput, Prisma.MissionUncheckedUpdateWithoutUpdaterInput>
+  create: Prisma.XOR<Prisma.MissionCreateWithoutUpdaterInput, Prisma.MissionUncheckedCreateWithoutUpdaterInput>
+}
+
+export type MissionUpdateWithWhereUniqueWithoutUpdaterInput = {
+  where: Prisma.MissionWhereUniqueInput
+  data: Prisma.XOR<Prisma.MissionUpdateWithoutUpdaterInput, Prisma.MissionUncheckedUpdateWithoutUpdaterInput>
+}
+
+export type MissionUpdateManyWithWhereWithoutUpdaterInput = {
+  where: Prisma.MissionScalarWhereInput
+  data: Prisma.XOR<Prisma.MissionUpdateManyMutationInput, Prisma.MissionUncheckedUpdateManyWithoutUpdaterInput>
 }
 
 export type MissionCreateWithoutEventInput = {
   name: string
   description: string
-  max_volunteers: number
-  date: Date | string
-  start_hour: Date | string
-  end_hour: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   creator: Prisma.UserCreateNestedOneWithoutMissionsInput
-  userHasMissions?: Prisma.User_Has_MissionCreateNestedManyWithoutMissionInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedMissionsInput
   missionHasSkills?: Prisma.Mission_has_SkillCreateNestedManyWithoutMissionInput
+  missionSlots?: Prisma.MissionSlotCreateNestedManyWithoutMissionInput
 }
 
 export type MissionUncheckedCreateWithoutEventInput = {
   id?: number
   name: string
   description: string
-  max_volunteers: number
-  date: Date | string
-  start_hour: Date | string
-  end_hour: Date | string
   creatorId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  userHasMissions?: Prisma.User_Has_MissionUncheckedCreateNestedManyWithoutMissionInput
+  updatedById?: number | null
   missionHasSkills?: Prisma.Mission_has_SkillUncheckedCreateNestedManyWithoutMissionInput
+  missionSlots?: Prisma.MissionSlotUncheckedCreateNestedManyWithoutMissionInput
 }
 
 export type MissionCreateOrConnectWithoutEventInput = {
@@ -775,33 +787,89 @@ export type MissionUpdateManyWithWhereWithoutEventInput = {
   data: Prisma.XOR<Prisma.MissionUpdateManyMutationInput, Prisma.MissionUncheckedUpdateManyWithoutEventInput>
 }
 
+export type MissionCreateWithoutMissionSlotsInput = {
+  name: string
+  description: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  event: Prisma.EvntCreateNestedOneWithoutMissionsInput
+  creator: Prisma.UserCreateNestedOneWithoutMissionsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedMissionsInput
+  missionHasSkills?: Prisma.Mission_has_SkillCreateNestedManyWithoutMissionInput
+}
+
+export type MissionUncheckedCreateWithoutMissionSlotsInput = {
+  id?: number
+  name: string
+  description: string
+  eventId: number
+  creatorId: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  updatedById?: number | null
+  missionHasSkills?: Prisma.Mission_has_SkillUncheckedCreateNestedManyWithoutMissionInput
+}
+
+export type MissionCreateOrConnectWithoutMissionSlotsInput = {
+  where: Prisma.MissionWhereUniqueInput
+  create: Prisma.XOR<Prisma.MissionCreateWithoutMissionSlotsInput, Prisma.MissionUncheckedCreateWithoutMissionSlotsInput>
+}
+
+export type MissionUpsertWithoutMissionSlotsInput = {
+  update: Prisma.XOR<Prisma.MissionUpdateWithoutMissionSlotsInput, Prisma.MissionUncheckedUpdateWithoutMissionSlotsInput>
+  create: Prisma.XOR<Prisma.MissionCreateWithoutMissionSlotsInput, Prisma.MissionUncheckedCreateWithoutMissionSlotsInput>
+  where?: Prisma.MissionWhereInput
+}
+
+export type MissionUpdateToOneWithWhereWithoutMissionSlotsInput = {
+  where?: Prisma.MissionWhereInput
+  data: Prisma.XOR<Prisma.MissionUpdateWithoutMissionSlotsInput, Prisma.MissionUncheckedUpdateWithoutMissionSlotsInput>
+}
+
+export type MissionUpdateWithoutMissionSlotsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  event?: Prisma.EvntUpdateOneRequiredWithoutMissionsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutMissionsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedMissionsNestedInput
+  missionHasSkills?: Prisma.Mission_has_SkillUpdateManyWithoutMissionNestedInput
+}
+
+export type MissionUncheckedUpdateWithoutMissionSlotsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  eventId?: Prisma.IntFieldUpdateOperationsInput | number
+  creatorId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  missionHasSkills?: Prisma.Mission_has_SkillUncheckedUpdateManyWithoutMissionNestedInput
+}
+
 export type MissionCreateWithoutMissionHasSkillsInput = {
   name: string
   description: string
-  max_volunteers: number
-  date: Date | string
-  start_hour: Date | string
-  end_hour: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
-  creator: Prisma.UserCreateNestedOneWithoutMissionsInput
   event: Prisma.EvntCreateNestedOneWithoutMissionsInput
-  userHasMissions?: Prisma.User_Has_MissionCreateNestedManyWithoutMissionInput
+  creator: Prisma.UserCreateNestedOneWithoutMissionsInput
+  updater?: Prisma.UserCreateNestedOneWithoutUpdatedMissionsInput
+  missionSlots?: Prisma.MissionSlotCreateNestedManyWithoutMissionInput
 }
 
 export type MissionUncheckedCreateWithoutMissionHasSkillsInput = {
   id?: number
   name: string
   description: string
-  max_volunteers: number
-  date: Date | string
-  start_hour: Date | string
-  end_hour: Date | string
   eventId: number
   creatorId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  userHasMissions?: Prisma.User_Has_MissionUncheckedCreateNestedManyWithoutMissionInput
+  updatedById?: number | null
+  missionSlots?: Prisma.MissionSlotUncheckedCreateNestedManyWithoutMissionInput
 }
 
 export type MissionCreateOrConnectWithoutMissionHasSkillsInput = {
@@ -823,115 +891,42 @@ export type MissionUpdateToOneWithWhereWithoutMissionHasSkillsInput = {
 export type MissionUpdateWithoutMissionHasSkillsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  creator?: Prisma.UserUpdateOneRequiredWithoutMissionsNestedInput
   event?: Prisma.EvntUpdateOneRequiredWithoutMissionsNestedInput
-  userHasMissions?: Prisma.User_Has_MissionUpdateManyWithoutMissionNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutMissionsNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedMissionsNestedInput
+  missionSlots?: Prisma.MissionSlotUpdateManyWithoutMissionNestedInput
 }
 
 export type MissionUncheckedUpdateWithoutMissionHasSkillsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventId?: Prisma.IntFieldUpdateOperationsInput | number
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userHasMissions?: Prisma.User_Has_MissionUncheckedUpdateManyWithoutMissionNestedInput
-}
-
-export type MissionCreateWithoutUserHasMissionsInput = {
-  name: string
-  description: string
-  max_volunteers: number
-  date: Date | string
-  start_hour: Date | string
-  end_hour: Date | string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  creator: Prisma.UserCreateNestedOneWithoutMissionsInput
-  event: Prisma.EvntCreateNestedOneWithoutMissionsInput
-  missionHasSkills?: Prisma.Mission_has_SkillCreateNestedManyWithoutMissionInput
-}
-
-export type MissionUncheckedCreateWithoutUserHasMissionsInput = {
-  id?: number
-  name: string
-  description: string
-  max_volunteers: number
-  date: Date | string
-  start_hour: Date | string
-  end_hour: Date | string
-  eventId: number
-  creatorId: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  missionHasSkills?: Prisma.Mission_has_SkillUncheckedCreateNestedManyWithoutMissionInput
-}
-
-export type MissionCreateOrConnectWithoutUserHasMissionsInput = {
-  where: Prisma.MissionWhereUniqueInput
-  create: Prisma.XOR<Prisma.MissionCreateWithoutUserHasMissionsInput, Prisma.MissionUncheckedCreateWithoutUserHasMissionsInput>
-}
-
-export type MissionUpsertWithoutUserHasMissionsInput = {
-  update: Prisma.XOR<Prisma.MissionUpdateWithoutUserHasMissionsInput, Prisma.MissionUncheckedUpdateWithoutUserHasMissionsInput>
-  create: Prisma.XOR<Prisma.MissionCreateWithoutUserHasMissionsInput, Prisma.MissionUncheckedCreateWithoutUserHasMissionsInput>
-  where?: Prisma.MissionWhereInput
-}
-
-export type MissionUpdateToOneWithWhereWithoutUserHasMissionsInput = {
-  where?: Prisma.MissionWhereInput
-  data: Prisma.XOR<Prisma.MissionUpdateWithoutUserHasMissionsInput, Prisma.MissionUncheckedUpdateWithoutUserHasMissionsInput>
-}
-
-export type MissionUpdateWithoutUserHasMissionsInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  creator?: Prisma.UserUpdateOneRequiredWithoutMissionsNestedInput
-  event?: Prisma.EvntUpdateOneRequiredWithoutMissionsNestedInput
-  missionHasSkills?: Prisma.Mission_has_SkillUpdateManyWithoutMissionNestedInput
-}
-
-export type MissionUncheckedUpdateWithoutUserHasMissionsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  eventId?: Prisma.IntFieldUpdateOperationsInput | number
-  creatorId?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  missionHasSkills?: Prisma.Mission_has_SkillUncheckedUpdateManyWithoutMissionNestedInput
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  missionSlots?: Prisma.MissionSlotUncheckedUpdateManyWithoutMissionNestedInput
 }
 
 export type MissionCreateManyCreatorInput = {
   id?: number
   name: string
   description: string
-  max_volunteers: number
-  date: Date | string
-  start_hour: Date | string
-  end_hour: Date | string
   eventId: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  updatedById?: number | null
+}
+
+export type MissionCreateManyUpdaterInput = {
+  id?: number
+  name: string
+  description: string
+  eventId: number
+  creatorId: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -939,41 +934,65 @@ export type MissionCreateManyCreatorInput = {
 export type MissionUpdateWithoutCreatorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   event?: Prisma.EvntUpdateOneRequiredWithoutMissionsNestedInput
-  userHasMissions?: Prisma.User_Has_MissionUpdateManyWithoutMissionNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedMissionsNestedInput
   missionHasSkills?: Prisma.Mission_has_SkillUpdateManyWithoutMissionNestedInput
+  missionSlots?: Prisma.MissionSlotUpdateManyWithoutMissionNestedInput
 }
 
 export type MissionUncheckedUpdateWithoutCreatorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userHasMissions?: Prisma.User_Has_MissionUncheckedUpdateManyWithoutMissionNestedInput
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   missionHasSkills?: Prisma.Mission_has_SkillUncheckedUpdateManyWithoutMissionNestedInput
+  missionSlots?: Prisma.MissionSlotUncheckedUpdateManyWithoutMissionNestedInput
 }
 
 export type MissionUncheckedUpdateManyWithoutCreatorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eventId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type MissionUpdateWithoutUpdaterInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  event?: Prisma.EvntUpdateOneRequiredWithoutMissionsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutMissionsNestedInput
+  missionHasSkills?: Prisma.Mission_has_SkillUpdateManyWithoutMissionNestedInput
+  missionSlots?: Prisma.MissionSlotUpdateManyWithoutMissionNestedInput
+}
+
+export type MissionUncheckedUpdateWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  eventId?: Prisma.IntFieldUpdateOperationsInput | number
+  creatorId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  missionHasSkills?: Prisma.Mission_has_SkillUncheckedUpdateManyWithoutMissionNestedInput
+  missionSlots?: Prisma.MissionSlotUncheckedUpdateManyWithoutMissionNestedInput
+}
+
+export type MissionUncheckedUpdateManyWithoutUpdaterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  eventId?: Prisma.IntFieldUpdateOperationsInput | number
+  creatorId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -982,55 +1001,43 @@ export type MissionCreateManyEventInput = {
   id?: number
   name: string
   description: string
-  max_volunteers: number
-  date: Date | string
-  start_hour: Date | string
-  end_hour: Date | string
   creatorId: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  updatedById?: number | null
 }
 
 export type MissionUpdateWithoutEventInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creator?: Prisma.UserUpdateOneRequiredWithoutMissionsNestedInput
-  userHasMissions?: Prisma.User_Has_MissionUpdateManyWithoutMissionNestedInput
+  updater?: Prisma.UserUpdateOneWithoutUpdatedMissionsNestedInput
   missionHasSkills?: Prisma.Mission_has_SkillUpdateManyWithoutMissionNestedInput
+  missionSlots?: Prisma.MissionSlotUpdateManyWithoutMissionNestedInput
 }
 
 export type MissionUncheckedUpdateWithoutEventInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userHasMissions?: Prisma.User_Has_MissionUncheckedUpdateManyWithoutMissionNestedInput
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   missionHasSkills?: Prisma.Mission_has_SkillUncheckedUpdateManyWithoutMissionNestedInput
+  missionSlots?: Prisma.MissionSlotUncheckedUpdateManyWithoutMissionNestedInput
 }
 
 export type MissionUncheckedUpdateManyWithoutEventInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  max_volunteers?: Prisma.IntFieldUpdateOperationsInput | number
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  start_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  end_hour?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creatorId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -1039,13 +1046,13 @@ export type MissionUncheckedUpdateManyWithoutEventInput = {
  */
 
 export type MissionCountOutputType = {
-  userHasMissions: number
   missionHasSkills: number
+  missionSlots: number
 }
 
 export type MissionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  userHasMissions?: boolean | MissionCountOutputTypeCountUserHasMissionsArgs
   missionHasSkills?: boolean | MissionCountOutputTypeCountMissionHasSkillsArgs
+  missionSlots?: boolean | MissionCountOutputTypeCountMissionSlotsArgs
 }
 
 /**
@@ -1061,15 +1068,15 @@ export type MissionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * MissionCountOutputType without action
  */
-export type MissionCountOutputTypeCountUserHasMissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.User_Has_MissionWhereInput
+export type MissionCountOutputTypeCountMissionHasSkillsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.Mission_has_SkillWhereInput
 }
 
 /**
  * MissionCountOutputType without action
  */
-export type MissionCountOutputTypeCountMissionHasSkillsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.Mission_has_SkillWhereInput
+export type MissionCountOutputTypeCountMissionSlotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MissionSlotWhereInput
 }
 
 
@@ -1077,18 +1084,16 @@ export type MissionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   id?: boolean
   name?: boolean
   description?: boolean
-  max_volunteers?: boolean
-  date?: boolean
-  start_hour?: boolean
-  end_hour?: boolean
   eventId?: boolean
   creatorId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  updatedById?: boolean
   event?: boolean | Prisma.EvntDefaultArgs<ExtArgs>
-  userHasMissions?: boolean | Prisma.Mission$userHasMissionsArgs<ExtArgs>
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  updater?: boolean | Prisma.Mission$updaterArgs<ExtArgs>
   missionHasSkills?: boolean | Prisma.Mission$missionHasSkillsArgs<ExtArgs>
+  missionSlots?: boolean | Prisma.Mission$missionSlotsArgs<ExtArgs>
   _count?: boolean | Prisma.MissionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mission"]>
 
@@ -1098,45 +1103,41 @@ export type MissionSelectScalar = {
   id?: boolean
   name?: boolean
   description?: boolean
-  max_volunteers?: boolean
-  date?: boolean
-  start_hour?: boolean
-  end_hour?: boolean
   eventId?: boolean
   creatorId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  updatedById?: boolean
 }
 
-export type MissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "max_volunteers" | "date" | "start_hour" | "end_hour" | "eventId" | "creatorId" | "createdAt" | "updatedAt", ExtArgs["result"]["mission"]>
+export type MissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "eventId" | "creatorId" | "createdAt" | "updatedAt" | "updatedById", ExtArgs["result"]["mission"]>
 export type MissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   event?: boolean | Prisma.EvntDefaultArgs<ExtArgs>
-  userHasMissions?: boolean | Prisma.Mission$userHasMissionsArgs<ExtArgs>
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  updater?: boolean | Prisma.Mission$updaterArgs<ExtArgs>
   missionHasSkills?: boolean | Prisma.Mission$missionHasSkillsArgs<ExtArgs>
+  missionSlots?: boolean | Prisma.Mission$missionSlotsArgs<ExtArgs>
   _count?: boolean | Prisma.MissionCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $MissionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Mission"
   objects: {
-    creator: Prisma.$UserPayload<ExtArgs>
     event: Prisma.$EvntPayload<ExtArgs>
-    userHasMissions: Prisma.$User_Has_MissionPayload<ExtArgs>[]
+    creator: Prisma.$UserPayload<ExtArgs>
+    updater: Prisma.$UserPayload<ExtArgs> | null
     missionHasSkills: Prisma.$Mission_has_SkillPayload<ExtArgs>[]
+    missionSlots: Prisma.$MissionSlotPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
     description: string
-    max_volunteers: number
-    date: Date
-    start_hour: Date
-    end_hour: Date
     eventId: number
     creatorId: number
     createdAt: Date
     updatedAt: Date
+    updatedById: number | null
   }, ExtArgs["result"]["mission"]>
   composites: {}
 }
@@ -1477,10 +1478,11 @@ readonly fields: MissionFieldRefs;
  */
 export interface Prisma__MissionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  creator<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   event<T extends Prisma.EvntDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EvntDefaultArgs<ExtArgs>>): Prisma.Prisma__EvntClient<runtime.Types.Result.GetResult<Prisma.$EvntPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  userHasMissions<T extends Prisma.Mission$userHasMissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Mission$userHasMissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$User_Has_MissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  creator<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  updater<T extends Prisma.Mission$updaterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Mission$updaterArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   missionHasSkills<T extends Prisma.Mission$missionHasSkillsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Mission$missionHasSkillsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$Mission_has_SkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  missionSlots<T extends Prisma.Mission$missionSlotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Mission$missionSlotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MissionSlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1513,14 +1515,11 @@ export interface MissionFieldRefs {
   readonly id: Prisma.FieldRef<"Mission", 'Int'>
   readonly name: Prisma.FieldRef<"Mission", 'String'>
   readonly description: Prisma.FieldRef<"Mission", 'String'>
-  readonly max_volunteers: Prisma.FieldRef<"Mission", 'Int'>
-  readonly date: Prisma.FieldRef<"Mission", 'DateTime'>
-  readonly start_hour: Prisma.FieldRef<"Mission", 'DateTime'>
-  readonly end_hour: Prisma.FieldRef<"Mission", 'DateTime'>
   readonly eventId: Prisma.FieldRef<"Mission", 'Int'>
   readonly creatorId: Prisma.FieldRef<"Mission", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Mission", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Mission", 'DateTime'>
+  readonly updatedById: Prisma.FieldRef<"Mission", 'Int'>
 }
     
 
@@ -1869,27 +1868,22 @@ export type MissionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Mission.userHasMissions
+ * Mission.updater
  */
-export type Mission$userHasMissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Mission$updaterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the User_Has_Mission
+   * Select specific fields to fetch from the User
    */
-  select?: Prisma.User_Has_MissionSelect<ExtArgs> | null
+  select?: Prisma.UserSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the User_Has_Mission
+   * Omit specific fields from the User
    */
-  omit?: Prisma.User_Has_MissionOmit<ExtArgs> | null
+  omit?: Prisma.UserOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.User_Has_MissionInclude<ExtArgs> | null
-  where?: Prisma.User_Has_MissionWhereInput
-  orderBy?: Prisma.User_Has_MissionOrderByWithRelationInput | Prisma.User_Has_MissionOrderByWithRelationInput[]
-  cursor?: Prisma.User_Has_MissionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.User_Has_MissionScalarFieldEnum | Prisma.User_Has_MissionScalarFieldEnum[]
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**
@@ -1914,6 +1908,30 @@ export type Mission$missionHasSkillsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.Mission_has_SkillScalarFieldEnum | Prisma.Mission_has_SkillScalarFieldEnum[]
+}
+
+/**
+ * Mission.missionSlots
+ */
+export type Mission$missionSlotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MissionSlot
+   */
+  select?: Prisma.MissionSlotSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MissionSlot
+   */
+  omit?: Prisma.MissionSlotOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MissionSlotInclude<ExtArgs> | null
+  where?: Prisma.MissionSlotWhereInput
+  orderBy?: Prisma.MissionSlotOrderByWithRelationInput | Prisma.MissionSlotOrderByWithRelationInput[]
+  cursor?: Prisma.MissionSlotWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MissionSlotScalarFieldEnum | Prisma.MissionSlotScalarFieldEnum[]
 }
 
 /**

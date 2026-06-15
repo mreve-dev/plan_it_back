@@ -35,16 +35,19 @@ model User {
 
   evnts           Evnt[]             @relation("EventCreator")
   notifications   Notification[]
-  missions        Mission[]
   userHasMissions User_Has_Mission[]
   userHasSkills   User_has_Skill[]
   updatedEvent    Evnt[]             @relation("EventUpdater")
+  missions        Mission[]          @relation("MissionCreator")
+  updatedMissions Mission[]          @relation("MissionUpdater")
+  updatedSlots    MissionSlot[]      @relation("SlotUpdater")
 }
 
 model Evnt {
   id          Int      @id @default(autoincrement())
   name        String
-  date        DateTime @db.Date
+  start_date  DateTime @db.Date
+  end_date    DateTime @db.Date
   start_hour  DateTime @db.Time(0)
   end_hour    DateTime @db.Time(0)
   location    String?
@@ -57,31 +60,48 @@ model Evnt {
   updatedAt   DateTime @updatedAt
 
   creator  User      @relation("EventCreator", fields: [creatorId], references: [id])
+  updater  User?     @relation("EventUpdater", fields: [updatedById], references: [id])
   category Category  @relation(fields: [categoryId], references: [id])
   document Document? @relation(fields: [documentId], references: [id])
-  updater  User?     @relation("EventUpdater", fields: [updatedById], references: [id])
 
   missions         Mission[]
   eventHasDocument Event_Has_Document[]
 }
 
 model Mission {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  eventId     Int
+  creatorId   Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  updatedById Int?
+
+  event Evnt @relation(fields: [eventId], references: [id])
+
+  creator User  @relation("MissionCreator", fields: [creatorId], references: [id])
+  updater User? @relation("MissionUpdater", fields: [updatedById], references: [id])
+
+  missionHasSkills Mission_has_Skill[]
+  missionSlots     MissionSlot[]
+}
+
+model MissionSlot {
   id             Int      @id @default(autoincrement())
-  name           String
-  description    String
-  max_volunteers Int
   date           DateTime @db.Date
   start_hour     DateTime @db.Time(0)
   end_hour       DateTime @db.Time(0)
-  eventId        Int
-  creatorId      Int
+  max_volunteers Int
+  missionId      Int
+  updatedById    Int?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  creator          User                @relation(fields: [creatorId], references: [id])
-  event            Evnt                @relation(fields: [eventId], references: [id])
-  userHasMissions  User_Has_Mission[]
-  missionHasSkills Mission_has_Skill[]
+  updater User? @relation("SlotUpdater", fields: [updatedById], references: [id])
+
+  mission         Mission            @relation(fields: [missionId], references: [id])
+  userHasMissions User_Has_Mission[]
 }
 
 model Category {
@@ -149,13 +169,13 @@ model Mission_has_Skill {
 
 model User_Has_Mission {
   userId    Int
-  missionId Int
+  slotId    Int
   createdAt DateTime @default(now())
 
-  user    User    @relation(fields: [userId], references: [id])
-  mission Mission @relation(fields: [missionId], references: [id])
+  user User        @relation(fields: [userId], references: [id])
+  slot MissionSlot @relation(fields: [slotId], references: [id])
 
-  @@id([userId, missionId])
+  @@id([userId, slotId])
 }
 
 model Event_Has_Document {

@@ -11,9 +11,10 @@ import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
 import { SkillModule } from './skill/skill.module';
 import { MailModule } from './mail/mail.module';
+import { MissionSlotModule } from './mission-slot/mission-slot.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({isGlobal:true}), EventModule, PrismaModule, UserModule, MissionModule, AuthModule, CategoryModule, SkillModule, MailModule],
+  imports: [ConfigModule.forRoot({isGlobal:true}), EventModule, PrismaModule, UserModule, MissionModule, AuthModule, CategoryModule, SkillModule, MailModule, MissionSlotModule],
   controllers: [AppController],
   providers: [AppService],
 })

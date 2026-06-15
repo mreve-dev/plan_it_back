@@ -1,5 +1,7 @@
 import { Type } from "class-transformer"
-import { IsDate, IsDateString, IsInt, IsNotEmpty, IsNumber, IsString, Matches, Min } from "class-validator"
+import { IsArray, IsDate, IsDateString, IsInt, IsNotEmpty, IsNumber, IsString, Matches, Min, ValidateNested } from "class-validator"
+import { CreateMissionSlotDto } from "src/mission-slot/dto/create-mission-slot.dto"
+
 
 export class CreateMissionDto {
 
@@ -11,28 +13,14 @@ export class CreateMissionDto {
     description!: string
 
     @IsInt()
-    @Min(1)
-    max_volunteers!: number
-
-    @Type(() => Date)
-    @IsDate()
-    date!: Date
-
-
-    @Matches(/^([01]\d|2[0-3]):([0-5]\d)$/, {
-        message: "start_hour must be in HH:mm format"
-    })
-    start_hour!: string
-
-
-    @Matches(/^([01]\d|2[0-3]):([0-5]\d)$/, {
-        message: "end_hour must be in HH:mm format"
-    })
-    end_hour!: string
-
-    @IsInt()
     eventId!: number
 
     @IsInt()
     creatorId!: number
+
+    // Un tableau de slots à créer en même tps que la mission
+    @IsArray()
+    @ValidateNested({each: true})
+    @Type(() => CreateMissionSlotDto)
+    slots!: CreateMissionSlotDto[]
 }

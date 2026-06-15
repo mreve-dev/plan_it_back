@@ -54,6 +54,7 @@ export const ModelName = {
   User: 'User',
   Evnt: 'Evnt',
   Mission: 'Mission',
+  MissionSlot: 'MissionSlot',
   Category: 'Category',
   Document: 'Document',
   Notification: 'Notification',
@@ -102,7 +103,8 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const EvntScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  date: 'date',
+  start_date: 'start_date',
+  end_date: 'end_date',
   start_hour: 'start_hour',
   end_hour: 'end_hour',
   location: 'location',
@@ -122,17 +124,29 @@ export const MissionScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
-  max_volunteers: 'max_volunteers',
+  eventId: 'eventId',
+  creatorId: 'creatorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  updatedById: 'updatedById'
+} as const
+
+export type MissionScalarFieldEnum = (typeof MissionScalarFieldEnum)[keyof typeof MissionScalarFieldEnum]
+
+
+export const MissionSlotScalarFieldEnum = {
+  id: 'id',
   date: 'date',
   start_hour: 'start_hour',
   end_hour: 'end_hour',
-  eventId: 'eventId',
-  creatorId: 'creatorId',
+  max_volunteers: 'max_volunteers',
+  missionId: 'missionId',
+  updatedById: 'updatedById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type MissionScalarFieldEnum = (typeof MissionScalarFieldEnum)[keyof typeof MissionScalarFieldEnum]
+export type MissionSlotScalarFieldEnum = (typeof MissionSlotScalarFieldEnum)[keyof typeof MissionSlotScalarFieldEnum]
 
 
 export const CategoryScalarFieldEnum = {
@@ -199,7 +213,7 @@ export type Mission_has_SkillScalarFieldEnum = (typeof Mission_has_SkillScalarFi
 
 export const User_Has_MissionScalarFieldEnum = {
   userId: 'userId',
-  missionId: 'missionId',
+  slotId: 'slotId',
   createdAt: 'createdAt'
 } as const
 

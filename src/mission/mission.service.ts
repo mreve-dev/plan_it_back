@@ -2,7 +2,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateMissionDto } from './dto/create-mission.dto';
 import { UpdateMissionDto } from './dto/update-mission.dto';
 import { PrismaService } from 'prisma/prisma.service';
-import { Mission } from 'prisma/generated/prisma/client';
 
 @Injectable()
 export class MissionService {
@@ -11,29 +10,61 @@ export class MissionService {
 
   async create(createMission: CreateMissionDto) {
 
-    const newMission: Mission = await this.prisma.mission.create({
+    const newMission = await this.prisma.mission.create({
       data: {
         name: createMission.name,
         description: createMission.description,
-        max_volunteers: createMission.max_volunteers,
-        date: new Date(createMission.date),
-        start_hour: new Date(`1970-01-01T${createMission.start_hour}:00`),
-        end_hour: new Date(`1970-01-01T${createMission.end_hour}:00`),
         eventId: createMission.eventId,
-        creatorId: createMission.creatorId
+        creatorId: createMission.creatorId,
+        // Création des slots en même temps que la mission
+        missionSlots: {
+          create: createMission.slots.map(slot => ({
+            date: new Date(slot.date),
+            start_hour: new Date(`1970-01-01T${slot.start_hour}:00`),
+            end_hour: new Date(`1970-01-01T${slot.end_hour}:00`),
+            max_volunteers: slot.max_volunteers
+          }))
+        }
+      },
+      include: {
+        missionSlots: true
       }
     })
     return newMission;
   }
 
+
+
   async findAll() {
-    const mission: Mission[] = await this.prisma.mission.findMany()
+    const mission = await this.prisma.mission.findMany({
+      include: {
+        missionSlots: true,
+        missionHasSkills: {
+          include: {skill: true}
+        }
+      }
+    })
+
     return mission;
   }
 
   async findOne(id: number) {
 
-    const mission: Mission | null = await this.prisma.mission.findUnique({ where: { id } })
+    const mission = await this.prisma.mission.findUnique({ 
+      where: { id },
+      include: {
+        missionSlots: {
+          include: {
+            userHasMissions: {
+              include: {user: true}
+            }
+          }
+        },
+        missionHasSkills: {
+          include: {skill: true}
+        }
+      }
+    })
 
     if (!mission) {
       throw new NotFoundException(`Mission ${id} not found`)
@@ -41,19 +72,21 @@ export class MissionService {
     return mission;
   }
 
-  async update(id: number, updateMission: UpdateMissionDto) {
+  async update(id: number, updateMission: UpdateMissionDto, userId: number) {
 
     await this.findOne(id)
 
     return this.prisma.mission.update({
       where: { id },
-      data: updateMission
+      data: {
+        ...updateMission,
+        updatedById: userId
+      }
     });
   }
 
   async remove(id: number) {
     await this.findOne(id)
-
     return this.prisma.mission.delete({ where: { id } });
   }
 }

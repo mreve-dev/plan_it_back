@@ -8,7 +8,11 @@ export class CreateEventDto {
 
     @Type(() => Date)
     @IsDate()
-    date!: Date
+    start_date!: Date
+
+    @Type(() => Date)
+    @IsDate()
+    end_date!: Date
 
     @Matches(/^([01]\d|2[0-3]):([0-5]\d)$/, {
         message: "start_hour must be in HH:mm format"

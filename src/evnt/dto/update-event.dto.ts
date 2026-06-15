@@ -6,12 +6,18 @@ import { IsDate, IsInt, IsOptional, IsString, isString, Matches } from "class-va
 export class UpdateEventDto extends PartialType(CreateEventDto) {
     @IsString()
     @IsOptional()
-    name!: string
+    name?: string
 
     @Type(() => Date)
     @IsDate()
     @IsOptional()
-    date?: Date
+    start_date?: Date
+
+
+    @Type(() => Date)
+    @IsDate()
+    @IsOptional()
+    end_date?: Date
 
     @Matches(/^([01]\d|2[0-3]):([0-5]\d)$/, {
         message: "start_hour must be in HH:mm format"
@@ -37,10 +43,6 @@ export class UpdateEventDto extends PartialType(CreateEventDto) {
     @IsInt()
     @IsOptional()
     categoryId?: number
-
-    @IsInt()
-    @IsOptional()
-    creatorId?: number
 
     @IsInt()
     @IsOptional()

@@ -55,6 +55,11 @@ export type Evnt = Prisma.EvntModel
  */
 export type Mission = Prisma.MissionModel
 /**
+ * Model MissionSlot
+ * 
+ */
+export type MissionSlot = Prisma.MissionSlotModel
+/**
  * Model Category
  * 
  */
