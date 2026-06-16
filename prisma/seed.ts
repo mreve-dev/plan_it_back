@@ -89,7 +89,8 @@ async function main() {
         data: {
             name: "Le petit tournoi des familles",
             description: "Premier tournoi où petits et grands peuvent venir s'amuser en famille",
-            date: new Date("2026-06-15"),
+            start_date: new Date("2026-06-15"),
+            end_date: new Date("2026-06-18"),
             start_hour: new Date("1970-01-01T09:00:00"),
             end_hour: new Date("1970-01-01T18:00:00"),
             categoryId: category1.id,

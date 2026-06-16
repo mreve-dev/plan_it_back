@@ -1,6 +1,6 @@
 import { Type } from "class-transformer"
 import { IsArray, IsDate, IsDateString, IsInt, IsNotEmpty, IsNumber, IsString, Matches, Min, ValidateNested } from "class-validator"
-import { CreateMissionSlotDto } from "src/mission-slot/dto/create-mission-slot.dto"
+import { CreateMissionSlotInlineDto } from "./create-mission-slot-inline.dto"
 
 
 export class CreateMissionDto {
@@ -21,6 +21,6 @@ export class CreateMissionDto {
     // Un tableau de slots à créer en même tps que la mission
     @IsArray()
     @ValidateNested({each: true})
-    @Type(() => CreateMissionSlotDto)
-    slots!: CreateMissionSlotDto[]
+    @Type(() => CreateMissionSlotInlineDto)
+    slots!: CreateMissionSlotInlineDto[]
 }
