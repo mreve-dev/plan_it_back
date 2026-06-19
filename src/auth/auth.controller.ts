@@ -32,9 +32,6 @@ export class AuthController {
       signupData.password
     )
 
-    //on hash le MDP
-    signupData.password = await this.authService.hash(signupData.password)
-
     // créer le user dans la DB
     const newUser: UserWTPwd = await this.userService.create(signupData)
 
@@ -108,7 +105,7 @@ export class AuthController {
   @Patch('newpassword')
   async changepassword(@Req() req, @Body() changePassword: ChangePassword): Promise<void> {
 
-    const user = await this.userService.findOne(req.user.id)
+    const user = await this.userService.findOneWithPassword(req.user.id)
 
     if (!user) throw new NotFoundException('Email ou mot de passe incorrect')
 
@@ -131,6 +128,11 @@ export class AuthController {
     res.clearCookie('refreshToken')
   }
 
+
+
+
+
+
   @Post('forgot-password')
   async forgotPassword(@Body() body: ForgotPasswordDto): Promise<void> {
 
@@ -150,9 +152,13 @@ export class AuthController {
     })
 
     const resetLink = `http://localhost:5173/reset-password?token=${token}`
-
     await this.mailService.sendChangePasswordEmail(user.email, resetLink)
   }
+
+
+
+
+
 
   @Post('reset-password')
   async resetPassword(@Body() body: ResetPasswordDto): Promise<void> {
@@ -174,8 +180,6 @@ export class AuthController {
       resetPasswordExpires: null,
       resetPasswordToken: null
     })
-
-
   }
 
 }

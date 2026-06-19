@@ -1,3 +1,4 @@
-import { User } from "../entities/user.entity";
+import { User } from "prisma/generated/prisma/client";
+
 
 export type UserWTPwd = Omit<User, "password">

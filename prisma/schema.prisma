@@ -78,7 +78,7 @@ model Mission {
   updatedAt   DateTime @updatedAt
   updatedById Int?
 
-  event Evnt @relation(fields: [eventId], references: [id])
+  event Evnt @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   creator User  @relation("MissionCreator", fields: [creatorId], references: [id])
   updater User? @relation("MissionUpdater", fields: [updatedById], references: [id])
@@ -100,7 +100,7 @@ model MissionSlot {
 
   updater User? @relation("SlotUpdater", fields: [updatedById], references: [id])
 
-  mission         Mission            @relation(fields: [missionId], references: [id])
+  mission         Mission            @relation(fields: [missionId], references: [id], onDelete: Cascade)
   userHasMissions User_Has_Mission[]
 }
 
@@ -173,7 +173,7 @@ model User_Has_Mission {
   createdAt DateTime @default(now())
 
   user User        @relation(fields: [userId], references: [id])
-  slot MissionSlot @relation(fields: [slotId], references: [id])
+  slot MissionSlot @relation(fields: [slotId], references: [id], onDelete: Cascade)
 
   @@id([userId, slotId])
 }
@@ -184,7 +184,7 @@ model Event_Has_Document {
   createdAt  DateTime @default(now())
 
   document Document @relation(fields: [documentId], references: [id])
-  evnt     Evnt     @relation(fields: [evntId], references: [id])
+  evnt     Evnt     @relation(fields: [evntId], references: [id], onDelete: Cascade)
 
   @@id([documentId, evntId])
 }

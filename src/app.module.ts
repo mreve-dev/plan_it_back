@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { EventModule } from './evnt/event.module';
-import { PrismaService } from 'prisma/prisma.service';
 import { PrismaModule } from 'prisma/prisma.module';
 import { UserModule } from './user/user.module';
 import { MissionModule } from './mission/mission.module';
@@ -12,9 +11,10 @@ import { CategoryModule } from './category/category.module';
 import { SkillModule } from './skill/skill.module';
 import { MailModule } from './mail/mail.module';
 import { MissionSlotModule } from './mission-slot/mission-slot.module';
+import { UserHasMissionModule } from './user-has-mission/user-has-mission.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({isGlobal:true}), EventModule, PrismaModule, UserModule, MissionModule, AuthModule, CategoryModule, SkillModule, MailModule, MissionSlotModule],
+  imports: [ConfigModule.forRoot({isGlobal:true}), EventModule, PrismaModule, UserModule, MissionModule, AuthModule, CategoryModule, SkillModule, MailModule, MissionSlotModule, UserHasMissionModule],
   controllers: [AppController],
   providers: [AppService],
 })

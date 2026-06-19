@@ -2,19 +2,35 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'prisma/prisma.service';
-import { User } from 'prisma/generated/prisma/client';
+import { RoleEnum, User } from 'prisma/generated/prisma/client';
 import { UserWTPwd } from './interface/userWTPwd.interface';
 import { OnBoarding } from './dto/onBoarding.dto';
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class UserService {
 
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly authService: AuthService
+  ) { }
+
+  // Centralise la règle : retire les champs admin-only si le demandeur n'est pas admin
+  private filterByRole<T extends { email?: string }>(data: T, requesterRole: string): T | Omit<T, 'email'> {
+    if (requesterRole === 'admin') return data
+    const { email, ...rest } = data
+    return rest
+  }
 
   async create(userData: CreateUserDto): Promise<UserWTPwd> {
 
+    const hashedPassword = await this.authService.hash(userData.password)
+
     const newUser: UserWTPwd = await this.prisma.user.create({
-      data: userData,
+      data: {
+        ...userData,
+        password: hashedPassword
+      },
       omit: { password: true }
     })
 
@@ -23,8 +39,9 @@ export class UserService {
 
   // Retourne aussi les skills en plus des données de la table user
 
-  async findAll(): Promise<User[] | null> {
-    return this.prisma.user.findMany({
+  async findAll(requestRole: string): Promise<(UserWTPwd | Omit<UserWTPwd, 'email'>)[]> {
+    const users = await this.prisma.user.findMany({
+      omit: { password: true },
       include: {
         userHasSkills: {
           include: {
@@ -33,10 +50,28 @@ export class UserService {
         }
       }
     });
+
+    return users.map(u => this.filterByRole(u, requestRole))
   }
 
-  async findOne(id: number): Promise<User | null> {
+  async findOneFiltered(id: number, requesterRole: string): Promise<UserWTPwd | Omit<UserWTPwd, 'email'> | null>{
+    const user = await this.findOne(id)
+    if (!user) return null
+    return this.filterByRole(user, requesterRole)
+  }
+
+  // Pour usage interne uniquement (login, changement de mdp)
+  async findOneWithPassword(id: number): Promise<User | null> {
     return this.prisma.user.findUnique({ where: { id } });
+  }
+
+  async findOne(id: number): Promise<UserWTPwd | null> {
+    return this.prisma.user.findUnique({
+      where: { id },
+      omit: {
+        password: true
+      }
+    });
   }
 
   async findOneByEmail(email: string): Promise<User | null> {
@@ -45,9 +80,9 @@ export class UserService {
 
 
   // findFirst : comme findUnique mais pour un champ qui n'est pas marqué @unique dans Prisma. Retourne le premier résultat trouvé
-  async findOneByResetToken(token: string): Promise<User | null>{
+  async findOneByResetToken(token: string): Promise<User | null> {
     return this.prisma.user.findFirst({
-      where: {resetPasswordToken: token}
+      where: { resetPasswordToken: token }
     })
   }
 
@@ -76,6 +111,8 @@ export class UserService {
   }
 
   async update(id: number, updateUser: UpdateUserDto): Promise<User> {
+    const {role, ...safeData} = updateUser
+
     return this.prisma.user.update({
       where: { id },
       data: updateUser
@@ -83,12 +120,19 @@ export class UserService {
     });
   }
 
+  async updateRole(id: number, role: RoleEnum): Promise<User> {
+    return this.prisma.user.update({
+      where: {id},
+      data: {role}
+    })
+  }
+
 
   async remove(id: number): Promise<void> {
 
-    await this.prisma.user_has_Skill.deleteMany({where: {userId: id}})
-    await this.prisma.user_Has_Mission.deleteMany({where: {userId: id}})
-    await this.prisma.notification.deleteMany({where: {userId: id}})
+    await this.prisma.user_has_Skill.deleteMany({ where: { userId: id } })
+    await this.prisma.user_Has_Mission.deleteMany({ where: { userId: id } })
+    await this.prisma.notification.deleteMany({ where: { userId: id } })
 
     const deleteUser: User = await this.prisma.user.delete({ where: { id } });
 

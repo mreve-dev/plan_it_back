@@ -13,8 +13,8 @@ export class MissionController {
   @Roles('admin')
   @UseGuards(AuthGuard, RolesGuard)
   @Post()
-  create(@Body() createMissionDto: CreateMissionDto) {
-    return this.missionService.create(createMissionDto);
+  create(@Body() createMissionDto: CreateMissionDto, @Req() req) {
+    return this.missionService.create(createMissionDto, req.user.id);
   }
 
   @UseGuards(AuthGuard)

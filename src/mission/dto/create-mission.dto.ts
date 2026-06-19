@@ -15,9 +15,6 @@ export class CreateMissionDto {
     @IsInt()
     eventId!: number
 
-    @IsInt()
-    creatorId!: number
-
     // Un tableau de slots à créer en même tps que la mission
     @IsArray()
     @ValidateNested({each: true})

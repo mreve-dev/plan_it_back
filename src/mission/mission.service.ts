@@ -8,14 +8,14 @@ export class MissionService {
 
   constructor(private readonly prisma: PrismaService) { }
 
-  async create(createMission: CreateMissionDto) {
+  async create(createMission: CreateMissionDto , creatorId: number) {
 
     const newMission = await this.prisma.mission.create({
       data: {
         name: createMission.name,
         description: createMission.description,
         eventId: createMission.eventId,
-        creatorId: createMission.creatorId,
+        creatorId,
         // Création des slots en même temps que la mission
         missionSlots: {
           create: createMission.slots.map(slot => ({

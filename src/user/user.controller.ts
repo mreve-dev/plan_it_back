@@ -3,32 +3,47 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from 'src/auth/guard/auth.guard';
-import { User } from 'prisma/generated/prisma/client';
+import { RoleEnum, User } from 'prisma/generated/prisma/client';
 import { OnBoarding } from './dto/onBoarding.dto';
+import { UserWTPwd } from './interface/userWTPwd.interface';
+import { Roles } from 'src/auth/guard/decorators/roles.decorator';
+import { RolesGuard } from 'src/auth/guard/role.guard';
+import { UpdateRoleDto } from './dto/update-role.dto';
+
+
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @UseGuards(AuthGuard)
   @Get()
-  async findAll() : Promise<User[] | null> {
-    return this.userService.findAll();
+  async findAll(@Req() req) : Promise<(UserWTPwd | Omit<UserWTPwd, 'email'>)[]> {
+    return this.userService.findAll(req.user.role);
   }
 
   @UseGuards(AuthGuard)
   @Get('me')
-  async getMe(@Req() req) : Promise<User | null> {
+  async getMe(@Req() req) : Promise<UserWTPwd | null> {
     return this.userService.findOne(req.user.id)
   }
 
+  @UseGuards(AuthGuard)
   @Get(':id')
-  async findOne(@Param('id') id: string) : Promise<User | null> {
-    return this.userService.findOne(+id);
+  async findOne(@Req() req, @Param('id') id: string) : Promise<UserWTPwd | Omit<UserWTPwd, 'email'> |null> {
+    return this.userService.findOneFiltered(+id, req.user.role);
   }
 
   @UseGuards(AuthGuard)
   @Patch()
   async update(@Req() req, @Body() updateUser: UpdateUserDto) : Promise<User> {
     return this.userService.update(req.user.id, updateUser);
+  }
+
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles('admin')
+  @Patch(':id/role')
+  async updateRole(@Param('id') id: string, @Body() body: UpdateRoleDto): Promise<User> {
+    return this.userService.updateRole(+id, body.role)
   }
 
   @UseGuards(AuthGuard)

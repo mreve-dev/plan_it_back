@@ -5,6 +5,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { Evnt } from 'prisma/generated/prisma/client';
 
 
+
 @Injectable()
 export class EventService {
 
@@ -34,7 +35,15 @@ export class EventService {
             missionSlots: {
               include: {
                 userHasMissions: {
-                  include: { user: true }
+                  include: { 
+                    user: {
+                      omit: {
+                        email: true,
+                        password: true
+                      }
+                    }
+                      
+                   }
                 }
               }
             }
@@ -55,7 +64,13 @@ export class EventService {
               missionSlots: {
                 include: {
                   userHasMissions: {
-                    include: { user: true }
+                    include: { 
+                      user: {
+                        omit: {
+                          email: true,
+                          password: true
+                        }
+                      } }
                   }
                 }
               }
