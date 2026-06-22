@@ -3,6 +3,7 @@ import { CreateMissionSlotDto } from './dto/create-mission-slot.dto';
 import { UpdateMissionSlotDto } from './dto/update-mission-slot.dto';
 import { PrismaService } from 'prisma/prisma.service';
 import { MissionSlot } from 'prisma/generated/prisma/client';
+import { CreateManyMissionSlotDto } from './dto/create-many-mission-slot.dto';
 
 
 @Injectable()
@@ -23,13 +24,50 @@ export class MissionSlotService {
     return newSlot;
   }
 
+  async createMany(createManySlots: CreateManyMissionSlotDto): Promise<MissionSlot[]> {
+    const dataToInsert = createManySlots.slots.map(slot => ({
+      missionId: createManySlots.missionId,
+      date: new Date(slot.date),
+      start_hour: new Date(`1970-01-01T${slot.start_hour}:00`),
+      end_hour: new Date(`1970-01-01T${slot.end_hour}:00`),
+      max_volunteers: slot.max_volunteers
+    }))
+    
+    // createMany ne renvoie qu'un compteur, donc on insère puis on relit
+    // les slots qui viennent d'être créés via un timestamp de référence
+    const beforeInsert = new Date()
+
+    await this.prisma.missionSlot.createMany({
+        data: dataToInsert
+    })
+
+    return this.prisma.missionSlot.findMany({
+      where: {
+        missionId:createManySlots.missionId,
+        createdAt: {gte: beforeInsert}
+      },
+      include: {
+        userHasMissions: {
+          include: {
+            user: {
+              omit: { email: true, password: true }
+            }
+          }
+        }
+      }
+    })
+  }
+
   async findAll(): Promise<MissionSlot[] | null> {
 
     return this.prisma.missionSlot.findMany({
       include: {
         mission: true,
         userHasMissions: {
-          include: { user: true }
+          include: { 
+            user: {
+              omit: { email: true, password: true }
+            } }
         },
         updater: true
       }
@@ -42,7 +80,11 @@ export class MissionSlotService {
       include: {
         mission: true,
         userHasMissions: {
-          include: { user: true }
+          include: { 
+            user: {
+              omit: { email: true, password: true }
+            }
+           }
         },
         updater: true
       }

@@ -5,6 +5,7 @@ import { UpdateMissionSlotDto } from './dto/update-mission-slot.dto';
 import { AuthGuard } from 'src/auth/guard/auth.guard';
 import { RolesGuard } from 'src/auth/guard/role.guard';
 import { Roles } from 'src/auth/guard/decorators/roles.decorator';
+import { CreateManyMissionSlotDto } from './dto/create-many-mission-slot.dto';
 
 @Controller('mission-slot')
 export class MissionSlotController {
@@ -16,6 +17,13 @@ export class MissionSlotController {
   @Post()
   create(@Body() createMissionSlotDto: CreateMissionSlotDto) {
     return this.missionSlotService.create(createMissionSlotDto);
+  }
+
+  @Roles('admin')
+  @UseGuards(AuthGuard, RolesGuard)
+  @Post('many')
+  createMany(@Body() createMissionSlotDto: CreateManyMissionSlotDto) {
+    return this.missionSlotService.createMany(createMissionSlotDto);
   }
 
   @UseGuards(AuthGuard)

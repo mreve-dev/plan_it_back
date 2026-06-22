@@ -22,13 +22,13 @@ export class UserHasMissionController {
 
   @UseGuards(AuthGuard)
   @Get('slots/:slotId')
-  findAllBySlot(@Param('slotIid') slotId: string) {
+  findAllBySlot(@Param('slotId') slotId: string) {
     return this.userHasMissionService.findAllBySlot(+slotId);
   }
 
   @UseGuards(AuthGuard)
   @Delete(':slotId/user/:userId')
-  remove(@Param('slotIid') slotId: string,@Param('userId') userId: string, @Req() req) {
+  remove(@Param('slotId') slotId: string,@Param('userId') userId: string, @Req() req) {
     return this.userHasMissionService.remove(+slotId, +userId, req.user.id, req.user.role);
   }
 }
