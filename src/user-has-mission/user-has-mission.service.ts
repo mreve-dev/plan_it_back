@@ -13,15 +13,38 @@ export class UserHasMissionService {
   //et userId (qui viendra du token dans le controller, jamais du body — comme creatorId sur les missions).
   async create(createUserHasMissionDto: CreateUserHasMissionDto, userId: number) {
 
+
+
     //On charge le slot avec ses inscriptions existantes (include: { userHasMissions: true }). 
     //C'est indispensable pour les deux vérifications suivantes — sans ça, on ne sait ni qui est déjà inscrit, ni combien de places sont prises.
     const slot = await this.prisma.missionSlot.findUnique({
       where: { id: createUserHasMissionDto.slotId },
-      include: { userHasMissions: true }
+      include: {
+        userHasMissions: true,
+        mission: {
+          include: { event: true }
+        }
+      }
     })
 
+    
+
+    // Vérifie que le créneau existe
     if (!slot) {
       throw new NotFoundException(`MissionSlot ${createUserHasMissionDto.slotId} not found`)
+    }
+
+
+    // Renvoie la date et l'heure de fin du créneau
+    const eventEndDateTime = new Date(slot.mission.event.end_date)
+    eventEndDateTime.setHours(
+      slot?.mission.event.end_hour.getHours(),
+      slot?.mission.event.end_hour.getMinutes()
+    )
+
+
+    if (eventEndDateTime < new Date()) {
+      throw new BadRequestException("Cet évènement est déjà terminé")
     }
 
     //Array.some() retourne true dès qu'il trouve au moins un élément qui correspond à la condition. 
@@ -30,6 +53,7 @@ export class UserHasMissionService {
 
     // Vérifie que le user n'est pas déjà inscrit sur ce slot
     const alreadyRegistered = slot.userHasMissions.some(uhm => uhm.userId === userId)
+
     if (alreadyRegistered) {
       throw new ConflictException('Vous êtes déjà inscrit sur ce créneau')
     }
@@ -64,15 +88,15 @@ export class UserHasMissionService {
 
 
 
-// Toutes les inscriptions d'un utilisateur donné. On inclut le slot et la mission du slot, pour que le front 
-// puisse afficher "tu es inscrit sur le créneau samedi 9h-12h de la mission Buvette". Sans cet include imbriqué, tu n'aurais que des ids.
+  // Toutes les inscriptions d'un utilisateur donné. On inclut le slot et la mission du slot, pour que le front 
+  // puisse afficher "tu es inscrit sur le créneau samedi 9h-12h de la mission Buvette". Sans cet include imbriqué, tu n'aurais que des ids.
 
   async findAllByUser(userId: number) {
     return this.prisma.user_Has_Mission.findMany({
-      where: {userId},
+      where: { userId },
       include: {
         slot: {
-          include: {mission: true}
+          include: { mission: true }
         }
       }
     })
@@ -83,7 +107,7 @@ export class UserHasMissionService {
   // pour un admin qui veut voir la liste des inscrits.
   async findAllBySlot(slotId: number) {
     return this.prisma.user_Has_Mission.findMany({
-      where: {slotId},
+      where: { slotId },
       include: {
         user: {
           omit: {
@@ -91,8 +115,8 @@ export class UserHasMissionService {
             password: true
           }
         }
-        }
       }
+    }
     )
   }
 
@@ -106,24 +130,24 @@ export class UserHasMissionService {
     // userId_slotId est le nom de la clé composite générée par Prisma depuis @@id([userId, slotId]) dans le schema. 
     // Il faut fournir les deux pour identifier une ligne de façon unique. Si la ligne n'existe pas → NotFoundException.
     const registration = await this.prisma.user_Has_Mission.findUnique({
-      where: {userId_slotId: {userId, slotId}}
+      where: { userId_slotId: { userId, slotId } }
     })
 
-    if(!registration) {
+    if (!registration) {
       throw new NotFoundException('Inscription introuvable')
     }
 
 
     //Règle de permission : si pas admin et qu'on essaies de désinscrire quelqu'un d'autre que toi → refusé. Un bénévole peut se désinscrire lui-même (requesterId === userId), un admin peut désinscrire n'importe qui. Même logique que le DELETE dans UserController qu'on avait vu plus tôt.
 
-    if(requesterRole !== 'admin' && requesterId !== userId) {
+    if (requesterRole !== 'admin' && requesterId !== userId) {
       throw new ForbiddenException('Action non autorisée')
     }
 
     // Suppression de la ligne. Pas de return ici — comme dans remove() de tes autres services, 
     // on supprime et c'est tout, la méthode retourne void implicitement.
     await this.prisma.user_Has_Mission.delete({
-      where: {userId_slotId: {userId, slotId}}
+      where: { userId_slotId: { userId, slotId } }
     })
   }
 }
