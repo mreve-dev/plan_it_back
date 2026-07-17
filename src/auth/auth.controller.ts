@@ -151,7 +151,7 @@ export class AuthController {
       resetPasswordExpires: expires
     })
 
-    const resetLink = `http://localhost:5173/reset-password?token=${token}`
+    const resetLink = `${process.env.FRONTEND_URL}/reset-password?token=${token}`
     await this.mailService.sendChangePasswordEmail(user.email, resetLink)
   }
 

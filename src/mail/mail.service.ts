@@ -49,7 +49,7 @@ export class MailService {
 
                 <p>Pour finaliser votre inscription, cliquez sur le lien ci-dessous :</p>
                 
-                <a href="http://localhost:5173/login" 
+                <a href=${process.env.FRONTEND_URL} 
                    style="background-color: #4f9288; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block;">
                     Accéder à mon compte
                 </a>

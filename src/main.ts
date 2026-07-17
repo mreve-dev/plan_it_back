@@ -11,7 +11,7 @@ async function bootstrap() {
   app.useGlobalFilters(new PrismaExceptionFilter(), /*new HttpExceptionFilter()*/)
   app.use(cookieParser.default())
   app.enableCors({
-    origin: 'http://localhost:5173',
+    origin: process.env.CORS_ORIGINS_URL?.split(','),
     credentials: true // important pour que les cookies soient envoyés avec les requêtes
   })
   await app.listen(process.env.PORT ?? 3000);

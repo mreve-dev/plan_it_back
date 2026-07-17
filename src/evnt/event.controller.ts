@@ -6,6 +6,7 @@ import { Evnt } from 'prisma/generated/prisma/client';
 import { Roles } from 'src/auth/guard/decorators/roles.decorator';
 import { AuthGuard } from 'src/auth/guard/auth.guard';
 import { RolesGuard } from 'src/auth/guard/role.guard';
+import type { RequestWithUser } from 'utils/interface/response.interface';
 
 @Controller('event')
 export class EventController {
@@ -23,17 +24,32 @@ export class EventController {
     return this.eventService.findAll();
   }
 
+
+  @UseGuards(AuthGuard)
+  @Get('me/event')
+  async findByUser(@Req() req): Promise<Evnt[] | null> {
+    return this.eventService.findByUser(req.user.id)
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) : Promise<Evnt | null> {
     return this.eventService.findOne(+id);
   }
 
+
+
+  
+
+
   @Roles('admin')
   @UseGuards(AuthGuard, RolesGuard)
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateEvent: UpdateEventDto, @Req() req) : Promise<Evnt> {
+  async update(@Param('id') id: string, @Body() updateEvent: UpdateEventDto, @Req() req: RequestWithUser) : Promise<Evnt> {
     return this.eventService.update(+id, updateEvent, req.user.id)
   }
+
+
+
 
   @Delete(':id')
   async remove(@Param('id') id: string) : Promise<Evnt> {

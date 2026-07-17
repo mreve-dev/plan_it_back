@@ -65,9 +65,19 @@ export class UserService {
     return this.prisma.user.findUnique({ where: { id } });
   }
 
+
+
+
   async findOne(id: number): Promise<UserWTPwd | null> {
     return this.prisma.user.findUnique({
       where: { id },
+      include: {
+        userHasSkills: {
+          include: {
+            skill: true
+          }
+        }
+      },
       omit: {
         password: true
       }
@@ -110,15 +120,19 @@ export class UserService {
     return user
   }
 
+
+
   async update(id: number, updateUser: UpdateUserDto): Promise<User> {
     const {role, ...safeData} = updateUser
 
     return this.prisma.user.update({
       where: { id },
-      data: updateUser
+      data: safeData
 
     });
   }
+
+
 
   async updateRole(id: number, role: RoleEnum): Promise<User> {
     return this.prisma.user.update({

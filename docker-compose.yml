@@ -21,3 +21,4 @@ services:
 
 volumes:
   db_data:
+    name: plan_it_db_data

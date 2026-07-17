@@ -27,12 +27,16 @@ export class UserController {
     return this.userService.findOne(req.user.id)
   }
 
+
+  
+
   @UseGuards(AuthGuard)
   @Get(':id')
   async findOne(@Req() req, @Param('id') id: string) : Promise<UserWTPwd | Omit<UserWTPwd, 'email'> |null> {
     return this.userService.findOneFiltered(+id, req.user.role);
   }
 
+  
   @UseGuards(AuthGuard)
   @Patch()
   async update(@Req() req, @Body() updateUser: UpdateUserDto) : Promise<User> {

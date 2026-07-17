@@ -1,7 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
 
 datasource db {
   provider = "mysql"
@@ -20,18 +19,18 @@ enum RoleEnum {
 
 model User {
   id                   Int       @id @default(autoincrement())
-  firstname            String
-  lastname             String
-  email                String    @unique
-  password             String
+  firstname            String    @db.VarChar(45)
+  lastname             String    @db.VarChar(45)
+  email                String    @unique @db.VarChar(45)
+  password             String    @db.VarChar(255)
   date_of_birth        DateTime? @db.Date
   role                 RoleEnum
-  createdAt            DateTime  @default(now())
-  updatedAt            DateTime  @updatedAt
-  mustChangePassword   Boolean   @default(true)
-  isOnboarded          Boolean   @default(false)
-  resetPasswordToken   String?
-  resetPasswordExpires DateTime?
+  createdAt            DateTime  @default(now()) @db.DateTime(45)
+  updatedAt            DateTime  @updatedAt @db.DateTime(45)
+  mustChangePassword   Boolean   @default(true) @db.TinyInt
+  isOnboarded          Boolean   @default(false) @db.TinyInt
+  resetPasswordToken   String?   @db.VarChar(255)
+  resetPasswordExpires DateTime? @db.DateTime(45)
 
   evnts           Evnt[]             @relation("EventCreator")
   notifications   Notification[]
@@ -45,19 +44,19 @@ model User {
 
 model Evnt {
   id          Int      @id @default(autoincrement())
-  name        String
+  name        String   @db.VarChar(45)
   start_date  DateTime @db.Date
   end_date    DateTime @db.Date
   start_hour  DateTime @db.Time(0)
   end_hour    DateTime @db.Time(0)
-  location    String?
-  description String
-  categoryId  Int
-  creatorId   Int
-  updatedById Int?
-  documentId  Int?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  location    String?  @db.VarChar(45)
+  description String   @db.VarChar(255)
+  categoryId  Int      @db.Int
+  creatorId   Int      @db.Int
+  updatedById Int?     @db.Int
+  documentId  Int?     @db.Int
+  createdAt   DateTime @default(now()) @db.DateTime(45)
+  updatedAt   DateTime @updatedAt @db.DateTime(45)
 
   creator  User      @relation("EventCreator", fields: [creatorId], references: [id])
   updater  User?     @relation("EventUpdater", fields: [updatedById], references: [id])
@@ -70,13 +69,13 @@ model Evnt {
 
 model Mission {
   id          Int      @id @default(autoincrement())
-  name        String
-  description String
-  eventId     Int
-  creatorId   Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  updatedById Int?
+  name        String   @db.VarChar(45)
+  description String   @db.VarChar(45)
+  eventId     Int      @db.Int
+  creatorId   Int      @db.Int
+  createdAt   DateTime @default(now()) @db.DateTime(45)
+  updatedAt   DateTime @updatedAt @db.DateTime(45)
+  updatedById Int?     @db.Int
 
   event Evnt @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
@@ -92,11 +91,11 @@ model MissionSlot {
   date           DateTime @db.Date
   start_hour     DateTime @db.Time(0)
   end_hour       DateTime @db.Time(0)
-  max_volunteers Int
-  missionId      Int
-  updatedById    Int?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  max_volunteers Int      @db.Int
+  missionId      Int      @db.Int
+  updatedById    Int?     @db.Int
+  createdAt      DateTime @default(now()) @db.DateTime(45)
+  updatedAt      DateTime @updatedAt @db.DateTime(45)
 
   updater User? @relation("SlotUpdater", fields: [updatedById], references: [id])
 
@@ -106,19 +105,19 @@ model MissionSlot {
 
 model Category {
   id        Int      @id @default(autoincrement())
-  name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  name      String   @unique @db.VarChar(45)
+  createdAt DateTime @default(now()) @db.DateTime(45)
+  updatedAt DateTime @updatedAt @db.DateTime(45)
 
   evnts Evnt[]
 }
 
 model Document {
   id        Int      @id @default(autoincrement())
-  name      String   @unique
-  url       String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  name      String   @unique @db.VarChar(45)
+  url       String   @db.VarChar(45)
+  createdAt DateTime @default(now()) @db.DateTime(45)
+  updatedAt DateTime @updatedAt @db.DateTime(45)
 
   evnts            Evnt[]
   eventHasDocument Event_Has_Document[]
@@ -126,29 +125,29 @@ model Document {
 
 model Notification {
   id        Int      @id @default(autoincrement())
-  message   String   @unique
+  message   String   @db.VarChar(255)
   date      DateTime @db.Date
-  is_read   Boolean
-  userId    Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  is_read   Boolean  @db.TinyInt
+  userId    Int      @db.Int
+  createdAt DateTime @default(now()) @db.DateTime(45)
+  updatedAt DateTime @updatedAt @db.DateTime(45)
 
   user User @relation(fields: [userId], references: [id])
 }
 
 model Skill {
   id               Int                 @id @default(autoincrement())
-  name             String              @unique
-  createdAt        DateTime            @default(now())
-  updatedAt        DateTime            @updatedAt
+  name             String              @unique @db.VarChar(45)
+  createdAt        DateTime            @default(now()) @db.DateTime(45)
+  updatedAt        DateTime            @updatedAt @db.DateTime(45)
   userHasSkills    User_has_Skill[]
   missionHasSkills Mission_has_Skill[]
 }
 
 model User_has_Skill {
-  userId    Int
-  skillId   Int
-  createdAt DateTime @default(now())
+  userId    Int @db.Int
+  skillId   Int @db.Int
+  createdAt   DateTime @default(now()) @db.DateTime(45)
 
   user  User  @relation(fields: [userId], references: [id])
   skill Skill @relation(fields: [skillId], references: [id])
@@ -157,9 +156,9 @@ model User_has_Skill {
 }
 
 model Mission_has_Skill {
-  missionId Int
-  skillId   Int
-  createdAt DateTime @default(now())
+  missionId Int @db.Int
+  skillId   Int @db.Int
+  createdAt   DateTime @default(now()) @db.DateTime(45)
 
   mission Mission @relation(fields: [missionId], references: [id])
   skill   Skill   @relation(fields: [skillId], references: [id])
@@ -168,9 +167,9 @@ model Mission_has_Skill {
 }
 
 model User_Has_Mission {
-  userId    Int
-  slotId    Int
-  createdAt DateTime @default(now())
+  userId    Int @db.Int
+  slotId    Int @db.Int
+  createdAt   DateTime @default(now()) @db.DateTime(45)
 
   user User        @relation(fields: [userId], references: [id])
   slot MissionSlot @relation(fields: [slotId], references: [id], onDelete: Cascade)
@@ -179,10 +178,9 @@ model User_Has_Mission {
 }
 
 model Event_Has_Document {
-  documentId Int
-  evntId     Int
-  createdAt  DateTime @default(now())
-
+  documentId Int @db.Int
+  evntId     Int @db.Int
+  createdAt   DateTime @default(now()) @db.DateTime(45)
   document Document @relation(fields: [documentId], references: [id])
   evnt     Evnt     @relation(fields: [evntId], references: [id], onDelete: Cascade)
 

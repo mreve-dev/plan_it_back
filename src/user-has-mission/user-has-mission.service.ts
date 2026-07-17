@@ -27,7 +27,7 @@ export class UserHasMissionService {
       }
     })
 
-    
+
 
     // Vérifie que le créneau existe
     if (!slot) {
@@ -96,11 +96,66 @@ export class UserHasMissionService {
       where: { userId },
       include: {
         slot: {
-          include: { mission: true }
+          include: {
+            mission: {
+              include: {
+                event: true,
+                missionSlots: {
+                  include: {
+                    userHasMissions: {
+                      select: {
+                        user: {
+                          select: { id: true, firstname: true, lastname: true }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     })
   }
+
+
+  // Calcule le total d'heures de bénévolat effectuées par un user sur le mois en cours.
+  // On borne la période avec startOfMonth (1er jour du mois, 00h00) et endOfMonth 
+  // (dernier jour du mois — le jour 0 du mois suivant équivaut au dernier jour du mois actuel — à 23h59:59).
+  async getVolunteerHoursThisMonth(userId: number): Promise<number> {
+    const now = new Date()
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1)
+    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59)
+
+    // On récupère uniquement les inscriptions dont le créneau (slot) tombe dans cette période.
+    // Le filtre sur slot.date se fait directement dans le where grâce à la relation Prisma,
+    // pas besoin de tout charger puis filtrer en JS.
+    const registrations = await this.prisma.user_Has_Mission.findMany({
+      where: {
+        userId,
+        slot: {
+          date: { gte: startOfMonth, lte: endOfMonth }
+        }
+      },
+      include: { slot: true }
+    })
+
+    // Pour chaque inscription, on calcule la durée du créneau (end_hour - start_hour) en millisecondes,
+    // et on additionne le tout avec reduce(). getTime() convertit une Date en nombre de ms
+    // depuis 1970, ce qui permet de simplement soustraire les deux pour avoir la durée.
+    const totalMs = registrations.reduce((acc, reg) => {
+      const start = new Date(reg.slot.start_hour).getTime()
+      const end = new Date(reg.slot.end_hour).getTime()
+      return acc + (end - start)
+    }, 0)
+
+    // Conversion du total en millisecondes vers des heures (1h = 1000ms * 60s * 60min)
+    return totalMs / (1000 * 60 * 60)
+  }
+
+
+
 
 
   // Tous les bénévoles inscrits sur un slot précis. Utile pour afficher dans la modale "qui est déjà inscrit sur ce créneau" — ou 

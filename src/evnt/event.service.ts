@@ -35,15 +35,15 @@ export class EventService {
             missionSlots: {
               include: {
                 userHasMissions: {
-                  include: { 
+                  include: {
                     user: {
                       omit: {
                         email: true,
                         password: true
                       }
                     }
-                      
-                   }
+
+                  }
                 }
               }
             }
@@ -64,13 +64,14 @@ export class EventService {
               missionSlots: {
                 include: {
                   userHasMissions: {
-                    include: { 
+                    include: {
                       user: {
                         omit: {
                           email: true,
                           password: true
                         }
-                      } }
+                      }
+                    }
                   }
                 }
               }
@@ -82,11 +83,48 @@ export class EventService {
         }
       });
 
-      if(!evnt) {
-        throw new NotFoundException(`Event ${id} not found`)
-      }
+    if (!evnt) {
+      throw new NotFoundException(`Event ${id} not found`)
+    }
 
-      return evnt
+    return evnt
+  }
+
+
+
+
+  
+
+  async findByUser(userId: number) {
+    return this.prisma.evnt.findMany({
+      where: {
+        missions: {
+          some: {
+            missionSlots: {
+              some: {
+                userHasMissions: {
+                  some: {
+                    userId: userId
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      include: {
+        category: true,
+        missions: {
+          include: {
+            missionSlots: {
+              include: {
+                userHasMissions: true
+              }
+            }
+          }
+        }
+      }
+    })
   }
 
   async update(id: number, updateEventDto: UpdateEventDto, userId: number): Promise<Evnt> {

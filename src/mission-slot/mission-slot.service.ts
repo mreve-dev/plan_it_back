@@ -24,6 +24,11 @@ export class MissionSlotService {
     return newSlot;
   }
 
+
+
+
+
+
   async createMany(createManySlots: CreateManyMissionSlotDto): Promise<MissionSlot[]> {
     const dataToInsert = createManySlots.slots.map(slot => ({
       missionId: createManySlots.missionId,
@@ -58,6 +63,14 @@ export class MissionSlotService {
     })
   }
 
+
+
+
+
+
+
+
+
   async findAll(): Promise<MissionSlot[] | null> {
 
     return this.prisma.missionSlot.findMany({
@@ -73,6 +86,15 @@ export class MissionSlotService {
       }
     });
   }
+
+
+
+
+
+
+
+
+
 
   async findOne(id: number): Promise<MissionSlot | null> {
     const slot = await this.prisma.missionSlot.findUnique({
@@ -97,6 +119,14 @@ export class MissionSlotService {
     return slot
   }
 
+
+
+
+
+
+
+
+
   async update(id: number, updateMissionSlotDto: UpdateMissionSlotDto, userId: number) {
 
     await this.findOne(id)
@@ -115,6 +145,14 @@ export class MissionSlotService {
     });
   }
 
+
+
+
+
+
+
+
+  
   async remove(id: number) {
     await this.findOne(id)
     return this.prisma.missionSlot.delete({
