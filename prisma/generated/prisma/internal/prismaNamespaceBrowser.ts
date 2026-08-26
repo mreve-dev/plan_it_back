@@ -237,67 +237,18 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
 export const NullsOrder = {
   first: 'first',
   last: 'last'
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-export const UserOrderByRelevanceFieldEnum = {
-  firstname: 'firstname',
-  lastname: 'lastname',
-  email: 'email',
-  password: 'password',
-  resetPasswordToken: 'resetPasswordToken'
-} as const
-
-export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
-
-
-export const EvntOrderByRelevanceFieldEnum = {
-  name: 'name',
-  location: 'location',
-  description: 'description'
-} as const
-
-export type EvntOrderByRelevanceFieldEnum = (typeof EvntOrderByRelevanceFieldEnum)[keyof typeof EvntOrderByRelevanceFieldEnum]
-
-
-export const MissionOrderByRelevanceFieldEnum = {
-  name: 'name',
-  description: 'description'
-} as const
-
-export type MissionOrderByRelevanceFieldEnum = (typeof MissionOrderByRelevanceFieldEnum)[keyof typeof MissionOrderByRelevanceFieldEnum]
-
-
-export const CategoryOrderByRelevanceFieldEnum = {
-  name: 'name'
-} as const
-
-export type CategoryOrderByRelevanceFieldEnum = (typeof CategoryOrderByRelevanceFieldEnum)[keyof typeof CategoryOrderByRelevanceFieldEnum]
-
-
-export const DocumentOrderByRelevanceFieldEnum = {
-  name: 'name',
-  url: 'url'
-} as const
-
-export type DocumentOrderByRelevanceFieldEnum = (typeof DocumentOrderByRelevanceFieldEnum)[keyof typeof DocumentOrderByRelevanceFieldEnum]
-
-
-export const NotificationOrderByRelevanceFieldEnum = {
-  message: 'message'
-} as const
-
-export type NotificationOrderByRelevanceFieldEnum = (typeof NotificationOrderByRelevanceFieldEnum)[keyof typeof NotificationOrderByRelevanceFieldEnum]
-
-
-export const SkillOrderByRelevanceFieldEnum = {
-  name: 'name'
-} as const
-
-export type SkillOrderByRelevanceFieldEnum = (typeof SkillOrderByRelevanceFieldEnum)[keyof typeof SkillOrderByRelevanceFieldEnum]
 

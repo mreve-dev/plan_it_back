@@ -546,7 +546,21 @@ export type Event_Has_DocumentSelect<ExtArgs extends runtime.Types.Extensions.In
   evnt?: boolean | Prisma.EvntDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event_Has_Document"]>
 
+export type Event_Has_DocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  documentId?: boolean
+  evntId?: boolean
+  createdAt?: boolean
+  document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
+  evnt?: boolean | Prisma.EvntDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["event_Has_Document"]>
 
+export type Event_Has_DocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  documentId?: boolean
+  evntId?: boolean
+  createdAt?: boolean
+  document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
+  evnt?: boolean | Prisma.EvntDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["event_Has_Document"]>
 
 export type Event_Has_DocumentSelectScalar = {
   documentId?: boolean
@@ -556,6 +570,14 @@ export type Event_Has_DocumentSelectScalar = {
 
 export type Event_Has_DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"documentId" | "evntId" | "createdAt", ExtArgs["result"]["event_Has_Document"]>
 export type Event_Has_DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
+  evnt?: boolean | Prisma.EvntDefaultArgs<ExtArgs>
+}
+export type Event_Has_DocumentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
+  evnt?: boolean | Prisma.EvntDefaultArgs<ExtArgs>
+}
+export type Event_Has_DocumentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
   evnt?: boolean | Prisma.EvntDefaultArgs<ExtArgs>
 }
@@ -688,6 +710,30 @@ export interface Event_Has_DocumentDelegate<ExtArgs extends runtime.Types.Extens
   createMany<T extends Event_Has_DocumentCreateManyArgs>(args?: Prisma.SelectSubset<T, Event_Has_DocumentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many Event_Has_Documents and returns the data saved in the database.
+   * @param {Event_Has_DocumentCreateManyAndReturnArgs} args - Arguments to create many Event_Has_Documents.
+   * @example
+   * // Create many Event_Has_Documents
+   * const event_Has_Document = await prisma.event_Has_Document.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many Event_Has_Documents and only return the `documentId`
+   * const event_Has_DocumentWithDocumentIdOnly = await prisma.event_Has_Document.createManyAndReturn({
+   *   select: { documentId: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends Event_Has_DocumentCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, Event_Has_DocumentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$Event_Has_DocumentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a Event_Has_Document.
    * @param {Event_Has_DocumentDeleteArgs} args - Arguments to delete one Event_Has_Document.
    * @example
@@ -750,6 +796,36 @@ export interface Event_Has_DocumentDelegate<ExtArgs extends runtime.Types.Extens
    * 
    */
   updateMany<T extends Event_Has_DocumentUpdateManyArgs>(args: Prisma.SelectSubset<T, Event_Has_DocumentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more Event_Has_Documents and returns the data updated in the database.
+   * @param {Event_Has_DocumentUpdateManyAndReturnArgs} args - Arguments to update many Event_Has_Documents.
+   * @example
+   * // Update many Event_Has_Documents
+   * const event_Has_Document = await prisma.event_Has_Document.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more Event_Has_Documents and only return the `documentId`
+   * const event_Has_DocumentWithDocumentIdOnly = await prisma.event_Has_Document.updateManyAndReturn({
+   *   select: { documentId: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends Event_Has_DocumentUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, Event_Has_DocumentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$Event_Has_DocumentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one Event_Has_Document.
@@ -1182,6 +1258,29 @@ export type Event_Has_DocumentCreateManyArgs<ExtArgs extends runtime.Types.Exten
 }
 
 /**
+ * Event_Has_Document createManyAndReturn
+ */
+export type Event_Has_DocumentCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Event_Has_Document
+   */
+  select?: Prisma.Event_Has_DocumentSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Event_Has_Document
+   */
+  omit?: Prisma.Event_Has_DocumentOmit<ExtArgs> | null
+  /**
+   * The data used to create many Event_Has_Documents.
+   */
+  data: Prisma.Event_Has_DocumentCreateManyInput | Prisma.Event_Has_DocumentCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.Event_Has_DocumentIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * Event_Has_Document update
  */
 export type Event_Has_DocumentUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1223,6 +1322,36 @@ export type Event_Has_DocumentUpdateManyArgs<ExtArgs extends runtime.Types.Exten
    * Limit how many Event_Has_Documents to update.
    */
   limit?: number
+}
+
+/**
+ * Event_Has_Document updateManyAndReturn
+ */
+export type Event_Has_DocumentUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Event_Has_Document
+   */
+  select?: Prisma.Event_Has_DocumentSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Event_Has_Document
+   */
+  omit?: Prisma.Event_Has_DocumentOmit<ExtArgs> | null
+  /**
+   * The data used to update Event_Has_Documents.
+   */
+  data: Prisma.XOR<Prisma.Event_Has_DocumentUpdateManyMutationInput, Prisma.Event_Has_DocumentUncheckedUpdateManyInput>
+  /**
+   * Filter which Event_Has_Documents to update
+   */
+  where?: Prisma.Event_Has_DocumentWhereInput
+  /**
+   * Limit how many Event_Has_Documents to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.Event_Has_DocumentIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

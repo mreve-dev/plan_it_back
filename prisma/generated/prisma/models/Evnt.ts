@@ -333,7 +333,6 @@ export type EvntOrderByWithRelationInput = {
   document?: Prisma.DocumentOrderByWithRelationInput
   missions?: Prisma.MissionOrderByRelationAggregateInput
   eventHasDocument?: Prisma.Event_Has_DocumentOrderByRelationAggregateInput
-  _relevance?: Prisma.EvntOrderByRelevanceInput
 }
 
 export type EvntWhereUniqueInput = Prisma.AtLeast<{
@@ -532,12 +531,6 @@ export type EvntListRelationFilter = {
 
 export type EvntOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type EvntOrderByRelevanceInput = {
-  fields: Prisma.EvntOrderByRelevanceFieldEnum | Prisma.EvntOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type EvntCountOrderByAggregateInput = {
@@ -1584,7 +1577,47 @@ export type EvntSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   _count?: boolean | Prisma.EvntCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["evnt"]>
 
+export type EvntSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  name?: boolean
+  start_date?: boolean
+  end_date?: boolean
+  start_hour?: boolean
+  end_hour?: boolean
+  location?: boolean
+  description?: boolean
+  categoryId?: boolean
+  creatorId?: boolean
+  updatedById?: boolean
+  documentId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  updater?: boolean | Prisma.Evnt$updaterArgs<ExtArgs>
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.Evnt$documentArgs<ExtArgs>
+}, ExtArgs["result"]["evnt"]>
 
+export type EvntSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  name?: boolean
+  start_date?: boolean
+  end_date?: boolean
+  start_hour?: boolean
+  end_hour?: boolean
+  location?: boolean
+  description?: boolean
+  categoryId?: boolean
+  creatorId?: boolean
+  updatedById?: boolean
+  documentId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  updater?: boolean | Prisma.Evnt$updaterArgs<ExtArgs>
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.Evnt$documentArgs<ExtArgs>
+}, ExtArgs["result"]["evnt"]>
 
 export type EvntSelectScalar = {
   id?: boolean
@@ -1612,6 +1645,18 @@ export type EvntInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   missions?: boolean | Prisma.Evnt$missionsArgs<ExtArgs>
   eventHasDocument?: boolean | Prisma.Evnt$eventHasDocumentArgs<ExtArgs>
   _count?: boolean | Prisma.EvntCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type EvntIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  updater?: boolean | Prisma.Evnt$updaterArgs<ExtArgs>
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.Evnt$documentArgs<ExtArgs>
+}
+export type EvntIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  updater?: boolean | Prisma.Evnt$updaterArgs<ExtArgs>
+  category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
+  document?: boolean | Prisma.Evnt$documentArgs<ExtArgs>
 }
 
 export type $EvntPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1757,6 +1802,30 @@ export interface EvntDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
   createMany<T extends EvntCreateManyArgs>(args?: Prisma.SelectSubset<T, EvntCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many Evnts and returns the data saved in the database.
+   * @param {EvntCreateManyAndReturnArgs} args - Arguments to create many Evnts.
+   * @example
+   * // Create many Evnts
+   * const evnt = await prisma.evnt.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many Evnts and only return the `id`
+   * const evntWithIdOnly = await prisma.evnt.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends EvntCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, EvntCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EvntPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a Evnt.
    * @param {EvntDeleteArgs} args - Arguments to delete one Evnt.
    * @example
@@ -1819,6 +1888,36 @@ export interface EvntDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    * 
    */
   updateMany<T extends EvntUpdateManyArgs>(args: Prisma.SelectSubset<T, EvntUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more Evnts and returns the data updated in the database.
+   * @param {EvntUpdateManyAndReturnArgs} args - Arguments to update many Evnts.
+   * @example
+   * // Update many Evnts
+   * const evnt = await prisma.evnt.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more Evnts and only return the `id`
+   * const evntWithIdOnly = await prisma.evnt.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends EvntUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, EvntUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EvntPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one Evnt.
@@ -2266,6 +2365,29 @@ export type EvntCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * Evnt createManyAndReturn
+ */
+export type EvntCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Evnt
+   */
+  select?: Prisma.EvntSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Evnt
+   */
+  omit?: Prisma.EvntOmit<ExtArgs> | null
+  /**
+   * The data used to create many Evnts.
+   */
+  data: Prisma.EvntCreateManyInput | Prisma.EvntCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EvntIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * Evnt update
  */
 export type EvntUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2307,6 +2429,36 @@ export type EvntUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Evnts to update.
    */
   limit?: number
+}
+
+/**
+ * Evnt updateManyAndReturn
+ */
+export type EvntUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Evnt
+   */
+  select?: Prisma.EvntSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Evnt
+   */
+  omit?: Prisma.EvntOmit<ExtArgs> | null
+  /**
+   * The data used to update Evnts.
+   */
+  data: Prisma.XOR<Prisma.EvntUpdateManyMutationInput, Prisma.EvntUncheckedUpdateManyInput>
+  /**
+   * Filter which Evnts to update
+   */
+  where?: Prisma.EvntWhereInput
+  /**
+   * Limit how many Evnts to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EvntIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

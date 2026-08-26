@@ -219,7 +219,6 @@ export type SkillOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   userHasSkills?: Prisma.User_has_SkillOrderByRelationAggregateInput
   missionHasSkills?: Prisma.Mission_has_SkillOrderByRelationAggregateInput
-  _relevance?: Prisma.SkillOrderByRelevanceInput
 }
 
 export type SkillWhereUniqueInput = Prisma.AtLeast<{
@@ -308,12 +307,6 @@ export type SkillUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type SkillOrderByRelevanceInput = {
-  fields: Prisma.SkillOrderByRelevanceFieldEnum | Prisma.SkillOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type SkillCountOrderByAggregateInput = {
@@ -520,7 +513,19 @@ export type SkillSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   _count?: boolean | Prisma.SkillCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["skill"]>
 
+export type SkillSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  name?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+}, ExtArgs["result"]["skill"]>
 
+export type SkillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  name?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+}, ExtArgs["result"]["skill"]>
 
 export type SkillSelectScalar = {
   id?: boolean
@@ -535,6 +540,8 @@ export type SkillInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   missionHasSkills?: boolean | Prisma.Skill$missionHasSkillsArgs<ExtArgs>
   _count?: boolean | Prisma.SkillCountOutputTypeDefaultArgs<ExtArgs>
 }
+export type SkillIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type SkillIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $SkillPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Skill"
@@ -665,6 +672,30 @@ export interface SkillDelegate<ExtArgs extends runtime.Types.Extensions.Internal
   createMany<T extends SkillCreateManyArgs>(args?: Prisma.SelectSubset<T, SkillCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many Skills and returns the data saved in the database.
+   * @param {SkillCreateManyAndReturnArgs} args - Arguments to create many Skills.
+   * @example
+   * // Create many Skills
+   * const skill = await prisma.skill.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many Skills and only return the `id`
+   * const skillWithIdOnly = await prisma.skill.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends SkillCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, SkillCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SkillPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a Skill.
    * @param {SkillDeleteArgs} args - Arguments to delete one Skill.
    * @example
@@ -727,6 +758,36 @@ export interface SkillDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    * 
    */
   updateMany<T extends SkillUpdateManyArgs>(args: Prisma.SelectSubset<T, SkillUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more Skills and returns the data updated in the database.
+   * @param {SkillUpdateManyAndReturnArgs} args - Arguments to update many Skills.
+   * @example
+   * // Update many Skills
+   * const skill = await prisma.skill.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more Skills and only return the `id`
+   * const skillWithIdOnly = await prisma.skill.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends SkillUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, SkillUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SkillPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one Skill.
@@ -1160,6 +1221,25 @@ export type SkillCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * Skill createManyAndReturn
+ */
+export type SkillCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Skill
+   */
+  select?: Prisma.SkillSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Skill
+   */
+  omit?: Prisma.SkillOmit<ExtArgs> | null
+  /**
+   * The data used to create many Skills.
+   */
+  data: Prisma.SkillCreateManyInput | Prisma.SkillCreateManyInput[]
+  skipDuplicates?: boolean
+}
+
+/**
  * Skill update
  */
 export type SkillUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1189,6 +1269,32 @@ export type SkillUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
  * Skill updateMany
  */
 export type SkillUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * The data used to update Skills.
+   */
+  data: Prisma.XOR<Prisma.SkillUpdateManyMutationInput, Prisma.SkillUncheckedUpdateManyInput>
+  /**
+   * Filter which Skills to update
+   */
+  where?: Prisma.SkillWhereInput
+  /**
+   * Limit how many Skills to update.
+   */
+  limit?: number
+}
+
+/**
+ * Skill updateManyAndReturn
+ */
+export type SkillUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Skill
+   */
+  select?: Prisma.SkillSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Skill
+   */
+  omit?: Prisma.SkillOmit<ExtArgs> | null
   /**
    * The data used to update Skills.
    */

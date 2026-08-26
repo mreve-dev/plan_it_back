@@ -1,12 +1,11 @@
 import 'dotenv/config'
-import { error, log } from "console";
-import { PrismaMariaDb } from "@prisma/adapter-mariadb";
+import { PrismaPg } from "@prisma/adapter-pg"
 import { PrismaClient } from "./generated/prisma/client";
 import * as argon2 from 'argon2'
 
 
 
-const adapter = new PrismaMariaDb(process.env.DATABASE_URL as string)
+const adapter = new PrismaPg(process.env.DATABASE_URL as string)
 const prisma = new PrismaClient({ adapter }) // crée une connexion à la base de données
 
 
@@ -32,7 +31,7 @@ async function main() {
     await prisma.user_has_Skill.deleteMany()
     await prisma.user.deleteMany()
     await prisma.skill.deleteMany()
-    
+
 
     //1 - création des compétences 
 
@@ -54,7 +53,7 @@ async function main() {
     const user = await prisma.user.create({
         data: {
             firstname: "Admin",
-            lastname: "istrateur",
+            lastname: "Istrateur",
             email: "admin@email.com",
             password: hashedPassword1,
             date_of_birth: new Date("1993-10-23"),
@@ -64,7 +63,7 @@ async function main() {
         }
     })
 
-    const skills = await prisma.skill.findMany({take : 2})
+    const skills = await prisma.skill.findMany({ take: 2 })
 
     await prisma.user_has_Skill.createMany({
         data: skills.map(skill => ({

@@ -3,7 +3,7 @@
 
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
 }
 
 generator client {
@@ -25,12 +25,12 @@ model User {
   password             String    @db.VarChar(255)
   date_of_birth        DateTime? @db.Date
   role                 RoleEnum
-  createdAt            DateTime  @default(now()) @db.DateTime(45)
-  updatedAt            DateTime  @updatedAt @db.DateTime(45)
-  mustChangePassword   Boolean   @default(true) @db.TinyInt
-  isOnboarded          Boolean   @default(false) @db.TinyInt
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  mustChangePassword   Boolean   @default(true)
+  isOnboarded          Boolean   @default(false)
   resetPasswordToken   String?   @db.VarChar(255)
-  resetPasswordExpires DateTime? @db.DateTime(45)
+  resetPasswordExpires DateTime?
 
   evnts           Evnt[]             @relation("EventCreator")
   notifications   Notification[]
@@ -51,12 +51,12 @@ model Evnt {
   end_hour    DateTime @db.Time(0)
   location    String?  @db.VarChar(45)
   description String   @db.VarChar(255)
-  categoryId  Int      @db.Int
-  creatorId   Int      @db.Int
-  updatedById Int?     @db.Int
-  documentId  Int?     @db.Int
-  createdAt   DateTime @default(now()) @db.DateTime(45)
-  updatedAt   DateTime @updatedAt @db.DateTime(45)
+  categoryId  Int
+  creatorId   Int
+  updatedById Int?
+  documentId  Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   creator  User      @relation("EventCreator", fields: [creatorId], references: [id])
   updater  User?     @relation("EventUpdater", fields: [updatedById], references: [id])
@@ -71,11 +71,11 @@ model Mission {
   id          Int      @id @default(autoincrement())
   name        String   @db.VarChar(45)
   description String   @db.VarChar(45)
-  eventId     Int      @db.Int
-  creatorId   Int      @db.Int
-  createdAt   DateTime @default(now()) @db.DateTime(45)
-  updatedAt   DateTime @updatedAt @db.DateTime(45)
-  updatedById Int?     @db.Int
+  eventId     Int
+  creatorId   Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  updatedById Int?
 
   event Evnt @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
@@ -91,11 +91,11 @@ model MissionSlot {
   date           DateTime @db.Date
   start_hour     DateTime @db.Time(0)
   end_hour       DateTime @db.Time(0)
-  max_volunteers Int      @db.Int
-  missionId      Int      @db.Int
-  updatedById    Int?     @db.Int
-  createdAt      DateTime @default(now()) @db.DateTime(45)
-  updatedAt      DateTime @updatedAt @db.DateTime(45)
+  max_volunteers Int
+  missionId      Int
+  updatedById    Int?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   updater User? @relation("SlotUpdater", fields: [updatedById], references: [id])
 
@@ -106,8 +106,8 @@ model MissionSlot {
 model Category {
   id        Int      @id @default(autoincrement())
   name      String   @unique @db.VarChar(45)
-  createdAt DateTime @default(now()) @db.DateTime(45)
-  updatedAt DateTime @updatedAt @db.DateTime(45)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   evnts Evnt[]
 }
@@ -116,8 +116,8 @@ model Document {
   id        Int      @id @default(autoincrement())
   name      String   @unique @db.VarChar(45)
   url       String   @db.VarChar(45)
-  createdAt DateTime @default(now()) @db.DateTime(45)
-  updatedAt DateTime @updatedAt @db.DateTime(45)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   evnts            Evnt[]
   eventHasDocument Event_Has_Document[]
@@ -127,10 +127,10 @@ model Notification {
   id        Int      @id @default(autoincrement())
   message   String   @db.VarChar(255)
   date      DateTime @db.Date
-  is_read   Boolean  @db.TinyInt
-  userId    Int      @db.Int
-  createdAt DateTime @default(now()) @db.DateTime(45)
-  updatedAt DateTime @updatedAt @db.DateTime(45)
+  is_read   Boolean
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id])
 }
@@ -138,16 +138,16 @@ model Notification {
 model Skill {
   id               Int                 @id @default(autoincrement())
   name             String              @unique @db.VarChar(45)
-  createdAt        DateTime            @default(now()) @db.DateTime(45)
-  updatedAt        DateTime            @updatedAt @db.DateTime(45)
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
   userHasSkills    User_has_Skill[]
   missionHasSkills Mission_has_Skill[]
 }
 
 model User_has_Skill {
-  userId    Int @db.Int
-  skillId   Int @db.Int
-  createdAt   DateTime @default(now()) @db.DateTime(45)
+  userId    Int
+  skillId   Int
+  createdAt DateTime @default(now())
 
   user  User  @relation(fields: [userId], references: [id])
   skill Skill @relation(fields: [skillId], references: [id])
@@ -156,9 +156,9 @@ model User_has_Skill {
 }
 
 model Mission_has_Skill {
-  missionId Int @db.Int
-  skillId   Int @db.Int
-  createdAt   DateTime @default(now()) @db.DateTime(45)
+  missionId Int
+  skillId   Int
+  createdAt DateTime @default(now())
 
   mission Mission @relation(fields: [missionId], references: [id])
   skill   Skill   @relation(fields: [skillId], references: [id])
@@ -167,9 +167,9 @@ model Mission_has_Skill {
 }
 
 model User_Has_Mission {
-  userId    Int @db.Int
-  slotId    Int @db.Int
-  createdAt   DateTime @default(now()) @db.DateTime(45)
+  userId    Int
+  slotId    Int
+  createdAt DateTime @default(now())
 
   user User        @relation(fields: [userId], references: [id])
   slot MissionSlot @relation(fields: [slotId], references: [id], onDelete: Cascade)
@@ -178,9 +178,10 @@ model User_Has_Mission {
 }
 
 model Event_Has_Document {
-  documentId Int @db.Int
-  evntId     Int @db.Int
-  createdAt   DateTime @default(now()) @db.DateTime(45)
+  documentId Int
+  evntId     Int
+  createdAt  DateTime @default(now())
+
   document Document @relation(fields: [documentId], references: [id])
   evnt     Evnt     @relation(fields: [evntId], references: [id], onDelete: Cascade)
 

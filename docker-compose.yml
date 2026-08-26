@@ -1,24 +1,26 @@
 services:
   db:
-    image: mysql:8.0
+    image: postgres:16
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/postgresql/data
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: testdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: testdb
     ports: 
-      - 3307:3306  # portlocal:portducontainer
-  phpmyadmin:
+      - 5433:5432  # portlocal:portducontainer
+  pgadmin:
     depends_on:
       - db
-    image: phpmyadmin
+    image: dpage/pgadmin4
     restart: always
     ports:
       - "8081:80"
     environment:
-      PMA_HOST: db
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
 
 volumes:
   db_data:
-    name: plan_it_db_data
+    name: plan_it_db_data_pg

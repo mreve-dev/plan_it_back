@@ -888,7 +888,33 @@ export type MissionSlotSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   _count?: boolean | Prisma.MissionSlotCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["missionSlot"]>
 
+export type MissionSlotSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  date?: boolean
+  start_hour?: boolean
+  end_hour?: boolean
+  max_volunteers?: boolean
+  missionId?: boolean
+  updatedById?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  updater?: boolean | Prisma.MissionSlot$updaterArgs<ExtArgs>
+  mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["missionSlot"]>
 
+export type MissionSlotSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  date?: boolean
+  start_hour?: boolean
+  end_hour?: boolean
+  max_volunteers?: boolean
+  missionId?: boolean
+  updatedById?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  updater?: boolean | Prisma.MissionSlot$updaterArgs<ExtArgs>
+  mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["missionSlot"]>
 
 export type MissionSlotSelectScalar = {
   id?: boolean
@@ -908,6 +934,14 @@ export type MissionSlotInclude<ExtArgs extends runtime.Types.Extensions.Internal
   mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
   userHasMissions?: boolean | Prisma.MissionSlot$userHasMissionsArgs<ExtArgs>
   _count?: boolean | Prisma.MissionSlotCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type MissionSlotIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  updater?: boolean | Prisma.MissionSlot$updaterArgs<ExtArgs>
+  mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
+}
+export type MissionSlotIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  updater?: boolean | Prisma.MissionSlot$updaterArgs<ExtArgs>
+  mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
 }
 
 export type $MissionSlotPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1045,6 +1079,30 @@ export interface MissionSlotDelegate<ExtArgs extends runtime.Types.Extensions.In
   createMany<T extends MissionSlotCreateManyArgs>(args?: Prisma.SelectSubset<T, MissionSlotCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many MissionSlots and returns the data saved in the database.
+   * @param {MissionSlotCreateManyAndReturnArgs} args - Arguments to create many MissionSlots.
+   * @example
+   * // Create many MissionSlots
+   * const missionSlot = await prisma.missionSlot.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many MissionSlots and only return the `id`
+   * const missionSlotWithIdOnly = await prisma.missionSlot.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends MissionSlotCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, MissionSlotCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MissionSlotPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a MissionSlot.
    * @param {MissionSlotDeleteArgs} args - Arguments to delete one MissionSlot.
    * @example
@@ -1107,6 +1165,36 @@ export interface MissionSlotDelegate<ExtArgs extends runtime.Types.Extensions.In
    * 
    */
   updateMany<T extends MissionSlotUpdateManyArgs>(args: Prisma.SelectSubset<T, MissionSlotUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more MissionSlots and returns the data updated in the database.
+   * @param {MissionSlotUpdateManyAndReturnArgs} args - Arguments to update many MissionSlots.
+   * @example
+   * // Update many MissionSlots
+   * const missionSlot = await prisma.missionSlot.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more MissionSlots and only return the `id`
+   * const missionSlotWithIdOnly = await prisma.missionSlot.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends MissionSlotUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, MissionSlotUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MissionSlotPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one MissionSlot.
@@ -1546,6 +1634,29 @@ export type MissionSlotCreateManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * MissionSlot createManyAndReturn
+ */
+export type MissionSlotCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MissionSlot
+   */
+  select?: Prisma.MissionSlotSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the MissionSlot
+   */
+  omit?: Prisma.MissionSlotOmit<ExtArgs> | null
+  /**
+   * The data used to create many MissionSlots.
+   */
+  data: Prisma.MissionSlotCreateManyInput | Prisma.MissionSlotCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MissionSlotIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * MissionSlot update
  */
 export type MissionSlotUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1587,6 +1698,36 @@ export type MissionSlotUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many MissionSlots to update.
    */
   limit?: number
+}
+
+/**
+ * MissionSlot updateManyAndReturn
+ */
+export type MissionSlotUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MissionSlot
+   */
+  select?: Prisma.MissionSlotSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the MissionSlot
+   */
+  omit?: Prisma.MissionSlotOmit<ExtArgs> | null
+  /**
+   * The data used to update MissionSlots.
+   */
+  data: Prisma.XOR<Prisma.MissionSlotUpdateManyMutationInput, Prisma.MissionSlotUncheckedUpdateManyInput>
+  /**
+   * Filter which MissionSlots to update
+   */
+  where?: Prisma.MissionSlotWhereInput
+  /**
+   * Limit how many MissionSlots to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MissionSlotIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

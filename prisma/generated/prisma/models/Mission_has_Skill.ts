@@ -546,7 +546,21 @@ export type Mission_has_SkillSelect<ExtArgs extends runtime.Types.Extensions.Int
   skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mission_has_Skill"]>
 
+export type Mission_has_SkillSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  missionId?: boolean
+  skillId?: boolean
+  createdAt?: boolean
+  mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
+  skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["mission_has_Skill"]>
 
+export type Mission_has_SkillSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  missionId?: boolean
+  skillId?: boolean
+  createdAt?: boolean
+  mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
+  skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["mission_has_Skill"]>
 
 export type Mission_has_SkillSelectScalar = {
   missionId?: boolean
@@ -556,6 +570,14 @@ export type Mission_has_SkillSelectScalar = {
 
 export type Mission_has_SkillOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"missionId" | "skillId" | "createdAt", ExtArgs["result"]["mission_has_Skill"]>
 export type Mission_has_SkillInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
+  skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
+}
+export type Mission_has_SkillIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
+  skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
+}
+export type Mission_has_SkillIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   mission?: boolean | Prisma.MissionDefaultArgs<ExtArgs>
   skill?: boolean | Prisma.SkillDefaultArgs<ExtArgs>
 }
@@ -688,6 +710,30 @@ export interface Mission_has_SkillDelegate<ExtArgs extends runtime.Types.Extensi
   createMany<T extends Mission_has_SkillCreateManyArgs>(args?: Prisma.SelectSubset<T, Mission_has_SkillCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many Mission_has_Skills and returns the data saved in the database.
+   * @param {Mission_has_SkillCreateManyAndReturnArgs} args - Arguments to create many Mission_has_Skills.
+   * @example
+   * // Create many Mission_has_Skills
+   * const mission_has_Skill = await prisma.mission_has_Skill.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many Mission_has_Skills and only return the `missionId`
+   * const mission_has_SkillWithMissionIdOnly = await prisma.mission_has_Skill.createManyAndReturn({
+   *   select: { missionId: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends Mission_has_SkillCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, Mission_has_SkillCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$Mission_has_SkillPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a Mission_has_Skill.
    * @param {Mission_has_SkillDeleteArgs} args - Arguments to delete one Mission_has_Skill.
    * @example
@@ -750,6 +796,36 @@ export interface Mission_has_SkillDelegate<ExtArgs extends runtime.Types.Extensi
    * 
    */
   updateMany<T extends Mission_has_SkillUpdateManyArgs>(args: Prisma.SelectSubset<T, Mission_has_SkillUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more Mission_has_Skills and returns the data updated in the database.
+   * @param {Mission_has_SkillUpdateManyAndReturnArgs} args - Arguments to update many Mission_has_Skills.
+   * @example
+   * // Update many Mission_has_Skills
+   * const mission_has_Skill = await prisma.mission_has_Skill.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more Mission_has_Skills and only return the `missionId`
+   * const mission_has_SkillWithMissionIdOnly = await prisma.mission_has_Skill.updateManyAndReturn({
+   *   select: { missionId: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends Mission_has_SkillUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, Mission_has_SkillUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$Mission_has_SkillPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one Mission_has_Skill.
@@ -1182,6 +1258,29 @@ export type Mission_has_SkillCreateManyArgs<ExtArgs extends runtime.Types.Extens
 }
 
 /**
+ * Mission_has_Skill createManyAndReturn
+ */
+export type Mission_has_SkillCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Mission_has_Skill
+   */
+  select?: Prisma.Mission_has_SkillSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Mission_has_Skill
+   */
+  omit?: Prisma.Mission_has_SkillOmit<ExtArgs> | null
+  /**
+   * The data used to create many Mission_has_Skills.
+   */
+  data: Prisma.Mission_has_SkillCreateManyInput | Prisma.Mission_has_SkillCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.Mission_has_SkillIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * Mission_has_Skill update
  */
 export type Mission_has_SkillUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1223,6 +1322,36 @@ export type Mission_has_SkillUpdateManyArgs<ExtArgs extends runtime.Types.Extens
    * Limit how many Mission_has_Skills to update.
    */
   limit?: number
+}
+
+/**
+ * Mission_has_Skill updateManyAndReturn
+ */
+export type Mission_has_SkillUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Mission_has_Skill
+   */
+  select?: Prisma.Mission_has_SkillSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the Mission_has_Skill
+   */
+  omit?: Prisma.Mission_has_SkillOmit<ExtArgs> | null
+  /**
+   * The data used to update Mission_has_Skills.
+   */
+  data: Prisma.XOR<Prisma.Mission_has_SkillUpdateManyMutationInput, Prisma.Mission_has_SkillUncheckedUpdateManyInput>
+  /**
+   * Filter which Mission_has_Skills to update
+   */
+  where?: Prisma.Mission_has_SkillWhereInput
+  /**
+   * Limit how many Mission_has_Skills to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.Mission_has_SkillIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
