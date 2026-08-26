@@ -1,99 +1,169 @@
-<!-- Goodbye les cookies les Show7 !!!! -->
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Plan'it — API Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+*[Read this in English](docs/README.en.md)*
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+API REST pour **Plan'it**, une application de gestion de bénévoles pour un club de badminton. Elle permet aux administrateurs de créer des événements et des missions avec des créneaux horaires, et aux bénévoles de s'inscrire aux créneaux qui les intéressent.
 
-## Description
+## 🧱 Stack technique
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **[NestJS](https://nestjs.com/)** — framework Node.js structuré en modules/controllers/services
+- **[Prisma ORM](https://www.prisma.io/)** + **MySQL** — accès aux données et migrations
+- **JWT** (access + refresh token) — authentification, avec `jsonwebtoken` via `@nestjs/jwt`
+- **[Argon2](https://github.com/ranisalt/node-argon2)** — hachage des mots de passe
+- **[class-validator](https://github.com/typestack/class-validator)** — validation des DTO
+- **[Resend](https://resend.com/)** — envoi d'emails transactionnels (bienvenue, réinitialisation de mot de passe)
+- **Docker / docker-compose** — environnement de développement conteneurisé (API + MySQL + phpMyAdmin)
+- **Jest** — tests unitaires
 
-## Project setup
+## ✨ Fonctionnalités principales
 
-```bash
-$ npm install
-```
+- **Authentification** : inscription, connexion, déconnexion, rafraîchissement de token, mot de passe oublié / réinitialisation, changement de mot de passe
+- **Gestion des utilisateurs** : profils, rôles (admin / bénévole), compétences, onboarding
+- **Gestion des événements** : création, modification, suppression, documents associés
+- **Gestion des missions** : missions liées à un événement, associées à des compétences requises
+- **Gestion des créneaux (mission slots)** : créneaux horaires par mission, avec nombre de bénévoles maximum, création manuelle ou automatique (génération de plusieurs créneaux d'un coup)
+- **Inscriptions aux créneaux** : un bénévole peut s'inscrire/se désinscrire d'un créneau, avec vérification des places disponibles et des doublons d'inscription
+- **Statistiques** : missions/événements à venir, taux de remplissage, alertes sur les missions sous-remplies
 
-## Compile and run the project
+## 🔐 Sécurité
 
-```bash
-# development
-$ npm run start
+- Mots de passe hachés avec **Argon2**, jamais stockés ni renvoyés en clair
+- **Double token JWT** : `accessToken` (courte durée, 15 min par défaut) signé avec un secret dédié, `refreshToken` (longue durée, 7 jours par défaut) signé avec un **secret différent**, stocké côté client dans un **cookie `httpOnly` + `secure` + `sameSite: strict`**
+- **Guards** (`AuthGuard`, `RolesGuard`) sur les routes sensibles, avec vérification des rôles (`@Roles('admin')`)
+- Toutes les relations Prisma exposant des données utilisateur utilisent un `select` explicite (whitelist des champs), jamais `include: { user: true }` brut, pour ne jamais exposer par erreur les mots de passe hachés ou les emails
+- Le champ `role` est explicitement retiré des données transmises à la route de mise à jour de profil (`PATCH /user`), pour empêcher toute élévation de privilège — le changement de rôle passe uniquement par une route dédiée, réservée aux administrateurs
+- Vérification systématique des droits (auteur de la ressource ou admin) avant suppression/désinscription
 
-# watch mode
-$ npm run start:dev
+## 🚀 Installation
 
-# production mode
-$ npm run start:prod
-```
+### Prérequis
+- Node.js 20+
+- Docker et Docker Compose
+- npm
 
-## Run tests
+### Étapes
 
 ```bash
-# unit tests
-$ npm run test
+# 1. Cloner le dépôt
+git clone <url-du-repo>
+cd <nom-du-dossier>
 
-# e2e tests
-$ npm run test:e2e
+# 2. Installer les dépendances
+npm install
 
-# test coverage
-$ npm run test:cov
+# 3. Créer le fichier .env (voir la section Variables d'environnement ci-dessous)
+
+# 4. Lancer les services (API + MySQL + phpMyAdmin) avec Docker
+docker compose up --build
+
+# 5. Appliquer les migrations Prisma (si non fait automatiquement au démarrage du conteneur)
+npx prisma migrate deploy
+
+# 6. Générer le client Prisma
+npx prisma generate
 ```
 
-## Deployment
+L'API est alors disponible sur `http://localhost:3000`, et phpMyAdmin sur `http://localhost:8081`.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## ⚙️ Variables d'environnement
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Créer un fichier `.env` à la racine du projet, avec les variables suivantes :
+
+```env
+# Base de données
+DATABASE_URL="mysql://root:root@localhost:3308/testdb"
+
+# JWT
+ACCESSSECRET=un_secret_aleatoire_long_et_unique
+REFRESHSECRET=un_autre_secret_aleatoire_different_du_premier
+ACCESEXPIRE=15m
+REFRESHEXPIRE=7d
+JWTALGORITHM=HS512
+
+# CORS — origines autorisées à appeler l'API (séparées par des virgules)
+CORS_ORIGINS_URL=http://localhost:5173
+
+# Serveur
+PORT=3000
+
+# Emails (Resend)
+RESEND_API_KEY=ta_clé_api_resend
+
+# URL du front, utilisée dans les liens envoyés par email (ex: réinitialisation de mot de passe)
+FRONTEND_URL=http://localhost:5173
+```
+
+⚠️ Ce fichier ne doit **jamais** être commité — il est dans `.gitignore`. Conserve une copie de sauvegarde en dehors du dépôt Git.
+
+## 🗄️ Base de données
+
+Le schéma est géré avec Prisma (`prisma/schema.prisma`). Modèles principaux : `User`, `Evnt` (événement), `Mission`, `MissionSlot`, `User_Has_Mission`, `Skill`, `User_has_Skill`, `Mission_Has_Skill`, `Category`, `Document`, `Event_Has_Document`.
+
+Relations clés :
+- Un événement (`Evnt`) contient plusieurs missions (`Mission`) — relation 1-N
+- Une mission contient plusieurs créneaux (`MissionSlot`) — relation 1-N
+- Un bénévole peut s'inscrire à plusieurs créneaux, un créneau peut avoir plusieurs bénévoles — relation N-N via la table de liaison `User_Has_Mission`
+
+### Commandes utiles
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Créer une nouvelle migration après modification du schéma
+npx prisma migrate dev --name nom_de_la_migration
+
+# Appliquer les migrations en production
+npx prisma migrate deploy
+
+# Ouvrir Prisma Studio (interface graphique pour explorer la base)
+npx prisma studio
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 🧪 Tests
 
-## Resources
+```bash
+# Tests unitaires
+npm run test
 
-Check out a few resources that may come in handy when working with NestJS:
+# Tests unitaires en mode watch
+npm run test:watch
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# Couverture de tests
+npm run test:cov
+```
 
-## Support
+Les tests unitaires mockent `PrismaService` (via `jest.fn()`) pour tester la logique des services de façon isolée, sans dépendre d'une vraie base de données.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 📁 Structure du projet
 
-## Stay in touch
+```
+src/
+├── auth/              # Authentification (login, signup, refresh, guards)
+├── user/              # Gestion des utilisateurs
+├── evnt/               # Gestion des événements
+├── mission/            # Gestion des missions
+├── mission-slot/       # Gestion des créneaux
+├── user-has-mission/   # Inscriptions aux créneaux
+├── mail/                # Envoi d'emails (Resend)
+prisma/
+├── schema.prisma        # Schéma de la base de données
+├── migrations/           # Historique des migrations
+utils/
+├── interface/            # Interfaces partagées (ex: format de réponse standardisé)
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 📦 Format des réponses API
 
-## License
+Certaines routes (notamment l'authentification) renvoient une réponse enveloppée dans une structure standardisée :
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```typescript
+interface IResponse<T> {
+    data: T
+    timeStamp: Date
+    url: string
+}
+```
+
+D'autres routes renvoient directement la ressource, sans enveloppe. Se référer au controller concerné pour connaître le format exact de chaque route.
+
+## 🌐 Déploiement
+
+Le projet est conçu pour être déployé via Docker. Le `Dockerfile` de production doit utiliser un build compilé (`npm run build` + `npm run start:prod`) plutôt que le mode développement (`start:dev`). Pensez à adapter les variables d'environnement (`secure: true` pour les cookies uniquement en HTTPS, `CORS_ORIGINS_URL` avec le domaine réel du front, etc.) selon l'environnement cible.
