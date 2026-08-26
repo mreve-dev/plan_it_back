@@ -132,6 +132,30 @@ export class UserService {
     });
   }
 
+  async updateSkills (id: number, skillIds: number[]): Promise<User>{
+    await this.prisma.user_has_Skill.deleteMany({where: {userId: id}})
+
+    return this.prisma.user.update({
+      where: {id},
+      data: {
+        userHasSkills: {
+          create: skillIds.map(skillId => ({
+            skill: {
+              connect: {id: skillId}
+            }
+          }))
+        }
+      },
+      include: {
+        userHasSkills: {
+          include: {
+            skill: true
+          }
+        }
+      }
+    })
+  }
+
 
 
   async updateRole(id: number, role: RoleEnum): Promise<User> {

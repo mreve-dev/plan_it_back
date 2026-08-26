@@ -37,11 +37,21 @@ export class UserController {
   }
 
   
+
+
   @UseGuards(AuthGuard)
   @Patch()
   async update(@Req() req, @Body() updateUser: UpdateUserDto) : Promise<User> {
     return this.userService.update(req.user.id, updateUser);
   }
+
+  @UseGuards(AuthGuard)
+  @Patch('skills')
+  async updateSkills(@Req() req, @Body() body: {skillIds: number[]}) : Promise<User> {
+    return this.userService.updateSkills(req.user.id, body.skillIds);
+  }
+
+
 
   @UseGuards(AuthGuard, RolesGuard)
   @Roles('admin')
@@ -49,6 +59,8 @@ export class UserController {
   async updateRole(@Param('id') id: string, @Body() body: UpdateRoleDto): Promise<User> {
     return this.userService.updateRole(+id, body.role)
   }
+
+
 
   @UseGuards(AuthGuard)
   @Patch('onboarding')
