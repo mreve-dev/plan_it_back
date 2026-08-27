@@ -1,4 +1,4 @@
-import { Body, ConflictException, Controller, NotFoundException, Patch, Post, Req, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
+import { Body, ConflictException, Controller, Get, NotFoundException, Patch, Post, Req, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { UserService } from 'src/user/user.service';
@@ -181,5 +181,10 @@ export class AuthController {
       resetPasswordToken: null
     })
   }
+
+  @Get('test')
+testRoute() {
+    return "ok"
+}
 
 }
