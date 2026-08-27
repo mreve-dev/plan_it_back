@@ -14,6 +14,6 @@ async function bootstrap() {
     origin: process.env.CORS_ORIGINS_URL?.split(','),
     credentials: true // important pour que les cookies soient envoyés avec les requêtes
   })
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
 }
 bootstrap();
