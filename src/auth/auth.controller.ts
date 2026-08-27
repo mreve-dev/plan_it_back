@@ -12,7 +12,7 @@ import { MailService } from 'src/mail/mail.service';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 
-@Controller('auth')
+@Controller('authentification')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
