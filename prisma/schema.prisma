@@ -44,13 +44,13 @@ model User {
 
 model Evnt {
   id          Int      @id @default(autoincrement())
-  name        String   @db.VarChar(45)
+  name        String   @db.VarChar(100)
   start_date  DateTime @db.Date
   end_date    DateTime @db.Date
   start_hour  DateTime @db.Time(0)
   end_hour    DateTime @db.Time(0)
   location    String?  @db.VarChar(45)
-  description String   @db.VarChar(255)
+  description String   @db.Text
   categoryId  Int
   creatorId   Int
   updatedById Int?
@@ -70,7 +70,7 @@ model Evnt {
 model Mission {
   id          Int      @id @default(autoincrement())
   name        String   @db.VarChar(45)
-  description String   @db.VarChar(45)
+  description String   @db.Text
   eventId     Int
   creatorId   Int
   createdAt   DateTime @default(now())

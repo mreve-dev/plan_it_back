@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Evnt" ALTER COLUMN "name" SET DATA TYPE VARCHAR(100),
+ALTER COLUMN "description" SET DATA TYPE TEXT;
+
+-- AlterTable
+ALTER TABLE "Mission" ALTER COLUMN "description" SET DATA TYPE TEXT;
