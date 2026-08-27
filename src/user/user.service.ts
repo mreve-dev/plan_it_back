@@ -1,4 +1,4 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'prisma/prisma.service';
@@ -168,14 +168,26 @@ export class UserService {
 
   async remove(id: number): Promise<void> {
 
+    const user = await this.prisma.user.findUnique({ where: { id } })
+
+    if (!user) throw new NotFoundException(`Utilisateur ${id} introuvable`)
+
+    if (user.role === 'admin') {
+        const adminCount = await this.prisma.user.count({ where: { role: 'admin' } })
+
+        if (adminCount <= 1) {
+            throw new BadRequestException("Impossible de supprimer le dernier administrateur du club")
+        }
+    }
+
     await this.prisma.user_has_Skill.deleteMany({ where: { userId: id } })
     await this.prisma.user_Has_Mission.deleteMany({ where: { userId: id } })
     await this.prisma.notification.deleteMany({ where: { userId: id } })
 
-    const deleteUser: User = await this.prisma.user.delete({ where: { id } });
+    await this.prisma.user.delete({ where: { id } })
 
     return
-  }
+}
 
 
 
