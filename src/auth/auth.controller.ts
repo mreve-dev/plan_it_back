@@ -63,7 +63,7 @@ export class AuthController {
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true, // JS ne peut pas le lire
       secure: true, // false en dev (HTTP), true en prod (HTTPS)
-      sameSite: 'strict', // envoyé seulement depuis mon propre site
+      sameSite: 'none', // envoyé seulement depuis mon propre site
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 jours en ms
     })
 
