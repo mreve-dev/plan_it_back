@@ -65,10 +65,7 @@ export class UserController {
   @UseGuards(AuthGuard)
   @Patch('onboarding')
   async updateSkillsFirstConnexion(@Req() req, @Body() updateUser: OnBoarding) : Promise<User> {
-    
-    console.log(req.user.id);
-    
-    
+        
     return this.userService.onboarding(req.user.id, updateUser);
   }
 

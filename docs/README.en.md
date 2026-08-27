@@ -76,7 +76,7 @@ DATABASE_URL="mysql://root:root@localhost:3308/testdb"
 # JWT
 ACCESSSECRET=a_long_random_unique_secret
 REFRESHSECRET=another_random_secret_different_from_the_first
-ACCESEXPIRE=15m
+ACCESSEXPIRE=15m
 REFRESHEXPIRE=7d
 JWTALGORITHM=HS512
 

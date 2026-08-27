@@ -27,7 +27,7 @@ export class AuthService {
         const payload = { sub: id, role: role }
         const accessToken = await this.jwtService.signAsync(payload,
             {
-                expiresIn: process.env.ACCESEXPIRE ?? "15m" as any,
+                expiresIn: process.env.ACCESSEXPIRE ?? "15m" as any,
                 algorithm: process.env.JWTALGORITHM ?? 'HS512' as any,
                 secret: process.env.ACCESSSECRET as any
             }
